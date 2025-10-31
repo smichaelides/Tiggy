@@ -3,7 +3,7 @@ import type { Chat } from "../types";
 
 interface ChatSidebarProps {
   chats: Chat[];
-  currentChatId: string;
+  currentChatId?: string;
   onChatSelect: (chatId: string) => void;
   onNewChat: () => void;
   onDeleteChat: (chatId: string) => void;
@@ -70,7 +70,7 @@ function ChatSidebar({
                 <div className="chat-info">
                   <div className="chat-title">{getChatTitle(chat)}</div>
                   <div className="chat-meta">
-                    {chat.messageCount} messages • {formatDate(chat.updatedAt)}
+                    {chat.messages.length} messages • {formatDate(chat.updatedAt)}
                   </div>
                 </div>
               </div>

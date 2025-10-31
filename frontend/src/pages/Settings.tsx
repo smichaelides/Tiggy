@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { grades, princetonMajors, loadUserSettings, saveUserSettings, type UserSettings } from '../utils';
 
-interface SettingsProps {
-    onLogout: () => void;
-}
-
-function Settings({ onLogout }: SettingsProps) {
+function Settings() {
     const [grade, setGrade] = useState('');
     const [major, setMajor] = useState('');
     const [concentration, setConcentration] = useState('');
@@ -22,10 +18,6 @@ function Settings({ onLogout }: SettingsProps) {
         setConcentration(savedSettings.concentration);
     }, []);
 
-    const handleLogout = () => {
-        onLogout();
-    };
-
     const handleSave = () => {
         const settings: UserSettings = { grade, major, concentration };
         saveUserSettings(settings);
@@ -38,7 +30,7 @@ function Settings({ onLogout }: SettingsProps) {
 
     return (
         <div className="app">
-            <Header onLogout={onLogout} messages={[]} />
+            <Header messages={[]} />
             <div className="settings-container">
                 <div className="settings-card">
                     <div className="settings-header">
@@ -112,7 +104,6 @@ function Settings({ onLogout }: SettingsProps) {
                             </button>
                             <button 
                                 className="logout-button"
-                                onClick={handleLogout}
                             >
                                 <FiLogOut />
                                 Logout

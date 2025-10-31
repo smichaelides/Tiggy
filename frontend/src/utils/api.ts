@@ -34,8 +34,8 @@ export const userAPI = {
   },
 
   // Get user by ID
-  getUser: async (userId: string): Promise<User> => {
-    return apiRequest<User>(`/user/get-user?userId=${userId}`);
+  getUser: async (): Promise<User> => {
+    return apiRequest<User>(`/user/get-user`);
   },
 
   // Get user by email
@@ -44,60 +44,57 @@ export const userAPI = {
   },
 
   // Update user concentration
-  updateConcentration: async (userId: string, concentration: string): Promise<{ concentration: string }> => {
+  updateConcentration: async (concentration: string): Promise<{ concentration: string }> => {
     return apiRequest<{ concentration: string }>('/user/update-concentration', {
       method: 'PATCH',
-      body: JSON.stringify({ userId: userId, concentration }),
+      body: JSON.stringify({ concentration }),
     });
   },
 
   // Update user certificates
-  updateCertificates: async (userId: string, certificates: string[]): Promise<{ certificates: string[] }> => {
+  updateCertificates: async (certificates: string[]): Promise<{ certificates: string[] }> => {
     return apiRequest<{ certificates: string[] }>('/user/update-certificates', {
       method: 'PATCH',
-      body: JSON.stringify({ userId: userId, certificates }),
+      body: JSON.stringify({ certificates }),
     });
   },
 };
 
 // Chat API functions
 export const chatAPI = {
-  createChat: async (userId: string): Promise<Chat> => {
+  createChat: async (): Promise<Chat> => {
     return apiRequest<Chat>('/chat/create-chat', {
       method: 'POST',
-      body: JSON.stringify({ userId: userId }),
     });
   },
 
   // List user's chats
-  listChats: async (userId: string): Promise<{ chats: Array<Chat> }> => {
-    return apiRequest<{ chats: Array<Chat> }>(`/chat/list-chats?userId=${userId}`);
+  listChats: async (): Promise<{ chats: Array<Chat> }> => {
+    return apiRequest<{ chats: Array<Chat> }>(`/chat/list-chats`);
   },
 
   // Get chat with messages
-  getChat: async (chatId: string, userId: string): Promise<Chat> => {
-    return apiRequest<Chat>(`/chat/get-chat?chatId=${chatId}&userId=${userId}`);
+  getChat: async (chatId: string): Promise<Chat> => {
+    return apiRequest<Chat>(`/chat/get-chat?chatId=${chatId}`);
   },
 
   // Send a message
-  sendMessage: async (chatId: string, userId: string, message: string): Promise<{ model_message: string }> => {
+  sendMessage: async (chatId: string, message: string): Promise<{ model_message: string }> => {
     return apiRequest<{ model_message: string }>('/chat/send-message', {
       method: 'POST',
       body: JSON.stringify({
         chatId: chatId,
-        userId: userId,
         message,
         timestamp: new Date().toISOString(),
       }),
     });
   },
 
-  deleteChat: async (userId: string, chatId: string): Promise<{ chatId: string }> => {
-    return apiRequest<{ model_message: string }>('/chat/delete-chat', {
+  deleteChat: async (chatId: string): Promise<{ chatId: string }> => {
+    return apiRequest<{ chatId: string }>('/chat/delete-chat', {
       method: 'DELETE',
       body: JSON.stringify({
         chatId: chatId,
-        userId: userId,
       }),
     }); 
   }

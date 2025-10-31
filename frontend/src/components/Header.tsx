@@ -6,11 +6,10 @@ import type { Message } from '../types';
 import { generateChatPDF } from '../utils/pdfGenerator';
 
 interface HeaderProps {
-  onLogout: () => void;
   messages: Message[];
 }
 
-function Header({ onLogout, messages }: HeaderProps) {
+function Header({ messages }: HeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ function Header({ onLogout, messages }: HeaderProps) {
   };
 
   const handleLogoutClick = () => {
-    onLogout();
     navigate('/login');
     setIsDropdownOpen(false);
   };

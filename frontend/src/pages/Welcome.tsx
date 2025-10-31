@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import princetonLogo from '../assets/princeton.png';
 import tigerAvatar from '../assets/tiggy.png';
 import { princetonMajors, grades } from '../utils/settings';
 
-function Welcome({ onComplete }: { onComplete: () => void }) {
+function Welcome() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState({
     grade: '',
@@ -11,6 +12,7 @@ function Welcome({ onComplete }: { onComplete: () => void }) {
     favoriteClasses: [] as string[]
   });
   const [tempClass, setTempClass] = useState('');
+  const navigate = useNavigate();
 
   const totalSteps = 3;
 
@@ -18,9 +20,7 @@ function Welcome({ onComplete }: { onComplete: () => void }) {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Save to localStorage and complete
-      localStorage.setItem('userProfile', JSON.stringify(userData));
-      onComplete();
+      navigate("/");
     }
   };
 

@@ -10,7 +10,6 @@ export interface Chat {
   messages: Message[];
   userMessages: Message[];
   modelMessages: Message[];
-  messageCount: number;
   createdAt: Date;
   updatedAt: Date;
 }

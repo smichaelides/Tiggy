@@ -1,5 +1,5 @@
 from bson import ObjectId
-from api.models._base import Model
+from server.api.models._base import Model
 
 
 class Semester(Model):

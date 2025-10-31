@@ -1,33 +1,14 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import './App.css';
+import { useState } from 'react';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/Login';
 import SettingsPage from './pages/Settings';
-import Welcome from './pages/Welcome';
 import Callback from './pages/Callback';
-import { Auth0Provider } from '@auth0/auth0-react';
+import './App.css';
 
 function App() {
-  const { isAuthenticated, isLoading, logout } = useAuth0();
-
-  const handleWelcomeComplete = () => {
-    localStorage.setItem('hasCompletedWelcome', 'true');
-    // Force a re-render to show the main page
-    window.location.href = '/';
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('userProfile');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('hasCompletedWelcome');
-    logout({ logoutParams: { returnTo: `${window.location.origin}/login` } });
-  };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const [isAuthenticated] = useState(true);
 
   return (
     <Router>
@@ -47,7 +28,7 @@ function App() {
           path="/settings" 
           element={
             isAuthenticated ? (
-              <SettingsPage onLogout={handleLogout} />
+              <SettingsPage />
             ) : (
               <Navigate to="/login" replace />
             )
@@ -57,11 +38,7 @@ function App() {
           path="/" 
           element={
             isAuthenticated ? (
-              localStorage.getItem('hasCompletedWelcome') ? (
-                <MainPage onLogout={handleLogout} />
-              ) : (
-                <Welcome onComplete={handleWelcomeComplete} />
-              )
+              <MainPage />
             ) : (
               <Navigate to="/login" replace />
             )

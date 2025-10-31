@@ -2,18 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import princetonLogo from "../assets/princeton.png";
 import tigerAvatar from "../assets/tiggy.png";
-import { userAPI } from "../utils/api";
-import { useAuth0 } from "@auth0/auth0-react";
-
-interface LoginProps {
-  onLogin: (userId: string) => void;
-  isLoading?: boolean;
-}
 
 function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { loginWithRedirect, isLoading } = useAuth0();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setIsSubmitting(true);
@@ -25,13 +18,7 @@ function Login() {
         returnTo: "/",
         callbackUrl
       });
-    
-      loginWithRedirect({
-        appState: { returnTo: "/" },
-        authorizationParams: {
-          redirect_uri: callbackUrl
-        }
-      });
+      navigate("/callback");
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to login. Please try again.");
@@ -58,7 +45,7 @@ function Login() {
           <button
             onClick={handleLogin}
             className="login-button"
-            disabled={isSubmitting || isLoading}
+            disabled={isSubmitting}
           >
             {isSubmitting ? "Creating account..." : "Get Started"}
           </button>

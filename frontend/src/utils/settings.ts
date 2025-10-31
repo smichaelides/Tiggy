@@ -53,11 +53,9 @@ export interface UserSettings {
 
 // Settings storage functions
 export const saveUserSettings = (settings: UserSettings): void => {
-    localStorage.setItem('userSettings', JSON.stringify(settings));
 };
 
 export const loadUserSettings = (): UserSettings => {
-    const savedSettings = localStorage.getItem('userSettings');
     if (savedSettings) {
         try {
             return JSON.parse(savedSettings);
@@ -69,5 +67,4 @@ export const loadUserSettings = (): UserSettings => {
 };
 
 export const clearUserSettings = (): void => {
-    localStorage.removeItem('userSettings');
 }; 

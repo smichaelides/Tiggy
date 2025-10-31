@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 
 function Callback() {
-  const { handleRedirectCallback } = useAuth0();
+  // TODO: implement proper authentication and renavigate to homepage.
+  const navigate = useNavigate();
 
   useEffect(() => {
-    handleRedirectCallback();
-  }, [handleRedirectCallback]);
+    navigate("/");
+  }, [navigate]);
 
   return <div>Loading...</div>;
 }

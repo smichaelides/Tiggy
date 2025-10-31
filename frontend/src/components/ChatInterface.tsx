@@ -1,6 +1,8 @@
 import React from 'react';
 import { FiArrowUp } from 'react-icons/fi';
 import type { Message } from '../types';
+import tigerAvatar from "../assets/tiggy.png";
+
 
 interface ChatInterfaceProps {
   messages: Message[];
@@ -9,7 +11,6 @@ interface ChatInterfaceProps {
   handleSendMessage: (customText?: string) => void;
   handleKeyDown: (e: React.KeyboardEvent) => void;
   isLoading: boolean;
-  getAvatar: () => string;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -20,7 +21,6 @@ function ChatInterface({
   handleSendMessage,
   handleKeyDown,
   isLoading,
-  getAvatar,
   messagesEndRef
 }: ChatInterfaceProps) {
 
@@ -36,7 +36,7 @@ function ChatInterface({
             <div className="message-content">
               {!message.isUser && (
                 <div className="avatar ai-avatar">
-                  <img src={getAvatar()} alt="Tiger AI" />
+                  <img src={tigerAvatar} alt="Tiger AI" />
                 </div>
               )}
               <div className={`message-bubble ${message.isUser ? 'user-bubble' : 'ai-bubble'}`}>
@@ -56,7 +56,7 @@ function ChatInterface({
           <div className="message message-ai">
             <div className="message-content">
               <div className="avatar ai-avatar">
-                <img src={getAvatar()} alt="Tiger AI" />
+                <img src={tigerAvatar} alt="Tiger AI" />
               </div>
               <div className="message-bubble ai-bubble">
                 <p className="message-text">Tiggy is thinking...</p>

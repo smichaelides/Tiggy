@@ -5,88 +5,38 @@ import ChatInterface from "../components/ChatInterface";
 import ChatSidebar from "../components/ChatSidebar";
 import type { Message, Chat } from "../types";
 import { chatAPI } from "../utils/api";
-import { userAPI } from "../utils/api";
-import { useNavigate } from "react-router-dom";
 
-// Import avatar images
-import tigerAvatar from "../assets/tiggy.png";
-import { useAuth0 } from "@auth0/auth0-react";
+const getChatTitle = (messages: Message[]) => {
+  return messages.length > 0
+    ? messages[0].message.substring(0, 30) +
+        (messages[0].message.length > 30 ? "..." : "")
+    : "New Chat";
+};
 
-interface MainPageProps {
-  onLogout: () => void;
-}
-
-function MainPage({ onLogout }: MainPageProps) {
+function MainPage() {
   const [chats, setChats] = useState<Chat[]>([]);
-  const navigate = useNavigate();
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
-  const [currentChatId, setCurrentChatId] = useState("default");
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState<Message[]>(
+    currentChat?.messages || []
+  );
 
-  const messages = currentChat?.messages || [];
-
-  const { user } = useAuth0();
-
-  // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
-
-  const scrollToBottom = () => {
+    // Auto-scroll to bottom whenever messages or loading state changes
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages]);
 
-  const getAvatar = () => tigerAvatar;
-
-  const getUser = async () => {
-    const userId = user?.email;
-    console.log("User email:", userId);
-
-
-    try {
-      const response = await userAPI.getUser(userId || "");
-      if (!response.ok) {
-        const createUserResponse = await userAPI.createUser({
-          email: userId || "",
-          name: user?.name || "",
-          grad_year: user?.grad_year || 0,
-          concentration: user?.concentration || "",
-          certificates: user?.certificates || [],
-        });
-        console.log("Created user:", createUserResponse);
-      }
-      console.log("User:", response);
-    } catch (error) {
-      console.error("Unable to get user:", error);
-      navigate("/login");
-      return "";
-    }
-
-
-    if (userId === "undefined" || userId === null) {
-      navigate("/login");
-      return "";
-    }
-
-    return userId;
-  };
-
-  const getChatTitle = (title: string, messages: Message[]) => {
-    return title === "New Chat" && messages.length > 0
-      ? messages[0].message.substring(0, 30) +
-          (messages[0].message.length > 30 ? "..." : "")
-      : title;
-  };
+  // load all chats and create new chat if none exists.
+  useEffect(() => {
+    listChats();
+  }, []);
 
   const listChats = async () => {
-    const userId = getUser();
-
     try {
-      const response = await chatAPI.listChats(userId);
+      const response = await chatAPI.listChats();
       const chats = response.chats.map((chat): Chat => {
-        console.log();
         const userMessages = chat.userMessages.map((m: Message) => ({
           message: m.message,
           isUser: true,
@@ -104,37 +54,25 @@ function MainPage({ onLogout }: MainPageProps) {
         );
         return {
           _id: chat._id,
-          title: getChatTitle("New Chat", messages),
+          title: getChatTitle(messages),
           userMessages: chat.userMessages,
           modelMessages: chat.modelMessages,
           messages: messages,
-          messageCount: messages.length,
           createdAt: new Date(chat.createdAt),
           updatedAt: new Date(chat.updatedAt),
         };
       });
 
-      chats.reverse()
-      setCurrentChatId(chats[0]._id);
       setCurrentChat(chats[0]);
-      console.log("Chats[0]", chats[0])
       setChats(chats);
-      setInputValue("");
     } catch (error) {
       console.error("Unable to list new chats:", error);
     }
   };
 
-  // load all chats and create new chat if none exists.
-  useEffect(() => {
-    listChats();
-  }, []);
-
   const createNewChat = async () => {
-    const userId = getUser();
-
     try {
-      const chat = await chatAPI.createChat(userId);
+      const chat = await chatAPI.createChat();
 
       const newChat: Chat = {
         _id: chat._id,
@@ -142,13 +80,11 @@ function MainPage({ onLogout }: MainPageProps) {
         userMessages: [],
         modelMessages: [],
         messages: [],
-        messageCount: 0,
         createdAt: new Date(chat.createdAt),
         updatedAt: new Date(chat.updatedAt),
       };
 
       setChats((prev) => [...prev, newChat]);
-      setCurrentChatId(newChat._id);
       setCurrentChat(newChat);
       setInputValue("");
     } catch (error) {
@@ -157,13 +93,7 @@ function MainPage({ onLogout }: MainPageProps) {
   };
 
   const selectChat = async (chatId: string) => {
-    setCurrentChatId(chatId);
-    setInputValue("");
-    const userId = getUser();
-    if (!userId) return;
-
     const fetchedChat = chats.find((chat) => chat._id === chatId);
-
     if (!fetchedChat) return;
 
     const userMessages: Message[] = (fetchedChat.userMessages || []).map(
@@ -200,16 +130,16 @@ function MainPage({ onLogout }: MainPageProps) {
 
     const currentChat: Chat = {
       _id: fetchedChat._id,
-      title: getChatTitle(tempChatForTitle.title, tempChatForTitle.messages),
+      title: getChatTitle(tempChatForTitle.messages),
       userMessages,
       modelMessages,
       messages,
-      messageCount: messages.length,
       createdAt: new Date(fetchedChat.createdAt),
       updatedAt: new Date(fetchedChat.updatedAt),
     };
 
     setCurrentChat(currentChat);
+    setInputValue("");
 
     setChats((prev) =>
       prev.map((c) => {
@@ -224,10 +154,8 @@ function MainPage({ onLogout }: MainPageProps) {
   const deleteChat = async (chatId: string) => {
     if (chats.length <= 1) return;
 
-    const userId = getUser();
-
     try {
-      await chatAPI.deleteChat(userId, chatId);
+      await chatAPI.deleteChat(chatId);
     } catch (error) {
       console.error("Unable to delete chat. Ex:", chatId, error);
     }
@@ -235,10 +163,10 @@ function MainPage({ onLogout }: MainPageProps) {
     setChats((prev) => prev.filter((chat) => chat._id !== chatId));
 
     // If we're deleting the current chat, switch to new chat
-    if (chatId === currentChatId) {
+    if (chatId === currentChat?._id) {
       const remainingChats = chats.filter((chat) => chat._id !== chatId);
       if (remainingChats.length > 0) {
-        setCurrentChatId(remainingChats[0]._id);
+        setCurrentChat(remainingChats[0]);
       }
     }
   };
@@ -254,7 +182,6 @@ function MainPage({ onLogout }: MainPageProps) {
       return {
         ...prev,
         messages: newMessages,
-        messageCount: newMessages.length,
         updatedAt: new Date(),
         title: newTitle,
       };
@@ -266,7 +193,6 @@ function MainPage({ onLogout }: MainPageProps) {
           ? {
               ...chat,
               messages: newMessages,
-              messageCount: newMessages.length,
               updatedAt: new Date(),
               title:
                 chat.title === "New Chat" && newMessages.length > 0
@@ -280,15 +206,8 @@ function MainPage({ onLogout }: MainPageProps) {
   };
 
   const handleSendMessage = async (customText?: string) => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      console.error("User ID is null. Redirecting to login.");
-      navigate("/login");
-      return;
-    }
-
     const textToSend = customText || inputValue;
-    if (!textToSend.trim()) return;
+    if (!currentChat || !textToSend.trim()) return;
 
     const userMessage: Message = {
       message: textToSend,
@@ -296,14 +215,10 @@ function MainPage({ onLogout }: MainPageProps) {
       timestamp: new Date(),
     };
 
-    const chatResponse = await chatAPI.sendMessage(
-      currentChatId,
-      userId,
-      textToSend
-    );
+    const chatResponse = await chatAPI.sendMessage(currentChat._id, textToSend);
 
-    const newMessages = [...messages, userMessage];
-    updateChatMessages(currentChatId, newMessages);
+    setMessages((prev) => [...prev, userMessage]);
+    updateChatMessages(currentChat._id, messages);
     setInputValue("");
     setIsLoading(true);
 
@@ -314,8 +229,9 @@ function MainPage({ onLogout }: MainPageProps) {
         isUser: false,
         timestamp: new Date(),
       };
-      const finalMessages = [...newMessages, aiMessage];
-      updateChatMessages(currentChatId, finalMessages);
+
+      setMessages((prev) => [...prev, aiMessage]);
+      updateChatMessages(currentChat._id, messages);
       setIsLoading(false);
     }, 2000);
   };
@@ -329,12 +245,12 @@ function MainPage({ onLogout }: MainPageProps) {
 
   return (
     <div className="app">
-      <Header onLogout={onLogout} messages={messages} />
+      <Header messages={messages} />
 
       <div className="main-content">
         <ChatSidebar
           chats={chats}
-          currentChatId={currentChatId}
+          currentChatId={currentChat?._id}
           onChatSelect={selectChat}
           onNewChat={createNewChat}
           onDeleteChat={deleteChat}
@@ -342,10 +258,12 @@ function MainPage({ onLogout }: MainPageProps) {
 
         <main
           className={`chat-container ${
-            !(currentChat && currentChat.messages.length > 0) ? "chat-container-with-messages" : ""
+            !(currentChat && currentChat.messages.length > 0)
+              ? "chat-container-with-messages"
+              : ""
           }`}
         >
-          {(currentChat && currentChat.messages.length === 0) ? (
+          {currentChat && currentChat.messages.length === 0 ? (
             <WelcomeScreen
               inputValue={inputValue}
               setInputValue={setInputValue}
@@ -361,7 +279,6 @@ function MainPage({ onLogout }: MainPageProps) {
               handleSendMessage={handleSendMessage}
               handleKeyDown={handleKeyDown}
               isLoading={isLoading}
-              getAvatar={getAvatar}
               messagesEndRef={messagesEndRef}
             />
           )}

@@ -78,7 +78,7 @@ export const generateChatPDF = (messages: Message[]): void => {
       pdf.setTextColor(255, 255, 255);
       
       // Calculate text width and bubble dimensions with proper wrapping
-      const textLines = pdf.splitTextToSize(message.text, maxBubbleWidth - 20);
+      const textLines = pdf.splitTextToSize(message.message, maxBubbleWidth - 20);
       const lineHeight = 6;
       const bubbleHeight = textLines.length * lineHeight + 16;
       const bubbleWidth = Math.min(
@@ -102,7 +102,7 @@ export const generateChatPDF = (messages: Message[]): void => {
       pdf.setTextColor(0, 0, 0);
       
       // Calculate text width and bubble dimensions with proper wrapping
-      const textLines = pdf.splitTextToSize(message.text, maxBubbleWidth - 20);
+      const textLines = pdf.splitTextToSize(message.message, maxBubbleWidth - 20);
       const lineHeight = 6;
       const bubbleHeight = textLines.length * lineHeight + 16;
       const bubbleWidth = Math.min(
