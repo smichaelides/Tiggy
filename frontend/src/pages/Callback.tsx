@@ -5,9 +5,9 @@ function Callback() {
   // TODO: implement proper authentication and renavigate to homepage.
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("/");
-  }, [navigate]);
+  // useEffect(() => {
+  //   navigate("/");
+  // }, [navigate]);
 
   return <div>Loading...</div>;
 }

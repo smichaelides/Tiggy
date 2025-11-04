@@ -1,6 +1,6 @@
 import logging
 from bson import ObjectId
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from server.api.models.user import User
 from server.database import get_database
 
@@ -10,7 +10,7 @@ user = Blueprint("user", __name__, url_prefix="/user")
 @user.route("/get-user", methods=["GET"])
 def get_user():
     db = get_database()
-    user_id = request.args.get("userId")
+    user_id = session['userId']
 
     try:
         db_user = db.users.find_one({"_id": ObjectId(user_id)})

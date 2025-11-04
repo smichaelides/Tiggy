@@ -13,12 +13,27 @@ function Login() {
     setError(null);
 
     try {
-      const callbackUrl = `${window.location.origin}/callback`;
-      console.log('Login button clicked, redirecting with:', {
-        returnTo: "/",
-        callbackUrl
-      });
-      navigate("/callback");
+      const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+      const body = {
+        "method": "GET",
+        "action": oauth2Endpoint,
+      }
+
+      const params = {
+        client_id:
+          "280285444479-5f2hkpe9iabj5alrbrvdkd4g9lcqdlph.apps.googleusercontent.com",
+        redirect_uri: "https://localhost:5173/callback",
+        response_type: "token",
+        scope:
+          "https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/calendar.readonly",
+        include_granted_scopes: "true",
+        state: "pass-through value",
+      };
+
+      fetch(oauth2Endpoint, params);
+      
+
+
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to login. Please try again.");

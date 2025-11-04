@@ -8,7 +8,7 @@ import Callback from './pages/Callback';
 import './App.css';
 
 function App() {
-  const [isAuthenticated] = useState(true);
+  const [isAuthenticated] = useState(false);
 
   return (
     <Router>

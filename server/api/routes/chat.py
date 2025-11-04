@@ -1,11 +1,15 @@
+import os
 import logging
+from dotenv import load_dotenv
 from typing import Any
 from datetime import datetime, timezone
 from bson import ObjectId
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from server.database import get_database
 from server.api.models.chat import Chat
 from server.api.models.message import UserMessage, ModelMessage
+
+load_dotenv()
 
 chat = Blueprint("chat", __name__, url_prefix="/chat")
 
@@ -13,21 +17,18 @@ chat = Blueprint("chat", __name__, url_prefix="/chat")
 @chat.route("/get-chat", methods=["GET"])
 def get_chat():
     db = get_database()
-    chatId = request.args.get("chatId")
-    userId = request.args.get("userId")
+    chat_id = request.args.get("chatId")
+    user_id = session["userId"]
 
-    if chatId is None:
-        return {"error": "Missing required fields: 'chatId' and 'userId'."}, 400
-
-    if userId is None:
+    if chat_id is None:
         return {"error": "Missing required fields: 'chatId' and 'userId'."}, 400
 
     try:
         chat_dict: dict[str, str | list[dict[str, str]]] | None | Any = (
             db.chats.find_one(
                 {
-                    "_id": ObjectId(chatId),
-                    "userId": userId,
+                    "_id": ObjectId(chat_id),
+                    "userId": user_id,
                 }
             )
         )
@@ -59,15 +60,12 @@ def get_chat():
 @chat.route("/list-chats", methods=["GET"])
 def list_chats():
     db = get_database()
-    userId = request.args.get("userId")
-
-    if userId is None:
-        return {"error": "Missing required field: 'userId'."}, 400
+    user_id = session["userId"]
 
     try:
         # only lists out the _id, counts, and timestamps; we can call /get-chat to get the messages
         # match by userId and return full documents
-        chats = list(db.chats.find({"userId": userId}))
+        chats = list(db.chats.find({"userId": user_id}))
 
         # normalize ObjectId fields to strings for JSON serialization
         for chat in chats:
@@ -95,18 +93,13 @@ def list_chats():
 @chat.route("/create-chat", methods=["POST"])
 def create_chat():
     db = get_database()
-    payload = request.get_json()
-
-    print("PAYLOAD", payload)
-
-    if "userId" not in payload:
-        return {"error": "Missing required field: 'userId'."}, 400
+    user_id = session["userId"]
 
     # Verify that userId exists in the users collection
     try:
-        user_exists = db.users.find_one({"_id": ObjectId(payload.get("userId"))})
+        user_exists = db.users.find_one({"_id": ObjectId(user_id)})
         if not user_exists:
-            logging.error("User with userId %s does not exist.", payload.get("userId"))
+            logging.error("User with userId %s does not exist.", user_id)
             return {"error": "Invalid userId. User does not exist."}, 400
     except Exception as ex:
         logging.error("Failed to verify user existence: %s", ex)
@@ -115,7 +108,7 @@ def create_chat():
     now = datetime.now(tz=timezone.utc)
     new_chat = Chat.model_validate(
         {
-            "userId": payload.get("userId"),
+            "userId": user_id,
             "userMessages": [],
             "modelMessages": [],
             "createdAt": now,
@@ -137,24 +130,21 @@ def create_chat():
 @chat.route("/delete-chat", methods=["DELETE"])
 def delete_chat():
     db = get_database()
+    user_id = session["userId"]
     payload = request.get_json()
-
-    if "userId" not in payload:
-        return {"error": "Missing required field: 'userId'."}, 400
 
     if "chatId" not in payload:
         return {"error": "Missing required field: 'chatId'."}, 400
 
-    userId = payload["userId"]
     chatId = payload["chatId"]
 
     # Verify that userId exists in the users collection
     try:
-        result = db.chats.delete_one({"userId": userId, "_id": ObjectId(chatId)})
+        result = db.chats.delete_one({"userId": user_id, "_id": ObjectId(chatId)})
         if result.deleted_count == 0:
             error = (
                 "Could not delete chat with userId %s and chatId %s",
-                userId,
+                user_id,
                 chatId,
             )
             logging.error(error)
@@ -162,7 +152,7 @@ def delete_chat():
     except Exception as ex:
         error = (
             "Error deleting chat with userId: %s and chatId: %s. Ex: %s",
-            userId,
+            user_id,
             chatId,
             ex,
         )
