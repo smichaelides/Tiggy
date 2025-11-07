@@ -1,46 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import princetonLogo from "../assets/princeton.png";
+// import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 import tigerAvatar from "../assets/tiggy.png";
+import princetonLogo from "../assets/princeton.png";
 
 function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse);
+    },
+  });
 
   const handleLogin = async () => {
     setIsSubmitting(true);
     setError(null);
-
-    try {
-      const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
-      const body = {
-        "method": "GET",
-        "action": oauth2Endpoint,
-      }
-
-      const params = {
-        client_id:
-          "280285444479-5f2hkpe9iabj5alrbrvdkd4g9lcqdlph.apps.googleusercontent.com",
-        redirect_uri: "https://localhost:5173/callback",
-        response_type: "token",
-        scope:
-          "https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/calendar.readonly",
-        include_granted_scopes: "true",
-        state: "pass-through value",
-      };
-
-      fetch(oauth2Endpoint, params);
-      
-
-
-    } catch (error) {
-      console.error("Failed to login:", error);
-      setError("Failed to login. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    login();
+  }
 
   return (
     <div className="login-container">
@@ -56,7 +35,6 @@ function Login() {
 
         <div className="login-content">
           {error && <div className="error-message">{error}</div>}
-
           <button
             onClick={handleLogin}
             className="login-button"
