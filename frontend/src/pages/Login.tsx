@@ -3,15 +3,18 @@ import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import tigerAvatar from "../assets/tiggy.png";
 import princetonLogo from "../assets/princeton.png";
+import { authAPI } from "../api/authAPI";
 
 function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // const navigate = useNavigate();
 
+  // Must separate as useGoogleLogin is a hook.
   const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log(tokenResponse);
+    onSuccess: async (tokenResponse) => {
+      const userInfo = await authAPI.googleLogin(tokenResponse.access_token);
+      console.log("User info", userInfo);
     },
   });
 

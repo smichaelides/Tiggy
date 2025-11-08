@@ -4,7 +4,7 @@ import WelcomeScreen from "../components/WelcomeScreen";
 import ChatInterface from "../components/ChatInterface";
 import ChatSidebar from "../components/ChatSidebar";
 import type { Message, Chat } from "../types";
-import { chatAPI } from "../utils/api";
+import { chatAPI } from "../api/chatApi";
 
 const getChatTitle = (messages: Message[]) => {
   return messages.length > 0
