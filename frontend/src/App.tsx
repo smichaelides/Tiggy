@@ -10,6 +10,7 @@ import LoginPage from "./pages/Login";
 import SettingsPage from "./pages/Settings";
 import WelcomePage from "./pages/Welcome";
 import type { OnboardingInfo } from "./types";
+import CourseRecs from "./pages/CourseRecs";
 import "./App.css";
 
 function App() {
@@ -41,6 +42,16 @@ function App() {
           element={
             isAuthenticated ? (
               <SettingsPage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/course-recs"
+          element={
+            isAuthenticated ? (
+              <CourseRecs />
             ) : (
               <Navigate to="/login" replace />
             )

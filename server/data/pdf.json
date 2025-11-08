@@ -1,3157 +1,2902 @@
 [
   [
     {
-      "course_id":"008314",
-      "catalog_number":"103",
-      "title":"World Turned Upside Down, The",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008314",
+      "catalog_number": "103",
+      "title": "World Turned Upside Down, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008315",
-      "catalog_number":"104",
-      "title":"World Turned Upside Down, The",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008315",
+      "catalog_number": "104",
+      "title": "World Turned Upside Down, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008317",
-      "catalog_number":"106",
-      "title":"Seeking Nature",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008319",
+      "catalog_number": "109",
+      "title": "Sexual Revolutions",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
+    },
+    {
+      "course_id": "008322",
+      "catalog_number": "112",
+      "title": "Craft of Authenticity, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
+      },
+      "audit": false,
+      "grading": [
+        {
+          "component": "Papers",
+          "weight": 50.0
+        },
+        {
+          "component": "Paper in lieu of final",
+          "weight": 35.0
+        },
+        {
+          "component": "Class/precept participation",
+          "weight": 15.0
+        }
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008365",
-      "catalog_number":"107",
-      "title":"Seeking Nature",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008324",
+      "catalog_number": "114",
+      "title": "Modern Love",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008322",
-      "catalog_number":"112",
-      "title":"Craft of Authenticity, The",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008325",
+      "catalog_number": "115",
+      "title": "Modern Love",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008324",
-      "catalog_number":"114",
-      "title":"Modern Love",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008326",
+      "catalog_number": "116",
+      "title": "Sustainable Futures",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008325",
-      "catalog_number":"115",
-      "title":"Modern Love",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008328",
+      "catalog_number": "118",
+      "title": "Imagining Childhood",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":85.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Take home final exam",
-          "weight":5.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008328",
-      "catalog_number":"118",
-      "title":"Imagining Childhood",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008372",
+      "catalog_number": "119",
+      "title": "Imagining Childhood",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008330",
-      "catalog_number":"121",
-      "title":"Future of Food, The",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008330",
+      "catalog_number": "121",
+      "title": "Future of Food, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008332",
-      "catalog_number":"123",
-      "title":"Revolution Will (Not) Be Televised, The",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008332",
+      "catalog_number": "123",
+      "title": "Revolution Will (Not) Be Televised, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008334",
-      "catalog_number":"125",
-      "title":"Matters of Art",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008333",
+      "catalog_number": "124",
+      "title": "Revolution Will (Not) Be Televised, The",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008335",
-      "catalog_number":"126",
-      "title":"Matters of Art",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008334",
+      "catalog_number": "125",
+      "title": "Matters of Art",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008336",
-      "catalog_number":"127",
-      "title":"Let Every Voice Be Heard",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008336",
+      "catalog_number": "127",
+      "title": "Let Every Voice Be Heard",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008338",
-      "catalog_number":"128",
-      "title":"Let Every Voice Be Heard",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008338",
+      "catalog_number": "128",
+      "title": "Let Every Voice Be Heard",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008339",
-      "catalog_number":"129",
-      "title":"Disrupting Nature",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008339",
+      "catalog_number": "129",
+      "title": "Disrupting Nature",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008341",
-      "catalog_number":"131",
-      "title":"Love & Money",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008341",
+      "catalog_number": "131",
+      "title": "Love & Money",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008342",
-      "catalog_number":"132",
-      "title":"Love & Money",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008342",
+      "catalog_number": "132",
+      "title": "Love & Money",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008343",
-      "catalog_number":"133",
-      "title":"Educational Equities",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008345",
+      "catalog_number": "135",
+      "title": "Critical Care",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008345",
-      "catalog_number":"135",
-      "title":"Critical Care",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008346",
+      "catalog_number": "136",
+      "title": "Critical Care",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008346",
-      "catalog_number":"136",
-      "title":"Critical Care",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008349",
+      "catalog_number": "139",
+      "title": "How to Raise a Machine",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "See Writing Program website for course description.",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008347",
-      "catalog_number":"137",
-      "title":"Constructing Nature",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008350",
+      "catalog_number": "140",
+      "title": "How to Raise a Machine",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008348",
-      "catalog_number":"138",
-      "title":"Weird Weather",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008351",
+      "catalog_number": "141",
+      "title": "Fashioning the Self",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008349",
-      "catalog_number":"139",
-      "title":"How to Raise a Machine",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008352",
+      "catalog_number": "142",
+      "title": "Fashioning the Self",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"See Writing Program website for course description.",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008350",
-      "catalog_number":"140",
-      "title":"How to Raise a Machine",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008353",
+      "catalog_number": "143",
+      "title": "Priceless",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008353",
-      "catalog_number":"143",
-      "title":"Priceless",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008373",
+      "catalog_number": "144",
+      "title": "Priceless",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008373",
-      "catalog_number":"144",
-      "title":"Priceless",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008375",
+      "catalog_number": "146",
+      "title": "Constructing the Past",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008367",
-      "catalog_number":"149",
-      "title":"Interpreting Illness",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008367",
+      "catalog_number": "149",
+      "title": "Interpreting Illness",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008368",
-      "catalog_number":"150",
-      "title":"Interpreting Illness",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008368",
+      "catalog_number": "150",
+      "title": "Interpreting Illness",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"011502",
-      "catalog_number":"151",
-      "title":"Assigned at Birth",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "011502",
+      "catalog_number": "151",
+      "title": "Assigned at Birth",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008377",
-      "catalog_number":"153",
-      "title":"Curiosity",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008357",
+      "catalog_number": "152",
+      "title": "Assigned at Birth",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008587",
-      "catalog_number":"155",
-      "title":"Sourcing Your Stuff",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008587",
+      "catalog_number": "155",
+      "title": "Sourcing Your Stuff",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008588",
-      "catalog_number":"156",
-      "title":"Sourcing Your Stuff",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008588",
+      "catalog_number": "156",
+      "title": "Sourcing Your Stuff",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008589",
-      "catalog_number":"157",
-      "title":"Feeling in Public",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008589",
+      "catalog_number": "157",
+      "title": "Feeling in Public",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008868",
-      "catalog_number":"158",
-      "title":"Feeling in Public",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008868",
+      "catalog_number": "158",
+      "title": "Feeling in Public",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008867",
-      "catalog_number":"159",
-      "title":"Work On Yourself",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008867",
+      "catalog_number": "159",
+      "title": "Work On Yourself",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008755",
-      "catalog_number":"160",
-      "title":"Work On Yourself",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008755",
+      "catalog_number": "160",
+      "title": "Work On Yourself",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008756",
-      "catalog_number":"161",
-      "title":"Friendship",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008756",
+      "catalog_number": "161",
+      "title": "Friendship",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008758",
-      "catalog_number":"163",
-      "title":"Clickbait Justice",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008757",
+      "catalog_number": "162",
+      "title": "Friendship",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008759",
-      "catalog_number":"164",
-      "title":"Clickbait Justice",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008758",
+      "catalog_number": "163",
+      "title": "Clickbait Justice",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008760",
-      "catalog_number":"165",
-      "title":"Disability Justice",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008759",
+      "catalog_number": "164",
+      "title": "Clickbait Justice",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008762",
-      "catalog_number":"167",
-      "title":"Body Matters",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008760",
+      "catalog_number": "165",
+      "title": "Disability Justice",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008866",
-      "catalog_number":"168",
-      "title":"Body Matters",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008761",
+      "catalog_number": "166",
+      "title": "Like Magic",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008763",
-      "catalog_number":"169",
-      "title":"Expert Opinion",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008762",
+      "catalog_number": "167",
+      "title": "Body Matters",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008869",
-      "catalog_number":"170",
-      "title":"Expert Opinion",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008866",
+      "catalog_number": "168",
+      "title": "Body Matters",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"008764",
-      "catalog_number":"171",
-      "title":"Making Up Our Minds",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008763",
+      "catalog_number": "169",
+      "title": "Expert Opinion",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009042",
-      "catalog_number":"172",
-      "title":"Making Up Our Minds",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008869",
+      "catalog_number": "170",
+      "title": "Expert Opinion",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009043",
-      "catalog_number":"173",
-      "title":"Digging Into the Garden State",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "008764",
+      "catalog_number": "171",
+      "title": "Making Up Our Minds",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009044",
-      "catalog_number":"174",
-      "title":"Digging Into the Garden State",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009042",
+      "catalog_number": "172",
+      "title": "Making Up Our Minds",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009045",
-      "catalog_number":"175",
-      "title":"Mythconceptions",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009043",
+      "catalog_number": "173",
+      "title": "Digging Into the Garden State",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009046",
-      "catalog_number":"176",
-      "title":"Mythconceptions",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009044",
+      "catalog_number": "174",
+      "title": "Digging Into the Garden State",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009048",
-      "catalog_number":"177",
-      "title":"Technogenesis",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009045",
+      "catalog_number": "175",
+      "title": "Mythconceptions",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009074",
-      "catalog_number":"179",
-      "title":"Bad Botany",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009046",
+      "catalog_number": "176",
+      "title": "Mythconceptions",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009075",
-      "catalog_number":"180",
-      "title":"Bad Botany",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009048",
+      "catalog_number": "177",
+      "title": "Technogenesis",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009204",
-      "catalog_number":"183",
-      "title":"Imagined Geographies",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009049",
+      "catalog_number": "178",
+      "title": "Technogenesis",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009205",
-      "catalog_number":"184",
-      "title":"Imagined Geographies",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009074",
+      "catalog_number": "179",
+      "title": "Bad Botany",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009746",
-      "catalog_number":"187",
-      "title":"This Course Is Out To Get You",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009075",
+      "catalog_number": "180",
+      "title": "Bad Botany",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"009748",
-      "catalog_number":"189",
-      "title":"Sound and the City",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009746",
+      "catalog_number": "187",
+      "title": "This Course Is Out To Get You",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"010057",
-      "catalog_number":"193",
-      "title":"Animal Planet",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009748",
+      "catalog_number": "189",
+      "title": "Sound and the City",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"010205",
-      "catalog_number":"194",
-      "title":"Animal Planet",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009762",
+      "catalog_number": "190",
+      "title": "Sound and the City",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"011792",
-      "catalog_number":"197",
-      "title":"The Medium is the Message",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "009763",
+      "catalog_number": "191",
+      "title": "Seeing Is Believing",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"011506",
-      "catalog_number":"198",
-      "title":"Dirty Minds",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See the Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "010044",
+      "catalog_number": "192",
+      "title": "Seeing Is Believing",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"011507",
-      "catalog_number":"199",
-      "title":"Fabrics of Our Lives",
-      "semester":1262,
-      "department":"WRI",
-      "description":"See Princeton Writing Program website.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "010057",
+      "catalog_number": "193",
+      "title": "Animal Planet",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"014847",
-      "catalog_number":"207",
-      "title":"Focus",
-      "semester":1262,
-      "department":"WRI",
-      "description":"The 200-level writing seminars give transfer students the opportunity to expand upon their previous writing instruction for assignments at Princeton and in preparation for junior and senior independent work. Students begin the term with a self-assessment and collectively identify the tools a successful academic writer needs. Writing assignments build towards a self-directed research project and the term ends with a reimagining of that project as a junior paper proposal. All work in the course will guide students towards identifying the necessary methods and resources to produce strong work as a rising practitioner in their field.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "010205",
+      "catalog_number": "194",
+      "title": "Animal Planet",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"None",
-      "other_information":"This course fulfills the University's writing requirement for transfer students.  See the Princeton Writing Program website for a longer description.",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"016565",
-      "catalog_number":"208",
-      "title":"The Past is a Foreign Country",
-      "semester":1262,
-      "department":"WRI",
-      "description":"The 200-level writing seminars give transfer students the opportunity to expand upon their previous writing instruction for assignments at Princeton and in preparation for junior and senior independent work. Students begin the term with a self-assessment and collectively identify the tools a successful academic writer needs. Writing assignments build towards a self-directed research project and the term ends with a reimagining of that project as a junior paper proposal. All work in the course will guide students towards identifying the necessary methods and resources to produce strong work as a rising practitioner in their field.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "011792",
+      "catalog_number": "197",
+      "title": "The Medium is the Message",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"Students will receive credit for only ONE 200-level writing seminar.",
-      "other_information":"This course fulfills the University's writing requirement for transfer students. See the Princeton Writing Program website for a longer description.",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"016566",
-      "catalog_number":"209",
-      "title":"Curiosity",
-      "semester":1262,
-      "department":"WRI",
-      "description":"The 200-level writing seminars give transfer students the opportunity to expand upon their previous writing instruction for assignments at Princeton and in preparation for junior and senior independent work. Students begin the term with a self-assessment and collectively identify the tools a successful academic writer needs. Writing assignments build towards a self-directed research project and the term ends with a reimagining of that project as a junior paper proposal. All work in the course will guide students towards identifying the necessary methods and resources to produce strong work as a rising practitioner in their field.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "011506",
+      "catalog_number": "198",
+      "title": "Dirty Minds",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See the Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":50.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":35.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":15.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
-      ],
-      "assignments":"TBA",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"Students will receive credit for only ONE 200-level writing seminar.",
-      "other_information":"None",
-      "other_requirements":"None",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"016917",
-      "catalog_number":"220",
-      "title":"The Writing's on the Wall I (Year-Long Course)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Why do we so rarely talk about the rejected Picasso behind Spelman or how the Endowment weathers storms in the market? Research in psychology, architecture, and environmental science indicates that understanding one's surroundings leads to a happier life, yet we are so busy doing Princeton work that we miss the opportunity to analyze how campus influences our experiences or how the institutional makeup structures our learning. This seminar invites students to explore Princeton as a material archive and trains them in field-based methods for data-driven research in support of an independent project of their own design.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "011507",
+      "catalog_number": "199",
+      "title": "Fabrics of Our Lives",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "See Princeton Writing Program website.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":true,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":80.0
+          "component": "Papers",
+          "weight": 50.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 35.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Class/precept participation",
+          "weight": 15.0
         }
       ],
-      "assignments":"Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise about how their research experiences and learning might transfer to other courses and contexts.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
+      "assignments": "TBA",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": null,
+      "other_information": null,
+      "other_requirements": null,
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
+    },
+    {
+      "course_id": "017205",
+      "catalog_number": "221",
+      "title": "The Writing's on the Wall II (Year-Long Course)",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Grounded in humanistic disciplines, this seminar invites students to explore Princeton's campus as a material archive, first introducing them to different modes of textual, visual, and cultural analysis, before guiding them through the writing process as they complete an original research project of their own design.",
+      "pdf": {
+        "required": false,
+        "permitted": false
+      },
+      "audit": false,
+      "grading": [
         {
-          "title":"The Southern-Most Ivy: Princeton University from Jim ...",
-          "author":"Bradley, S."
+          "component": "Papers",
+          "weight": 70.0
         },
         {
-          "title":"Place and Being",
-          "author":"Cannatella, H."
+          "component": "Class/precept participation",
+          "weight": 20.0
         },
+        {
+          "component": "Paper in lieu of final",
+          "weight": 10.0
+        }
+      ],
+      "assignments": "See syllabus",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"The Fate of Place",
-          "author":"Casey, E."
+          "title": "Belonging: A Review of Conceptual Issues, an Integrative Fra",
+          "author": "Allen, K.-A. et al"
         },
         {
-          "title":"Master-Planning the American Campus: Goals ...",
-          "author":"Hajrasouliha, A.H."
+          "title": "Buildings for Education",
+          "author": "Delle Torre, S. et al"
         },
         {
-          "title":"Heritage: Critical Approaches",
-          "author":"Harrison, R."
+          "title": "Master-planning the American Campus: Goals, Actions, and Des",
+          "author": "Hajrasouliha, A.H."
         },
         {
-          "title":"How Do US Universities Want to Be Perceived? Factors ...",
-          "author":"Khalifa, B., Desmidt, S., & Huisman, J."
+          "title": "Heritage. Critical Approaches",
+          "author": "Harrison, R."
         }
       ],
-      "prerequisites":"This single-credit course redistributes the workload of a single semester over a full year. Completion of both semesters is required to earn that credit, which will appear on your transcript at the end of the spring term.",
-      "other_information":"Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.\n\nThe enrollment application and waitlist information can be found at: \nhttps://tinyurl.com/sophsem2526",
-      "other_requirements":"Open to Sophomores Only",
-      "website":"writing.princeton.edu/undergraduates/sophomore-research-seminars",
-      "distribution":"EC or SA",
-      "open":true,
-      "new":false
+      "prerequisites": "This single credit course is a year long. Completion of both semesters is required for credit.  Only students who completed WRI 220 in the fall term are eligible to enroll.",
+      "other_information": "Spread that fifth course requirement over two semesters instead of one; hone your research and writing skills; take charge of your own research questions. You'll still earn a full EC credit after completing both semesters but neither the fall nor the spring will feel like a heavier load.",
+      "other_requirements": "Open to Sophomores Only",
+      "website": "writing.princeton.edu/undergraduates/sophomore-research-seminars/fall-spring-seminars/wri-220-221",
+      "distribution": "EC",
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"017852",
-      "catalog_number":"235",
-      "title":"Is Talk Cheap?",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Most of us spend hours of our days talking with other people. So what makes interview and survey research different from those everyday conversations? And how do social scientists turn their conversational data into revolutionary research discoveries? This seminar will empower sophomores to find their own answers to those questions-while learning project management skills key to independent work success, expanding their networks on (and beyond!) Princeton's campus, and transforming a genuine personal passion into an intellectually and socially impactful research project.",
-      "pdf":{
-        "required":false,
-        "permitted":false
+      "course_id": "018074",
+      "catalog_number": "236",
+      "title": "From Data to Discovery",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Most of us spend hours of our days reading and learning from the written word. So what makes social scientific methods for textual analysis different from those everyday engagements? And how do scholars transform their raw research discoveries into impactful public-facing products? This seminar will empower sophomores to answer those questions while learning project management skills key to independent work success, expanding their networks on (and beyond!) Princeton's campus, and transforming a genuine personal passion into an intellectually and socially impactful research project.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":false,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":80.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of our two summative assignments (a midterm project pitch and final project summary), and they will fuel the concluding exercise about how your research experiences and learning might transfer to other courses and contexts.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
+      "assignments": "Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of our two summative assignments (a midterm results summary and final project presentation), and they will fuel each semester's concluding exercise about how your research experiences and learning might transfer to other courses and contexts.",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"The Lands We Share (https://landsweshare.org/)",
-          "author":"Wisconsin Farms Oral History Project"
+          "title": "Language Syncretism and the Expression of Youth Identities..",
+          "author": "Doreen Rumbizai Tivenga and Irikidzayi Manase"
         },
         {
-          "title":"'I Don't Like Passing as a Straight Woman': Queer ...",
-          "author":"Carla A. Pfeffer"
+          "title": "The Stigma of Diseases",
+          "author": "Rachel Kahn Best and Alina Arseniev-Koehler"
         },
         {
-          "title":"Feeling Good Is Feeling Better",
-          "author":"Alberto Prati and Claudia Senik"
+          "title": "A Dialogue on Love",
+          "author": "Zhang"
         },
         {
-          "title":"Engagement at the Margins: Investigating How Marginalized ..",
-          "author":"Amana Kaskazi and Vanessa Kitzie"
+          "title": "CEO Behavior and Firm Performance",
+          "author": "Oriana Bandiera et al."
         },
         {
-          "title":"'You Have to Move!' The Cruel and Ineffective ...",
-          "author":"Human Rights Watch"
+          "title": "The Coded Language of Empire",
+          "author": "Kalani Craig et al."
         },
         {
-          "title":"Vessel of God/Access to God: American Sign Language ...",
-          "author":"MIchele Ilana Friedner"
+          "title": "You Have to Move!",
+          "author": "Human Rights Watch"
         }
       ],
-      "prerequisites":"This seminar is a standard, one-semester, full-time course (unlike other Writing Program sophomore research seminars, which operate on a half-time, year-long calendar). Students interested in continuing with their research in the spring will have priority for admission to WRI 236, \"From Data to Discovery.\"",
-      "other_information":"Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.\nThe enrollment application and waitlist information can be found at: https://tinyurl.com/sophsem2526",
-      "other_requirements":"None",
-      "website":"writing.princeton.edu/undergraduates/sophomore-research-seminars",
-      "distribution":"EC or SA",
-      "open":true,
-      "new":false
+      "prerequisites": "This seminar is a standard, one-semester, full-time course (unlike other Writing Program sophomore research seminars, which operate on a half-time, year-long calendar). WRI 236 is open to all students, whether or not they completed WRI 235 in the fall.",
+      "other_information": "Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres. The enrollment application and waitlist information can be found at: \nhttps://tinyurl.com/sophsem2526",
+      "other_requirements": "Open to Sophomores Only",
+      "website": "writing.princeton.edu/undergraduates/sophomore-research-seminars",
+      "distribution": "EC or SA",
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"017327",
-      "catalog_number":"240",
-      "title":"Cuneiform, Codices, Comics I (Year-Long Course)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Archives hold humanity's history - or at least some of it. So what is stored in archives? How do humanities scholars discover fascinating objects, learn from them, and publicize their new knowledge? This seminar demystifies research students might undertake in Firestone's C-Basement, empowering sophomores to pursue archival projects inspired by their intellectual interests. Through conducting a year-long project in Special Collections, students discover possible pathways for future independent work, cultivate networks of mentors and collaborators, and share their research to reach communities within and beyond the orange bubble.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "017455",
+      "catalog_number": "241",
+      "title": "Cuneiform, Codices, Comics II (Year-Long Course)",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "This seminar immerses students in archive-based methods for humanistic inquiry by exploring Special Collections objects (including manuscripts, drawings, death masks, musical scores, among many other items) and empowers them to develop an original research project of their own design.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":true,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":80.0
+          "component": "Papers",
+          "weight": 70.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":10.0
+          "component": "Class/precept participation",
+          "weight": 20.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         }
-      ],
-      "assignments":"Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise - about how their research experiences and learning might transfer to other courses and contexts.",
-      "reserved_seats":[
-        
       ],
-      "readings":[
+      "assignments": "See syllabus",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"Invisible Women in History and Global Studies",
-          "author":"Meenal Shrivastava"
+          "title": "Behind the Mask: Death Masks, Celebrity, and [Princeton's] L",
+          "author": "Barry, Anna and Verity Burke"
         },
         {
-          "title":"Behind the Mask: Death Masks, Celebrity, and the ...",
-          "author":"Anna Maria Barry and Verity Burke"
+          "title": "Hokusai: The Great Picture Book of Everything",
+          "author": "Clark, Timothy"
         },
         {
-          "title":"Programmed Space, Themed Space, and the Ethics of Home ...",
-          "author":"Shari Evans"
+          "title": "Programmed Space, Themed Space and Ethics in Toni Morrison's",
+          "author": "Evans, Shari"
         },
         {
-          "title":"Exploring Diversity and Student Political Activism",
-          "author":"Laurel Elder and Shelley Wallace"
+          "title": "Transcription, Translation, and Annotation: Observations on",
+          "author": "Langermann, Y. Tzvi"
         },
         {
-          "title":"The Smell of the White Man is Killing Us: Education ...",
-          "author":"James T. Carroll"
+          "title": "A Newly-Discovered Manuscript of Mozart's Die Zauberflote",
+          "author": "Buch, David J."
         }
       ],
-      "prerequisites":"This single-credit course redistributes the workload of a single semester over a full year. Completion of both semesters is required to earn that credit, which will appear on your transcript at the end of the spring term.",
-      "other_information":"Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.\n\nThe enrollment application and waitlist information can be found at: \nhttps://tinyurl.com/sophsem2526",
-      "other_requirements":"Open to Sophomores Only",
-      "website":"writing.princeton.edu/undergraduates/sophomore-research-seminars",
-      "distribution":"EC or HA",
-      "open":true,
-      "new":false
+      "prerequisites": "This single credit course is a year long. Completion of both semesters is required for credit. Only students who completed WRI 240 in the fall term are eligible to enroll.",
+      "other_information": "Spread that fifth course requirement over two semesters instead of one; hone your research and writing skills; take charge of your own research questions. You'll still earn a full EC credit after completing both semesters but neither the fall nor the spring will feel like a heavier load.",
+      "other_requirements": "Open to Sophomores Only",
+      "website": " ",
+      "distribution": "EC",
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"017853",
-      "catalog_number":"260",
-      "title":"The Invisible Hand I (Year-Long Course)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Hands-on engagement with the process of crafting produces a different type of knowledge than that gained via other methods, such as reading a book or making logical deductions about a corpus. This seminar recenters the embodied human in the humanities, inviting students to make the body (all the way down to their own hands!) central to inquiry and discovery. Students design a year-long, hands-on making project, practicing research skills from forming a compelling question to situating insights and connections within their literary, historical, and/or cultural context. Spend a year putting process over product - and make something!",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "018133",
+      "catalog_number": "261",
+      "title": "The Invisible Hand II (Year-Long Course)",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Hands-on engagement with the process of crafting produces a different type of knowledge than that gained via other methods, such as reading a book or making logical deductions about a corpus. This seminar recenters the embodied human in the humanities, inviting students to make the body (all the way down to their own hands!) central to inquiry and discovery. Students design a year-long, hands-on making project, practicing research skills from forming a compelling question to situating insights and connections within their literary, historical, and/or cultural context. Spend a year putting process over product - and make something!",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":true,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":80.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise - about how their research experiences and learning might transfer to other courses and contexts.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
+      "assignments": "Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise - about how their research experiences and learning might transfer to other courses and contexts.",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"Out of the Ivy and Into the Arctic: Imitation Coral ...",
-          "author":"Bilak, Donna"
+          "title": "Out of the Ivy and Into the Arctic: Imitation Coral ...",
+          "author": "Bilak, Donna"
         },
         {
-          "title":"Stitch Please Podcast. (https://stitchpleasepodcast.com/)",
-          "author":"Black Women Stitch"
+          "title": "Stitch Please Podcast. (https://stitchpleasepodcast.com/)",
+          "author": "Black Women Stitch"
         },
         {
-          "title":"Method Meets Art: Arts-Based Research Practice",
-          "author":"Leavy, Patricia"
+          "title": "Method Meets Art: Arts-Based Research Practice",
+          "author": "Leavy, Patricia"
         },
         {
-          "title":"Openness, Secrecy, Authorship: Technical Arts and ...",
-          "author":"Long, Pamela"
+          "title": "Openness, Secrecy, Authorship: Technical Arts and ...",
+          "author": "Long, Pamela"
         },
         {
-          "title":"Crafting Innovation, Weaving Sustainability: Theorizing ...",
-          "author":"Mamidipudi, Annapurna"
+          "title": "Crafting Innovation, Weaving Sustainability: Theorizing ...",
+          "author": "Mamidipudi, Annapurna"
         }
       ],
-      "prerequisites":"This single-credit course redistributes the workload of a single semester over a full year. Completion of both semesters is required to earn that credit, which will appear on your transcript at the end of the spring term.",
-      "other_information":"Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.\nThe enrollment application and waitlist information can be found at: https://tinyurl.com/sophsem2526",
-      "other_requirements":"Open to Sophomores Only",
-      "website":"writing.princeton.edu/undergraduates/sophomore-research-seminars",
-      "distribution":"EC or LA",
-      "open":true,
-      "new":false
+      "prerequisites": "This single-credit course is a year long. Completion of both semesters is required for credit. Only students who completed WRI 260 in the fall term are eligible to enroll.",
+      "other_information": "Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.",
+      "other_requirements": "Open to Sophomores Only",
+      "website": "writing.princeton.edu/undergraduates/sophomore-research-seminars",
+      "distribution": "EC or LA",
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"017896",
-      "catalog_number":"270",
-      "title":"The Curious Scientist I (Year-Long Course)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Sure, the latest issue of Nature is filled with thrilling scientific discoveries. But how do researchers dream up these exciting projects? How can undergraduate students move from textbook knowledge into innovative research questions? And what can scientists at all levels do with our findings once we have them? Entry into the world of original STEM research can seem daunting: this seminar will empower sophomores with strategies to develop novel research questions big and small, evaluate and execute methods for answering those questions, and make scientific discoveries more widely accessible.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "018134",
+      "catalog_number": "271",
+      "title": "The Curious Scientist II (Year-Long Course)",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Sure, the latest issue of Nature is filled with thrilling scientific discoveries. But how do researchers dream up these exciting projects? How can undergraduate students move from textbook knowledge into innovative research questions? And what can scientists at all levels do with our findings once we have them? Entry into the world of original STEM research can seem daunting: this seminar will empower sophomores with strategies to develop novel research questions big and small, evaluate and execute methods for answering those questions, and make scientific discoveries more widely accessible.",
+      "pdf": {
+        "required": false,
+        "permitted": false
       },
-      "audit":true,
-      "grading":[
+      "audit": false,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":80.0
+          "component": "Papers",
+          "weight": 80.0
         },
         {
-          "component":"Paper in lieu of final",
-          "weight":10.0
+          "component": "Paper in lieu of final",
+          "weight": 10.0
         },
         {
-          "component":"Class/precept participation",
-          "weight":10.0
+          "component": "Class/precept participation",
+          "weight": 10.0
         }
       ],
-      "assignments":"Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise about how their research experiences and learning might transfer to other courses and contexts.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        {
-          "title":"Brown dwarf in neighboring solar system is actually ...",
-          "author":"Xuan, J.W."
-        },
+      "assignments": "Short, weekly assignments will provide students with opportunities to develop, practice, or strengthen research skills relevant to their individual projects and intellectual goals. Those smaller assignments will also be the building blocks of each semester's summative assignment and the inspiration for each semester's concluding exercise about how their research experiences and learning might transfer to other courses and contexts.",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"How 'miracle' weight-loss drugs will change the world",
-          "author":"Reardon, D."
+          "title": "Brown dwarf in neighboring solar system is actually ...",
+          "author": "Xuan, J.W."
         },
         {
-          "title":"AI-generated images threaten science",
-          "author":"Kwon, D."
+          "title": "How 'miracle' weight-loss drugs will change the world",
+          "author": "Reardon, D."
         },
         {
-          "title":"This microtubule does not exist",
-          "author":"Saguy, A et al"
+          "title": "AI-generated images threaten science",
+          "author": "Kwon, D."
         },
         {
-          "title":"Now what?",
-          "author":"Hopfield, J."
+          "title": "This microtubule does not exist Hopfield, J., Now what?",
+          "author": "Saguy, A et al"
         },
-        {
-          "title":"Large associative memory problem in neurobiology ...",
-          "author":"Krotov, D. , Hopfield, J"
-        }
-      ],
-      "prerequisites":"This single-credit course redistributes the workload of a single semester over a full year. Completion of both semesters is required to earn that credit, which will appear on your transcript at the end of the spring term.",
-      "other_information":"Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres.\n\nThe enrollment application and waitlist information can be found at:\nhttps://tinyurl.com/sophsem2526",
-      "other_requirements":"Open to Sophomores Only",
-      "website":"writing.princeton.edu/undergraduates/sophomore-research-seminars",
-      "distribution":"EC",
-      "open":true,
-      "new":false
-    },
-    {
-      "course_id":"011050",
-      "catalog_number":"501",
-      "title":"Reading & Writing About the Scientific Literature in English (Half Term): Science & Engineering",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Introduction to reading and writing about the research literature for international graduate students from non-English speaking institutions. Topics include academic integrity and effective source use, how researchers work with the academic literature as both readers and writers, how research articles are constructed and interpreted, how research findings are presented, and how quantitative arguments are developed. Two 80-minute seminars per week.",
-      "pdf":{
-        "required":false,
-        "permitted":true
-      },
-      "audit":true,
-      "grading":[
         {
-          "component":"Other (see instructor)",
-          "weight":100.0
+          "title": "Large associative memory problem in neurobiology ...",
+          "author": "Krotov, D. , Hopfield, J."
         }
       ],
-      "assignments":"One to two research articles will be assigned as readings each week.  Writing assignments will include weekly informal responses of one to two pages and a 1,200- to 1,500-word literature review in the student's area of research.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"Course is open to international graduate students in quantitative fields of science, engineering, and social sciences.",
-      "other_information":"Course will meet from 10/20/25 to 12/4/25.  This is a half-term course that meets in the second half of Fall term.",
-      "other_requirements":"Open to Graduate Students Only",
-      "website":"writing.princeton.edu/graduate-students-postdocs/writing-courses-science-engineering",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "prerequisites": "This single-credit course redistributes the workload of a single semester over a full year. Completion of both semesters is required to earn that credit. Only students who completed WRI 270 in the fall are eligible to enroll.",
+      "other_information": "Like all sophomore research seminars housed in the Writing Program, this course will include sessions on obtaining undergraduate research funding, building a research network at Princeton (and beyond!), balancing professional ambition with personal wellbeing, cultivating a supportive peer writing community, and sharing research findings effectively in public-facing genres. The enrollment application and waitlist information can be found at: https://tinyurl.com/sophsem2526",
+      "other_requirements": "Open to Sophomores Only",
+      "website": "writing.princeton.edu/undergraduates/sophomore-research-seminars",
+      "distribution": "EC",
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"013813",
-      "catalog_number":"502",
-      "title":"Writing a Persuasive Proposal in Quantitative Disciplines (Half-Term)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Workshop on writing research proposals, especially for submission to funding agencies and/or departmental committees. Open to students in areas of quantitative research, including science, engineering, and social science. Topics include getting started, motivating research questions, developing specific aims, reviewing published research literature rigorously, justifying resources and budgets, revising effectively, giving and receiving feedback as well as academic integrity. Prerequisites: International graduate students may enroll only after completing WRI 501 or with permission of instructor.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "011050",
+      "catalog_number": "501",
+      "title": "Reading & Writing About the Scientific Literature",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Presentations, conferences, papers, and grants - the work of a scientist is the work of a writer. Academic writing is hard, with additional burdens for students new to academic English. At the same time, large language models can find papers and generate a response at superhuman speed. How might generative AI help, and where does it lead us astray? This course explores how scientific articles are constructed, how research findings are presented, and how scientific arguments are developed. Students learn to read critically and efficiently, differentiate their work from prior research, and cite sources accurately and responsibly.",
+      "pdf": {
+        "required": false,
+        "permitted": true
       },
-      "audit":true,
-      "grading":[
+      "audit": true,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":100.0
+          "component": "Other (see instructor)",
+          "weight": 100.0
         }
-      ],
-      "assignments":"Reading sample proposals and writing weekly drafts.",
-      "reserved_seats":[
-        
       ],
-      "readings":[
-        
-      ],
-      "prerequisites":"WRI 501 or permission of the instructor.",
-      "other_information":"This class will meet from 9/2/25 to 10/10/25.  This is a half-term course that meets for 6 weeks in the first half of Fall term.",
-      "other_requirements":"Open to Graduate Students Only",
-      "website":"www.princeton.edu/writing/wse",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "For each class, students read research articles and write informal critical responses to exchange with other class members. Students conclude by writing a short literature review relevant to their research project.",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": "This course is open to graduate students in quantitative fields in science, engineering, and social sciences.",
+      "other_information": "WRI 501 is a full term course and meets once a week for twelve weeks. The course is especially helpful for students who wish to 1) sharpen their critical written analysis in preparation for writing proposals and/or general examinations, 2) engage confidently in conversations about writing with their coauthors and collaborators, and 3) develop a healthy relationship to generative AI.",
+      "other_requirements": "Open to Graduate Students Only",
+      "website": "writing.princeton.edu/graduate-students-postdocs/writing-courses-science-engineering",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"010878",
-      "catalog_number":"503",
-      "title":"Writing an Effective Scientific Research Article (Half Term): Sci & Engineering",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Writing workshop for students in any area of quantitative research, including science, engineering, and quantitative social sciences, who are prepared to draft a research article for publication based on their original work. Topics include getting started, presenting data, communicating visually, understanding the elements of a research article, using evidence persuasively, revising effectively, soliciting useful comments from readers, and incorporating feedback.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "013813",
+      "catalog_number": "502",
+      "title": "Writing a Grant Proposal in Quantitative Disciplines",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Graduate work trains us to gather data, but professional researchers often start by gathering funds. In a competitive environment, how can we persuade institutions to choose us? How do we write about research that doesn't yet exist? In this course, students learn to craft concise and compelling grant proposals. Together we will focus on how to start, get unstuck, and alternate between collecting data and composing drafts. By the end of the course, students will have a proposal suitable for submission to departmental committees or external funding agencies such as the NSF, the NIH, the DOD, private foundations, and angel investors.",
+      "pdf": {
+        "required": false,
+        "permitted": true
       },
-      "audit":true,
-      "grading":[
+      "audit": true,
+      "grading": [
         {
-          "component":"Papers",
-          "weight":100.0
+          "component": "Other (see instructor)",
+          "weight": 100.0
         }
-      ],
-      "assignments":"Each week, students write a new section of a research article on their own work. Reading assignments include examples of published research articles and drafts of articles composed by members of the class.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
       ],
-      "prerequisites":"Course is open to graduate students who have completed sufficient research to begin writing a research article for publication in any area of science, engineering, or quantitative social sciences.  International students require either completion of WRI 501 or permission of the instructor.",
-      "other_information":"This class meets from 9/2/25 to 10/10/25, the first half of the Fall Term.",
-      "other_requirements":"Open to Graduate Students Only",
-      "website":"writing.princeton.edu/graduate-students-postdocs/writing-courses-science-engineering",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "Reading sample proposals and writing weekly drafts.",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": "WRI 501 or permission of the instructor.",
+      "other_information": "WRI 502 is a full term course that meets once a week for twelve weeks. Each class includes opportunities to develop, write, evaluate, and respond to sections of a proposal. Throughout the course, students give and receive feedback on their proposal drafts from each other; they also participate in two individual conferences with the instructor.",
+      "other_requirements": "Open to Graduate Students Only",
+      "website": "www.princeton.edu/writing/wse",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"013881",
-      "catalog_number":"503A",
-      "title":"Writing an Effective Scientific Research Article (Half Term): Sci & Engineering",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Writing workshop for students in any area of quantitative research, including science, engineering, and quantitative social sciences, who are preparing to draft a research article for publication based on their original work. Topics include getting started, presenting data, communicating visually, understanding the elements of a research article, using evidence persuasively, revising effectively, soliciting useful comments from readers, and incorporating feedback.  One 2-hour, 50-minute seminar per week, for 6 weeks.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "010878",
+      "catalog_number": "503",
+      "title": "Writing an Effective Scientific Research Article",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Writing a scientific research article requires significant support, from guidance on drafting and revision to instruction on appropriate uses of generative AI and more. This course allows students to develop expertise in a genre that requires a systematic format to make a persuasive and novel contribution. Students draft a research article based on their original research, learning: 1) how to use the persuasive aspects of conventional written structure; 2) how to use analysis, feedback, and revision to develop a collaborative writing process; and 3) how to craft concise and compelling arguments that establish new scientific knowledge.",
+      "pdf": {
+        "required": false,
+        "permitted": true
       },
-      "audit":true,
-      "grading":[
+      "audit": true,
+      "grading": [
         {
-          "component":"Other (see instructor)",
-          "weight":100.0
+          "component": "Other (see instructor)",
+          "weight": 100.0
         }
       ],
-      "assignments":"Each week, students will write a new section of a research article on their own work.  Reading assignments will include examples of published research articles and drafts of articles composed by members of the class.",
-      "reserved_seats":[
-        
-      ],
-      "readings":[
-        
-      ],
-      "prerequisites":"Course is open to graduate students who have completed sufficient research to begin writing a research article for publication in any area of science, engineering, or quantitative social sciences. International students require either completion of WRI 501 or permission of the instructor..",
-      "other_information":"Course will meet in the second half of Fall term, from 10/20/25 to 12/4/25.  To apply, visit https://writing.princeton.edu/graduate-students-postdocs/writing-courses-science-engineering/wri-503.",
-      "other_requirements":"Open to Graduate Students Only",
-      "website":"writing.princeton.edu/wse/graduate-writing-courses/wri-503",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "assignments": "Every two weeks, students write a new section of a research article on their own work. Reading assignments include examples of published research articles and drafts of articles composed by members of the class.",
+      "reserved_seats": [],
+      "readings": [],
+      "prerequisites": "Course is open to graduate students who have completed sufficient research to begin writing a research article for publication in any area of science, engineering, or quantitative social sciences.  International students require either completion of WRI 501 or permission of the instructor.",
+      "other_information": "WRI 503 is a full term course that meets once a week for 12 weeks. Each two week period focuses on a different section of the research article. Students also participate in individual conferences with the instructor and a final conference that includes the student's research advisor.",
+      "other_requirements": "Open to Graduate Students Only",
+      "website": "writing.princeton.edu/graduate-students-postdocs/writing-courses-science-engineering",
+      "distribution": null,
+      "open": true,
+      "new": false
     },
     {
-      "course_id":"015493",
-      "catalog_number":"504",
-      "title":"Write to Publish (Half-Term)",
-      "semester":1262,
-      "department":"WRI",
-      "description":"Course guides graduate students in the social sciences and humanities through the process of revising preexisting work into publishable form. Students learn the tricks of publishing and apply proven methods to their own work. In addition to classroom time dedicated to learning specific article-writing skills, participants form an accountability group to help meet milestones in the draft and revision, and have individual conferences for detailed feedback with the course instructor. Scholarship on various aspects of the writing process helps illuminate the many mechanisms behind forming sustainable, positive work habits.",
-      "pdf":{
-        "required":false,
-        "permitted":true
+      "course_id": "015493",
+      "catalog_number": "504",
+      "title": "Write to Publish (Half-Term)",
+      "semester": 1264,
+      "department": "WRI",
+      "description": "Course guides graduate students in the social sciences and humanities through the process of revising preexisting work into publishable form. Students learn the tricks of publishing and apply proven methods to their own work. In addition to classroom time dedicated to learning specific article-writing skills, participants form an accountability group to help meet milestones in the draft and revision, and have individual conferences for detailed feedback with the course instructor. Scholarship on various aspects of the writing process helps illuminate the many mechanisms behind forming sustainable, positive work habits.",
+      "pdf": {
+        "required": false,
+        "permitted": true
       },
-      "audit":true,
-      "grading":[
+      "audit": true,
+      "grading": [
         {
-          "component":"Other (see instructor)",
-          "weight":100.0
+          "component": "Other (see instructor)",
+          "weight": 100.0
         }
-      ],
-      "assignments":"Students are expected to complete a journal article for submission by the end of the course.",
-      "reserved_seats":[
-        
       ],
-      "readings":[
+      "assignments": "Students are expected to complete a journal article for submission by the end of the course.",
+      "reserved_seats": [],
+      "readings": [
         {
-          "title":"Why are some texts good and others not?",
-          "author":"Beauvais, C.T. Olive, and J.M. Passerault"
+          "title": "Why are some texts good and others not?",
+          "author": "Beauvais, C.T. Olive, and J.M. Passerault"
         },
         {
-          "title":"Writing Your Journal Article in Twelve Weeks",
-          "author":"Belcher, W. L."
+          "title": "Writing Your Journal Article in Twelve Weeks",
+          "author": "Belcher, W. L."
         },
         {
-          "title":"How to get your article published",
-          "author":"Dreyfuss, S. and M. Ryan"
+          "title": "How to get your article published",
+          "author": "Dreyfuss, S. and M. Ryan"
         }
       ],
-      "prerequisites":"Only open to graduate students.",
-      "other_information":"This course runs in the Fall term and meets alternating weeks on Fridays for 3 hours (9/5, 9/19, 10/3, 10/24, 11/7, 11/21).  Please visit https://writing.princeton.edu/wri504 for more information on applying to the course.",
-      "other_requirements":"Open to Graduate Students Only",
-      "website":" ",
-      "distribution":"None",
-      "open":true,
-      "new":false
+      "prerequisites": "Only open to graduate students.",
+      "other_information": "This course runs in the Spring term and meets alternating weeks on Fridays for 3 hours (1/30, 2/13, 2/27, 3/20, 4/3, 4/17).  Please visit https://writing.princeton.edu/wri504 for more information on applying to the course.",
+      "other_requirements": "Open to Graduate Students Only",
+      "website": " ",
+      "distribution": null,
+      "open": true,
+      "new": false
     }
   ]
 ]

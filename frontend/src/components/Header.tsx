@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiUser, FiSettings, FiLogOut, FiDownload } from 'react-icons/fi';
+import { FiUser, FiSettings, FiLogOut, FiDownload, FiBookOpen } from 'react-icons/fi';
 import princetonLogo from '../assets/princeton.png';
 import type { Message } from '../types';
 import { generateChatPDF } from '../utils/pdfGenerator';
@@ -39,6 +39,10 @@ function Header({ messages }: HeaderProps) {
     generateChatPDF(messages);
   };
 
+  const handleCourseRecsClick = () => {
+    navigate('/course-recs')
+  }
+
   return (
     <header className="header">
       <div className="header-content">
@@ -59,6 +63,13 @@ function Header({ messages }: HeaderProps) {
               <FiDownload />
             </button>
           )}
+          <button 
+            className="header-text-button"
+            onClick={handleCourseRecsClick}
+          >
+            Course Recs
+            <FiBookOpen />
+          </button>
           <div className="header-profile-container" ref={dropdownRef}>
             <button 
               className="header-button"
