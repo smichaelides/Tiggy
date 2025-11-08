@@ -5,16 +5,30 @@ import tigerAvatar from "../assets/tiggy.png";
 import princetonLogo from "../assets/princeton.png";
 import { authAPI } from "../api/authAPI";
 
-function Login() {
+interface LoginProps {
+  setIsAuthenticated: (isAuth: boolean) => void;
+  setHasCompletedWelcome: (completedWelcome: boolean) => void;
+}
+
+function Login({ setIsAuthenticated, setHasCompletedWelcome }: LoginProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // const navigate = useNavigate();
 
   // Must separate as useGoogleLogin is a hook.
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const userInfo = await authAPI.googleLogin(tokenResponse.access_token);
-      console.log("User info", userInfo);
+
+      try {
+        const userInfo = await authAPI.googleLogin(tokenResponse.access_token);
+        const loginResponse = await authAPI.login(userInfo.email);
+        setIsAuthenticated(true);
+      } catch (ex) {
+        console.error(ex);
+        if (ex?.message) {
+          setIsAuthenticated(true);
+          setHasCompletedWelcome(false);
+        }
+      }
     },
   });
 

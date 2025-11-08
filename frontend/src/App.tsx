@@ -1,47 +1,52 @@
-
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/Login';
-import SettingsPage from './pages/Settings';
-import Callback from './pages/Callback';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useState } from "react";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/Login";
+import SettingsPage from "./pages/Settings";
+import WelcomePage from "./pages/Welcome";
+import "./App.css";
 
 function App() {
-  const [isAuthenticated] = useState(false);
+  const [hasCompletedWelcome, setHasCompletedWelcome] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <Router>
       <Routes>
-        <Route path="/callback" element={<Callback />} />
-        <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             !isAuthenticated ? (
-              <LoginPage />
+              <LoginPage
+                setIsAuthenticated={setIsAuthenticated}
+                setHasCompletedWelcome={setHasCompletedWelcome}
+              />
+            ) : !hasCompletedWelcome ? (
+              <WelcomePage />
             ) : (
               <Navigate to="/" replace />
             )
-          } 
+          }
         />
-        <Route 
-          path="/settings" 
+        <Route
+          path="/settings"
           element={
             isAuthenticated ? (
               <SettingsPage />
             ) : (
               <Navigate to="/login" replace />
             )
-          } 
+          }
         />
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-            isAuthenticated ? (
-              <MainPage />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            isAuthenticated ? <MainPage /> : <Navigate to="/login" replace />
           }
         />
       </Routes>

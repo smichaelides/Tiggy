@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import princetonLogo from '../assets/princeton.png';
 import tigerAvatar from '../assets/tiggy.png';
+// import { authAPI } from '../api/userApi';
 import { princetonMajors, grades } from '../utils/settings';
 
 function Welcome() {
@@ -20,6 +21,8 @@ function Welcome() {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
+      // Sign up user with information
+      // const response = await 
       navigate("/");
     }
   };
