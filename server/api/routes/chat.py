@@ -173,14 +173,11 @@ def send_message():
     if "chatId" not in payload:
         return {"error": "Missing required field: 'chatId'."}, 400
 
-    if "userId" not in payload:
-        return {"error": "Missing required field: 'userId'."}, 400
-
     if "timestamp" not in payload:
         return {"error": "Missing required field: 'timestamp'."}, 400
 
     payload["chatId"] = ObjectId(payload["chatId"])
-    payload["userId"] = payload["userId"]
+    payload["userId"] = session["userId"]
     payload["timestamp"] = datetime.now(tz=timezone.utc)
 
     user_msg = UserMessage.model_validate(payload)

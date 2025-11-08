@@ -52,6 +52,7 @@ function MainPage() {
         const messages = [...userMessages, ...modelMessages].sort(
           (a, b) => a.timestamp.getTime() - b.timestamp.getTime()
         );
+
         return {
           _id: chat._id,
           title: getChatTitle(messages),
@@ -63,8 +64,11 @@ function MainPage() {
         };
       });
 
-      setCurrentChat(chats[0]);
       setChats(chats);
+      if (chats.length > 0) {
+        setCurrentChat(chats[0]);
+        setMessages(chats[0].messages);
+      }
     } catch (error) {
       console.error("Unable to list new chats:", error);
     }
@@ -85,6 +89,7 @@ function MainPage() {
       };
 
       setChats((prev) => [...prev, newChat]);
+      console.log("New chat created", newChat);
       setCurrentChat(newChat);
       setInputValue("");
     } catch (error) {
@@ -138,6 +143,7 @@ function MainPage() {
       updatedAt: new Date(fetchedChat.updatedAt),
     };
 
+    setMessages(messages);
     setCurrentChat(currentChat);
     setInputValue("");
 
@@ -207,7 +213,12 @@ function MainPage() {
 
   const handleSendMessage = async (customText?: string) => {
     const textToSend = customText || inputValue;
-    if (!currentChat || !textToSend.trim()) return;
+    if (!textToSend.trim()) return;
+
+    if (!currentChat) {
+      await createNewChat();
+      console.log("New current chat", currentChat);
+    }
 
     const userMessage: Message = {
       message: textToSend,
@@ -215,7 +226,7 @@ function MainPage() {
       timestamp: new Date(),
     };
 
-    const chatResponse = await chatAPI.sendMessage(currentChat._id, textToSend);
+    const chatResponse = await chatAPI.sendMessage(currentChat?._id, textToSend);
 
     setMessages((prev) => [...prev, userMessage]);
     updateChatMessages(currentChat._id, messages);
@@ -263,7 +274,7 @@ function MainPage() {
               : ""
           }`}
         >
-          {currentChat && currentChat.messages.length === 0 ? (
+          {!currentChat || (currentChat && currentChat.messages.length === 0) ? (
             <WelcomeScreen
               inputValue={inputValue}
               setInputValue={setInputValue}

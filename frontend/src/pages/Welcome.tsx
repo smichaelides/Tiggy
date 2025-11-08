@@ -29,8 +29,7 @@ function Welcome({
       setCurrentStep(currentStep + 1);
     } else {
       // Sign up user with information
-
-      const response = await authAPI.completeUserLogin(onboardingInfo);
+      await authAPI.completeUserLogin(onboardingInfo);
       navigate("/");
     }
   };

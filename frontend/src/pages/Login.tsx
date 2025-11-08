@@ -29,7 +29,7 @@ function Login({
           name: userInfo.name,
           email: userInfo.email,
         });
-        const loginResponse = await authAPI.login(userInfo.email);
+        await authAPI.login(userInfo.email);
         setIsAuthenticated(true);
       } catch (ex) {
         console.error(ex);
