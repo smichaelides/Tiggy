@@ -9,11 +9,13 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/Login";
 import SettingsPage from "./pages/Settings";
 import WelcomePage from "./pages/Welcome";
+import type { OnboardingInfo } from "./types";
 import "./App.css";
 
 function App() {
-  const [hasCompletedWelcome, setHasCompletedWelcome] = useState(false);
+  const [hasCompletedWelcome, setHasCompletedWelcome] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [onboardingInfo, setOnboardingInfo] = useState<OnboardingInfo>({});
 
   return (
     <Router>
@@ -25,9 +27,10 @@ function App() {
               <LoginPage
                 setIsAuthenticated={setIsAuthenticated}
                 setHasCompletedWelcome={setHasCompletedWelcome}
+                setOnboardingInfo={setOnboardingInfo}
               />
             ) : !hasCompletedWelcome ? (
-              <WelcomePage />
+              <WelcomePage googleAuthInfo={onboardingInfo} />
             ) : (
               <Navigate to="/" replace />
             )

@@ -5,6 +5,6 @@ class User(Model):
     _id: str | None
     name: str
     email: str
-    grad_year: int
+    grade: str
     concentration: str | None
     certificates: list[str]

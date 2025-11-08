@@ -21,6 +21,14 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
+export interface OnboardingInfo {
+  name?: string;
+  email?: string;
+  grade?: string;
+  concentration?: string;
+  favoriteClasses?: string[];
+}
+
 export interface User {
   _id: string;
   name: string;

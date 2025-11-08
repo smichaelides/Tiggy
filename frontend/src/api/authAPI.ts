@@ -1,4 +1,4 @@
-import type { User } from '../types';
+import type { OnboardingInfo, User } from '../types';
 import { apiRequest } from '../utils/api';
 
 interface GoogleUserInfo {
@@ -6,14 +6,6 @@ interface GoogleUserInfo {
     name: string;
     email: string;
     picture?: string;
-}
-
-interface UserInfo {
-    name: string;
-    email: string;
-    grade: number;
-    concentration: string;
-    favoriteClasses: string[];
 }
 
 export const authAPI = {
@@ -24,7 +16,7 @@ export const authAPI = {
         });
     },
 
-    completeUserLogin: async (userData: UserInfo): Promise<{ user: User }> => {
+    completeUserLogin: async (userData: OnboardingInfo): Promise<{ user: User }> => {
         return apiRequest<{ user: User }>('/auth/complete-user-login', {
             method: 'POST',
             body: JSON.stringify({ userData })

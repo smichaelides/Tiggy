@@ -1,28 +1,36 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import princetonLogo from '../assets/princeton.png';
-import tigerAvatar from '../assets/tiggy.png';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import princetonLogo from "../assets/princeton.png";
+import tigerAvatar from "../assets/tiggy.png";
 // import { authAPI } from '../api/userApi';
-import { princetonMajors, grades } from '../utils/settings';
+import { princetonMajors, grades } from "../utils/settings";
+import { authAPI } from "../api/authAPI";
+import type { OnboardingInfo } from "../types";
 
-function Welcome() {
+function Welcome({
+  googleAuthInfo,
+}: {
+    googleAuthInfo: OnboardingInfo;
+}) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState({
-    grade: '',
-    concentration: '',
-    favoriteClasses: [] as string[]
+  const [onboardingInfo, setOnboardingInfo] = useState<OnboardingInfo>({
+    ...googleAuthInfo,
+    grade: "",
+    concentration: "",
+    favoriteClasses: [] as string[],
   });
-  const [tempClass, setTempClass] = useState('');
+  const [tempClass, setTempClass] = useState("");
   const navigate = useNavigate();
 
   const totalSteps = 3;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
       // Sign up user with information
-      // const response = await 
+
+      const response = await authAPI.completeUserLogin(onboardingInfo);
       navigate("/");
     }
   };
@@ -34,28 +42,31 @@ function Welcome() {
   };
 
   const addFavoriteClass = () => {
-    if (tempClass.trim() && !userData.favoriteClasses.includes(tempClass.trim())) {
-      setUserData(prev => ({
+    if (
+      tempClass.trim() &&
+      !onboardingInfo.favoriteClasses?.includes(tempClass.trim())
+    ) {
+      setOnboardingInfo((prev) => ({
         ...prev,
-        favoriteClasses: [...prev.favoriteClasses, tempClass.trim()]
+        favoriteClasses: [...prev.favoriteClasses ?? [], tempClass.trim()],
       }));
-      setTempClass('');
+      setTempClass("");
     }
   };
 
   const removeFavoriteClass = (index: number) => {
-    setUserData(prev => ({
+    setOnboardingInfo((prev) => ({
       ...prev,
-      favoriteClasses: prev.favoriteClasses.filter((_, i) => i !== index)
+      favoriteClasses: prev.favoriteClasses?.filter((_, i) => i !== index),
     }));
   };
 
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return userData.grade !== '';
+        return onboardingInfo.grade !== '';
       case 2:
-        return userData.concentration !== '';
+        return onboardingInfo.concentration !== "";
       case 3:
         return true; // Optional step
       default:
@@ -69,13 +80,19 @@ function Welcome() {
         return (
           <div className="welcome-page-step">
             <h2 className="welcome-page-step-title">What's your class year?</h2>
-            <p className="welcome-page-step-subtitle">This helps Tiggy understand your academic journey</p>
+            <p className="welcome-page-step-subtitle">
+              This helps Tiggy understand your academic journey
+            </p>
             <div className="welcome-page-options">
               {grades.map((grade) => (
                 <button
                   key={grade.value}
-                  className={`welcome-page-option ${userData.grade === grade.value ? 'selected' : ''}`}
-                  onClick={() => setUserData(prev => ({ ...prev, grade: grade.value }))}
+                  className={`welcome-page-option ${
+                    onboardingInfo.grade === grade.value ? "selected" : ""
+                  }`}
+                  onClick={() =>
+                    setOnboardingInfo((prev) => ({ ...prev, grade: grade.value }))
+                  }
                 >
                   {grade.label}
                 </button>
@@ -87,13 +104,22 @@ function Welcome() {
       case 2:
         return (
           <div className="welcome-page-step">
-            <h2 className="welcome-page-step-title">What's your concentration?</h2>
-            <p className="welcome-page-step-subtitle">Choose your primary field of study</p>
+            <h2 className="welcome-page-step-title">
+              What's your concentration?
+            </h2>
+            <p className="welcome-page-step-subtitle">
+              Choose your primary field of study
+            </p>
             <div className="welcome-page-select-container">
               <select
                 className="welcome-page-select"
-                value={userData.concentration}
-                onChange={(e) => setUserData(prev => ({ ...prev, concentration: e.target.value }))}
+                value={onboardingInfo.concentration}
+                onChange={(e) =>
+                  setOnboardingInfo((prev) => ({
+                    ...prev,
+                    concentration: e.target.value,
+                  }))
+                }
               >
                 <option value="">Select your concentration...</option>
                 {princetonMajors.map((major) => (
@@ -109,8 +135,12 @@ function Welcome() {
       case 3:
         return (
           <div className="welcome-page-step">
-            <h2 className="welcome-page-step-title">What are your favorite classes?</h2>
-            <p className="welcome-page-step-subtitle">Add classes you've enjoyed or are looking forward to (optional)</p>
+            <h2 className="welcome-page-step-title">
+              What are your favorite classes?
+            </h2>
+            <p className="welcome-page-step-subtitle">
+              Add classes you've enjoyed or are looking forward to (optional)
+            </p>
             <div className="welcome-page-input-container">
               <input
                 type="text"
@@ -118,17 +148,20 @@ function Welcome() {
                 placeholder="Enter a class name..."
                 value={tempClass}
                 onChange={(e) => setTempClass(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && addFavoriteClass()}
+                onKeyPress={(e) => e.key === "Enter" && addFavoriteClass()}
               />
-              <button className="welcome-page-add-btn" onClick={addFavoriteClass}>
+              <button
+                className="welcome-page-add-btn"
+                onClick={addFavoriteClass}
+              >
                 Add
               </button>
             </div>
             <div className="welcome-page-tags">
-              {userData.favoriteClasses.map((className, index) => (
+              {onboardingInfo.favoriteClasses?.map((className, index) => (
                 <span key={index} className="welcome-page-tag">
                   {className}
-                  <button 
+                  <button
                     className="welcome-page-tag-remove"
                     onClick={() => removeFavoriteClass(index)}
                   >
@@ -149,7 +182,11 @@ function Welcome() {
     <div className="welcome-page-container">
       <div className="welcome-page-card">
         <div className="welcome-page-header">
-          <img src={princetonLogo} alt="Princeton" className="welcome-page-logo" />
+          <img
+            src={princetonLogo}
+            alt="Princeton"
+            className="welcome-page-logo"
+          />
           <div className="welcome-page-title-container">
             <h1 className="welcome-page-title">Welcome to Tiggy!</h1>
             <img src={tigerAvatar} alt="Tiggy" className="welcome-page-tiggy" />
@@ -159,8 +196,8 @@ function Welcome() {
 
         <div className="welcome-page-progress">
           <div className="welcome-page-progress-bar">
-            <div 
-              className="welcome-page-progress-fill" 
+            <div
+              className="welcome-page-progress-fill"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             />
           </div>
@@ -169,26 +206,24 @@ function Welcome() {
           </span>
         </div>
 
-        <div className="welcome-page-content">
-          {renderStep()}
-        </div>
+        <div className="welcome-page-content">{renderStep()}</div>
 
         <div className="welcome-page-actions">
           {currentStep > 1 && (
-            <button 
-              className="welcome-page-btn welcome-page-btn-secondary" 
+            <button
+              className="welcome-page-btn welcome-page-btn-secondary"
               onClick={handleBack}
             >
               Back
             </button>
           )}
-          
-          <button 
-            className="welcome-page-btn welcome-page-btn-primary" 
+
+          <button
+            className="welcome-page-btn welcome-page-btn-primary"
             onClick={handleNext}
             disabled={!canProceed()}
           >
-            {currentStep === totalSteps ? 'Get Started' : 'Next'}
+            {currentStep === totalSteps ? "Get Started" : "Next"}
           </button>
         </div>
       </div>

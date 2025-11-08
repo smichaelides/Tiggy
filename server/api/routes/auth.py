@@ -1,6 +1,8 @@
+import logging
 from dotenv import load_dotenv
 from flask import Blueprint, session, request
 from server.database import get_database
+from server.api.models.user import User
 
 load_dotenv()
 
@@ -12,7 +14,7 @@ def login():
     payload = request.get_json()
 
     if "email" not in payload:
-        return {"error": "Missing required field: 'chatId'."}, 400
+        return {"error": "Missing required field: 'email'."}, 400
 
     email = payload["email"]
     db_user = db.users.find_one({"email": email})
@@ -21,13 +23,32 @@ def login():
         # Redirects them to the setup
         return {"error": f"User with email {email} not found"}, 404
 
-    session["userId"] = db_user["_id"]
+    session["userId"] = str(db_user["_id"])
     return {"message": "Login successful"}, 200
 
-# @auth.route("/complete-user-login", methods=["POST"])
-# def complete_user_login():
-#     db = get_database()
-#     payload = request.get_json()
+@auth.route("/complete-user-login", methods=["POST"])
+def complete_user_login():
+    db = get_database()
+    payload = request.get_json()
 
-    # email = payload["email"]
-    # db_user = 
+    if "userData" not in payload:
+        return {"error": "Missing required field: 'email'."}, 400
+
+    user_data = payload["userData"]
+
+    new_user = User(
+        _id=user_data.get("email"),
+        name=user_data.get("name"),
+        email=user_data.get("email"),
+        grade=user_data.get("grade"),
+        concentration=user_data.get("concentration"),
+        certificates=user_data.get("certificates", []),
+    )
+
+    try:
+        db.users.insert_one(new_user.model_dump())
+    except Exception as ex:
+        logging.error("Failed to create new user: %s", ex)
+        return {"error": "Failed to create new user"}, 500
+
+    return new_user.model_dump_json(), 201
