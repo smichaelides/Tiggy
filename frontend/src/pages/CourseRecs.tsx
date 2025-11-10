@@ -78,12 +78,31 @@ function CourseRecs() {
         <div className="course-recs-card">
           <div className="course-recs-header">
             <h1 className="course-recs-title">
-              Tiggy recommends these courses{user?.name ? ` for you, ${user.name}` : ''}
+              Tiggy recommends these courses{user?.name ? ` for you, ${user.name.split(' ')[0]}` : ''}
             </h1>
           </div>
           
           <div className="courses-container">
-            {/* Courses will be mapped here */}
+            {courseRecs.map((course, index) => (
+              <div key={index} className="course-card">
+                <div className="course-header">
+                  <div className="course-code">{course.code}</div>
+                  <div className="course-format">{course.format}</div>
+                </div>
+                <h2 className="course-title">{course.title}</h2>
+                <div className="course-details">
+                  <div className="course-detail-item">
+                    <span className="course-detail-label">Instructor:</span>
+                    <span className="course-detail-value">{course.instructor}</span>
+                  </div>
+                  <div className="course-detail-item">
+                    <span className="course-detail-label">Schedule:</span>
+                    <span className="course-detail-value">{course.schedule}</span>
+                  </div>
+                </div>
+                <p className="course-description">{course.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

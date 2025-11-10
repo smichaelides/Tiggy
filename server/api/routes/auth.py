@@ -46,7 +46,9 @@ def complete_user_login():
     )
 
     try:
-        db.users.insert_one(new_user.model_dump())
+        result = db.users.insert_one(new_user.model_dump())
+        # Set session after successful user creation
+        session["userId"] = str(result.inserted_id)
     except Exception as ex:
         logging.error("Failed to create new user: %s", ex)
         return {"error": "Failed to create new user"}, 500
