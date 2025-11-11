@@ -1,11 +1,11 @@
 import React from 'react';
 import { FiArrowUp } from 'react-icons/fi';
-import type { Message } from '../types';
+import type { Chat } from '../types';
 import tigerAvatar from "../assets/tiggy.png";
 
 
 interface ChatInterfaceProps {
-  messages: Message[];
+  currentChat: Chat;
   inputValue: string;
   setInputValue: (value: string) => void;
   handleSendMessage: (customText?: string) => void;
@@ -15,7 +15,7 @@ interface ChatInterfaceProps {
 }
 
 function ChatInterface({
-  messages,
+  currentChat,
   inputValue,
   setInputValue,
   handleSendMessage,
@@ -28,7 +28,7 @@ function ChatInterface({
     <div className="chat-layout">
       {/* Messages */}
       <div className="messages-container">
-        {messages.map((message, index) => (
+        {currentChat.messages.map((message, index) => (
           <div
             key={index}
             className={`message ${message.isUser ? 'message-user' : 'message-ai'}`}

@@ -19,14 +19,11 @@ function MainPage() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<Message[]>(
-    currentChat?.messages || []
-  );
 
   useEffect(() => {
     // Auto-scroll to bottom whenever messages or loading state changes
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [currentChat?.messages]);
 
   // load all chats and create new chat if none exists.
   useEffect(() => {
@@ -67,7 +64,6 @@ function MainPage() {
       setChats(chats);
       if (chats.length > 0) {
         setCurrentChat(chats[0]);
-        setMessages(chats[0].messages);
       }
     } catch (error) {
       console.error("Unable to list new chats:", error);
@@ -98,7 +94,18 @@ function MainPage() {
   };
 
   const selectChat = async (chatId: string) => {
-    const fetchedChat = chats.find((chat) => chat._id === chatId);
+    // Prefer the server copy to ensure you have the freshest data; fallback to local state if API fails
+    let fetchedChat;
+    try {
+      fetchedChat = await chatAPI.getChat(chatId); // fetch latest from backend
+    } catch (err) {
+      console.warn(
+        "Failed to fetch chat from API, falling back to local state:",
+        err
+      );
+      fetchedChat = chats.find((chat) => chat._id === chatId); // local fallback (may be stale)
+    }
+
     if (!fetchedChat) return;
 
     const userMessages: Message[] = (fetchedChat.userMessages || []).map(
@@ -143,7 +150,6 @@ function MainPage() {
       updatedAt: new Date(fetchedChat.updatedAt),
     };
 
-    setMessages(messages);
     setCurrentChat(currentChat);
     setInputValue("");
 
@@ -194,8 +200,8 @@ function MainPage() {
     });
 
     setChats((prev) =>
-      prev.map((chat) =>
-        chat._id === chatId
+      prev.map((chat) => {
+        return chat._id === chatId
           ? {
               ...chat,
               messages: newMessages,
@@ -206,8 +212,8 @@ function MainPage() {
                     (newMessages[0].message.length > 30 ? "..." : "")
                   : chat.title,
             }
-          : chat
-      )
+          : chat;
+      })
     );
   };
 
@@ -216,8 +222,12 @@ function MainPage() {
     if (!textToSend.trim()) return;
 
     if (!currentChat) {
-      await createNewChat();
-      console.log("New current chat", currentChat);
+      try {
+        await createNewChat();
+      } catch (ex) {
+        console.error("Failed to create new chat:", ex);
+        return;
+      }
     }
 
     const userMessage: Message = {
@@ -226,10 +236,15 @@ function MainPage() {
       timestamp: new Date(),
     };
 
-    const chatResponse = await chatAPI.sendMessage(currentChat?._id, textToSend);
+    const chatResponse = await chatAPI.sendMessage(
+      currentChat!._id,
+      textToSend
+    );
 
-    setMessages((prev) => [...prev, userMessage]);
-    updateChatMessages(currentChat._id, messages);
+    updateChatMessages(currentChat!._id, [
+      ...currentChat!.messages,
+      userMessage,
+    ]);
     setInputValue("");
     setIsLoading(true);
 
@@ -241,8 +256,11 @@ function MainPage() {
         timestamp: new Date(),
       };
 
-      setMessages((prev) => [...prev, aiMessage]);
-      updateChatMessages(currentChat._id, messages);
+      updateChatMessages(currentChat!._id, [
+        ...currentChat!.messages,
+        userMessage,
+        aiMessage,
+      ]);
       setIsLoading(false);
     }, 2000);
   };
@@ -256,7 +274,7 @@ function MainPage() {
 
   return (
     <div className="app">
-      <Header messages={messages} />
+      <Header messages={currentChat?.messages ?? []} />
 
       <div className="main-content">
         <ChatSidebar
@@ -274,7 +292,8 @@ function MainPage() {
               : ""
           }`}
         >
-          {!currentChat || (currentChat && currentChat.messages.length === 0) ? (
+          {!currentChat ||
+          (currentChat && currentChat.messages.length === 0) ? (
             <WelcomeScreen
               inputValue={inputValue}
               setInputValue={setInputValue}
@@ -284,7 +303,7 @@ function MainPage() {
             />
           ) : (
             <ChatInterface
-              messages={messages}
+              currentChat={currentChat}
               inputValue={inputValue}
               setInputValue={setInputValue}
               handleSendMessage={handleSendMessage}
