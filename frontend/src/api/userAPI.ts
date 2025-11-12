@@ -57,4 +57,12 @@ export const userAPI = {
       body: JSON.stringify({ certificates }),
     });
   },
+
+  // Update user info (grade, concentration)
+  updateUser: async (updates: { grade?: string; concentration?: string }): Promise<User> => {
+    return apiRequest<User>('/user/update-user', {
+      method: 'PATCH',
+      body: JSON.stringify(updates),
+    });
+  },
 };

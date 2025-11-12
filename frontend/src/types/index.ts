@@ -33,7 +33,7 @@ export interface User {
   _id: string;
   name: string;
   email: string;
-  grad_year: number;
+  grade: string;
   concentration?: string;
   certificates: string[];
 }
@@ -41,7 +41,7 @@ export interface User {
 export interface CreateUserRequest {
   name: string;
   email: string;
-  grad_year: number;
+  grade: string;
   concentration?: string;
   certificates?: string[];
 } 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Header from "../components/Header";
 import WelcomeScreen from "../components/WelcomeScreen";
 import ChatInterface from "../components/ChatInterface";
@@ -70,7 +70,7 @@ function MainPage() {
     }
   };
 
-  const createNewChat = async () => {
+  const createNewChat = useCallback(async () => {
     try {
       const chat = await chatAPI.createChat();
 
@@ -91,7 +91,7 @@ function MainPage() {
     } catch (error) {
       console.error("Unable to create new chat:", error);
     }
-  };
+  }, []);
 
   const selectChat = async (chatId: string) => {
     // Prefer the server copy to ensure you have the freshest data; fallback to local state if API fails
@@ -183,7 +183,7 @@ function MainPage() {
     }
   };
 
-  const updateChatMessages = (chatId: string, newMessages: Message[]) => {
+  const updateChatMessages = useCallback((chatId: string, newMessages: Message[]) => {
     setCurrentChat((prev) => {
       if (!prev) return prev;
       const newTitle =
@@ -215,9 +215,9 @@ function MainPage() {
           : chat;
       })
     );
-  };
+  }, []);
 
-  const handleSendMessage = async (customText?: string) => {
+  const handleSendMessage = useCallback(async (customText?: string) => {
     const textToSend = customText || inputValue;
     if (!textToSend.trim()) return;
 
@@ -263,14 +263,14 @@ function MainPage() {
       ]);
       setIsLoading(false);
     }, 2000);
-  };
+  }, [inputValue, currentChat, createNewChat, updateChatMessages]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
-  };
+  }, [handleSendMessage]);
 
   return (
     <div className="app">

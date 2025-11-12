@@ -64,7 +64,7 @@ def create_user():
         _id=payload.get("email"),
         name=payload.get("name"),
         email=payload.get("email"),
-        grad_year=payload.get("grad_year"),
+        grade=payload.get("grade", ""),
         concentration=payload.get("concentration"),
         certificates=payload.get("certificates", []),
     )
@@ -134,3 +134,44 @@ def update_certificates():
         return {"error": f"Failed to update certificates {certificates}."}, 500
 
     return {"certificates": certificates}, 200
+
+
+@user.route("/update-user", methods=["PATCH"])
+def update_user():
+    db = get_database()
+    payload = request.get_json()
+    user_id = session.get('userId')
+
+    if not user_id:
+        return {"error": "User not authenticated"}, 401
+
+    update_fields = {}
+    if "grade" in payload:
+        update_fields["grade"] = payload.get("grade")
+    if "concentration" in payload:
+        update_fields["concentration"] = payload.get("concentration")
+
+    if not update_fields:
+        return {"error": "No fields to update"}, 400
+
+    try:
+        db.users.update_one(
+            {"_id": ObjectId(user_id)}, {"$set": update_fields}
+        )
+        # Fetch updated user
+        updated_user = db.users.find_one({"_id": ObjectId(user_id)})
+        if not updated_user:
+            return {"error": "User not found after update"}, 404
+        
+        updated_user["id"] = str(updated_user["_id"])
+        fetched_user = User.model_validate(updated_user)
+        result = fetched_user.model_dump()
+        result["_id"] = str(updated_user["_id"])
+        return result, 200
+    except Exception as ex:
+        logging.error(
+            "Failed to update user %s: %s",
+            user_id,
+            ex,
+        )
+        return {"error": f"Failed to update user."}, 500
