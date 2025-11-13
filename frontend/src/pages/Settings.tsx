@@ -19,6 +19,7 @@ const letterGrades = [
   { value: "C", label: "C" },
   { value: "D", label: "D" },
   { value: "F", label: "F" },
+  { value: "P", label: "P"}
 ];
 
 function Settings() {
