@@ -621,7 +621,7 @@ body {
 
 .settings-card {
   width: 100%;
-  max-width: 48rem;
+  max-width: 64rem;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -663,6 +663,39 @@ body {
   font-size: 1.125rem;
   margin: 0;
   font-style: italic;
+}
+
+.settings-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(255, 140, 0, 0.1);
+}
+
+.settings-tab {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: -2px;
+}
+
+.settings-tab:hover {
+  color: #ff8c00;
+  background: rgba(255, 140, 0, 0.05);
+}
+
+.settings-tab.active {
+  color: #ff8c00;
+  border-bottom-color: #ff8c00;
+  background: rgba(255, 140, 0, 0.05);
 }
 
 /* Course Recommendations Page */
@@ -863,6 +896,135 @@ body {
 .form-select::placeholder,
 .form-input::placeholder {
   color: #9ca3af;
+}
+
+/* Add Class Form */
+.add-class-form {
+  margin-bottom: 2rem;
+}
+
+.add-class-inputs {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.add-class-inputs .form-input {
+  flex: 2;
+  min-width: 200px;
+}
+
+.class-grade-select {
+  flex: 1;
+  min-width: 150px;
+}
+
+.add-class-button {
+  background: linear-gradient(135deg, #ff8c00, #ff6b35);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+  white-space: nowrap;
+}
+
+.add-class-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff6b35, #ff8c00);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+}
+
+.add-class-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Past Classes List */
+.past-classes-list {
+  margin-top: 2rem;
+}
+
+.past-classes-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.past-classes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.past-class-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.past-class-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 140, 0, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.past-class-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.past-class-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.past-class-grade {
+  background: linear-gradient(135deg, #ff8c00, #ff6b35);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.2);
+}
+
+.remove-class-button {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.remove-class-button:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
 }
 
 .settings-actions {

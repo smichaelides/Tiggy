@@ -147,7 +147,6 @@ function Welcome({
                 placeholder="Enter a class name..."
                 value={tempClass}
                 onChange={(e) => setTempClass(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && addFavoriteClass()}
               />
               <button
                 className="welcome-page-add-btn"
