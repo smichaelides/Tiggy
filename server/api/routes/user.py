@@ -218,7 +218,6 @@ def update_past_courses():
             course_codes = json.load(f)
             for course in past_courses.items():
                 course_name = course[0]
-                grade = course[1]
                 if course_name not in course_codes:
                     return {"error": f"{course_name} is not a valid course"}, 400
     except FileNotFoundError:
