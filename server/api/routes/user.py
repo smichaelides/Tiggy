@@ -1,6 +1,7 @@
+import os
 import logging
 from bson import ObjectId
-from flask import Blueprint, request, session
+from flask import Blueprint, request, session, json
 from server.api.models.user import User
 from server.database import get_database
 
@@ -207,6 +208,20 @@ def update_past_courses():
 
     if not update_fields:
         return {"error": "No fields to update"}, 400
+    
+    past_courses = payload.get("past_courses")
+    print("Past courses", past_courses)
+    course_code_file_path = os.path.join(user.root_path, 'data', 'data.json')
+
+    # Open and load the JSON data
+    try:
+        with open(course_code_file_path, 'r') as f:
+            data = json.load(f)
+            print("DATA", data)
+    except FileNotFoundError:
+        # Handle case where the file doesn't exist
+        data = {"error": "JSON file not found"}
+        print(data)
 
     try:
         db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
