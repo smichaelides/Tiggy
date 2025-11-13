@@ -10,7 +10,7 @@ user = Blueprint("user", __name__, url_prefix="/user")
 @user.route("/get-user", methods=["GET"])
 def get_user():
     db = get_database()
-    user_id = session['userId']
+    user_id = session["userId"]
 
     try:
         db_user = db.users.find_one({"_id": ObjectId(user_id)})
@@ -78,6 +78,23 @@ def create_user():
     return new_user.model_dump_json(), 201
 
 
+@user.route("/get-past-courses", methods=["GET"])
+def get_past_courses():
+    db = get_database()
+    user_id = session["userId"]
+
+    try:
+        db_user = db.users.find_one({"_id": ObjectId(user_id)})
+        if not db_user:
+            return {"error": f"User with id {user_id} not found"}, 404
+        # expose string id to the model via public 'id' field and avoid touching protected attributes
+    except Exception as ex:
+        logging.error("Failed to get user %s: %s", user_id, ex)
+        return {"error": f"Failed to get user {user_id}"}, 500
+
+    return {"past_courses": db_user["past_courses"]}, 200
+
+
 @user.route("/update-concentration", methods=["PATCH"])
 def update_concentration():
     db = get_database()
@@ -88,18 +105,18 @@ def update_concentration():
     if "concentration" not in payload:
         return {"error": "Missing required field: concentration"}, 400
 
-    userId: str = payload.get("userId")
+    user_id = session.get("userId")
     concentration: str = payload.get("concentration")
 
     try:
         db.users.update_one(
-            {"_id": ObjectId(userId)}, {"$set": {"concentration": concentration}}
+            {"_id": ObjectId(user_id)}, {"$set": {"concentration": concentration}}
         )
     except Exception as ex:
         logging.error(
             "Failed to update concentration {%s} for user %s: %s",
             concentration,
-            userId,
+            user_id,
             ex,
         )
         return {"error": f"Failed to update concentration {concentration}."}, 500
@@ -117,18 +134,18 @@ def update_certificates():
     if "certificates" not in payload:
         return {"error": "Missing required field: certificates"}, 400
 
-    userId: str = payload.get("userId")
+    user_id: str = payload.get("userId")
     certificates: list[str] = payload.get("certificates")
 
     try:
         db.users.update_one(
-            {"_id": ObjectId(userId)}, {"$set": {"certificates": certificates}}
+            {"_id": ObjectId(user_id)}, {"$set": {"certificates": certificates}}
         )
     except Exception as ex:
         logging.error(
             "Failed to update certificates {%s} for user %s: %s",
             certificates,
-            userId,
+            user_id,
             ex,
         )
         return {"error": f"Failed to update certificates {certificates}."}, 500
@@ -140,7 +157,7 @@ def update_certificates():
 def update_user():
     db = get_database()
     payload = request.get_json()
-    user_id = session.get('userId')
+    user_id = session.get("userId")
 
     if not user_id:
         return {"error": "User not authenticated"}, 401
@@ -155,14 +172,12 @@ def update_user():
         return {"error": "No fields to update"}, 400
 
     try:
-        db.users.update_one(
-            {"_id": ObjectId(user_id)}, {"$set": update_fields}
-        )
+        db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
         # Fetch updated user
         updated_user = db.users.find_one({"_id": ObjectId(user_id)})
         if not updated_user:
             return {"error": "User not found after update"}, 404
-        
+
         updated_user["id"] = str(updated_user["_id"])
         fetched_user = User.model_validate(updated_user)
         result = fetched_user.model_dump()
@@ -175,3 +190,40 @@ def update_user():
             ex,
         )
         return {"error": f"Failed to update user."}, 500
+
+
+@user.route("/update-past-courses", methods=["PATCH"])
+def update_past_courses():
+    db = get_database()
+    payload = request.get_json()
+    user_id = session.get("userId")
+
+    if not user_id:
+        return {"error": "User not authenticated"}, 401
+
+    update_fields = {}
+    if "past_courses" in payload:
+        update_fields["past_courses"] = payload.get("past_courses")
+
+    if not update_fields:
+        return {"error": "No fields to update"}, 400
+
+    try:
+        db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
+        # Fetch updated user
+        updated_user = db.users.find_one({"_id": ObjectId(user_id)})
+        if not updated_user:
+            return {"error": "User not found after update"}, 404
+
+        updated_user["id"] = str(updated_user["_id"])
+        fetched_user = User.model_validate(updated_user)
+        result = fetched_user.model_dump()
+        result["_id"] = str(updated_user["_id"])
+        return result, 200
+    except Exception as ex:
+        logging.error(
+            "Failed to update user %s: %s",
+            user_id,
+            ex,
+        )
+        return {"error": "Failed to update past courses for user."}, 500
