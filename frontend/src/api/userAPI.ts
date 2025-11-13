@@ -42,8 +42,8 @@ export const userAPI = {
     return apiRequest<User>(`/user/get-user-by-email?email=${email}`);
   },
 
-  getPastCourses: async (): Promise<{"past_course": Record<string, string>}> => {
-    return apiRequest<{"past_course": Record<string, string>}>('/user/get-past-courses');
+  getPastCourses: async (): Promise<{"past_courses": Record<string, string>}> => {
+    return apiRequest<{"past_courses": Record<string, string>}>('/user/get-past-courses');
   },
 
   // Update user concentration

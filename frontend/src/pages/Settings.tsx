@@ -32,6 +32,7 @@ function Settings() {
   const [pastClasses, setPastClasses] = useState<PastClass[]>([]);
   const [currentClassName, setCurrentClassName] = useState("");
   const [currentClassGrade, setCurrentClassGrade] = useState("");
+  const [courseError, setCourseError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ function Settings() {
             const pastClass: PastClass = {
               id: Date.now().toString(),
               name: course.trim().toUpperCase(),
-              grade: courseGrade || undefined,
+              grade: (courseGrade && typeof courseGrade === 'string') ? courseGrade : undefined,
             };
             return pastClass;
           }
@@ -81,17 +82,50 @@ function Settings() {
       grade: currentClassGrade || undefined,
     };
 
-    setPastClasses((prev) => {
-      const updated = [...prev, newClass];
-      // Sort alphabetically by class name
-      const sortedCourses = updated.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+    // Create updated list with new class
+    const updated = [...pastClasses, newClass];
+    // Sort alphabetically by class name
+    const sortedCourses = updated.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
 
-      (async () => {
-        try {
-          const body = {
-            past_courses: sortedCourses.reduce<Record<string, string>>(
+    try {
+      setCourseError(null);
+      const body = {
+        past_courses: sortedCourses.reduce<Record<string, string>>(
+          (acc, course) => {
+            acc[course.name] = course.grade ?? "";
+            return acc;
+          },
+          {}
+        ),
+      };
+      
+      // Await the API call
+      await userAPI.updatePastCourses(body);
+      
+      // Only update state if API call succeeds
+      setPastClasses(sortedCourses);
+      
+      // Reset inputs
+      setCurrentClassName("");
+      setCurrentClassGrade("");
+    } catch (ex) {
+      console.error("Failed to update past courses:", ex);
+      // Show error popup
+      setCourseError("This is not a course");
+      // Auto-dismiss error after 5 seconds
+      setTimeout(() => setCourseError(null), 5000);
+      // Don't update state, so the course is not added
+    }
+  };
+
+  const handleRemoveClass = async (courseCode: string) => {
+    const removedClasses = pastClasses.filter((cls) => cls.name !== courseCode);
+    try {
+        // Await the API call
+        const body = {
+            past_courses: removedClasses.reduce<Record<string, string>>(
               (acc, course) => {
                 acc[course.name] = course.grade ?? "";
                 return acc;
@@ -99,24 +133,16 @@ function Settings() {
               {}
             ),
           };
-          await userAPI.updatePastCourses(body);
-        } catch (ex) {
-          console.error("Failed to update past courses:", ex);
-          return prev;
-          // handle error if needed
-        }
-      })();
-
-      return sortedCourses;
-    });
-
-    // Reset inputs
-    setCurrentClassName("");
-    setCurrentClassGrade("");
-  };
-
-  const handleRemoveClass = (id: string) => {
-    setPastClasses((prev) => prev.filter((cls) => cls.id !== id));
+        await userAPI.updatePastCourses(body);
+        setPastClasses(removedClasses);
+    } catch (ex) {
+        console.error("Failed to delete past courses:", ex);
+        // Show error popup
+        setCourseError("Failed to delete a course");
+        // Auto-dismiss error after 5 seconds
+        setTimeout(() => setCourseError(null), 5000);
+        // Don't update state, so the course is not added
+      }
   };
 
   const handleSave = async () => {
@@ -267,6 +293,21 @@ function Settings() {
               <div className="settings-section">
                 <h2 className="section-title">Input Courses</h2>
 
+                {courseError && (
+                  <div
+                    style={{
+                      background: "rgba(239, 68, 68, 0.1)",
+                      color: "#ef4444",
+                      padding: "1rem",
+                      borderRadius: "0.75rem",
+                      marginBottom: "1rem",
+                      border: "1px solid rgba(239, 68, 68, 0.2)",
+                    }}
+                  >
+                    {courseError}
+                  </div>
+                )}
+
                 <div className="add-class-form">
                   <div className="add-class-inputs">
                     <input
@@ -274,7 +315,13 @@ function Settings() {
                       className="form-input"
                       placeholder="Enter class name (e.g., COS234)"
                       value={currentClassName}
-                      onChange={(e) => setCurrentClassName(e.target.value)}
+                      onChange={(e) => {
+                        setCurrentClassName(e.target.value);
+                        // Clear error when user starts typing
+                        if (courseError) {
+                          setCourseError(null);
+                        }
+                      }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           handleAddClass();
@@ -319,7 +366,7 @@ function Settings() {
                           </div>
                           <button
                             className="remove-class-button"
-                            onClick={() => handleRemoveClass(cls.id)}
+                            onClick={() => handleRemoveClass(cls.name)}
                             aria-label="Remove class"
                           >
                             x

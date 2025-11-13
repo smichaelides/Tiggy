@@ -209,19 +209,23 @@ def update_past_courses():
     if not update_fields:
         return {"error": "No fields to update"}, 400
     
-    past_courses = payload.get("past_courses")
-    print("Past courses", past_courses)
-    course_code_file_path = os.path.join(user.root_path, 'data', 'data.json')
+    past_courses = payload.get("past_courses")   
+    course_code_file_path = os.path.join(user.root_path, '..', '..', 'data', 'course_info', 'course_codes.json')
 
     # Open and load the JSON data
     try:
         with open(course_code_file_path, 'r') as f:
-            data = json.load(f)
-            print("DATA", data)
+            course_codes = json.load(f)
+            for course in past_courses.items():
+                course_name = course[0]
+                grade = course[1]
+                if course_name not in course_codes:
+                    return {"error": f"{course_name} is not a valid course"}, 400
     except FileNotFoundError:
         # Handle case where the file doesn't exist
         data = {"error": "JSON file not found"}
-        print(data)
+    except Exception as ex:
+        print("ex", ex)
 
     try:
         db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
