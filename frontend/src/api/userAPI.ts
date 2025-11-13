@@ -42,6 +42,10 @@ export const userAPI = {
     return apiRequest<User>(`/user/get-user-by-email?email=${email}`);
   },
 
+  getPastCourses: async (): Promise<{"past_course": Record<string, string>}> => {
+    return apiRequest<{"past_course": Record<string, string>}>('/user/get-past-courses');
+  },
+
   // Update user concentration
   updateConcentration: async (concentration: string): Promise<{ concentration: string }> => {
     return apiRequest<{ concentration: string }>('/user/update-concentration', {
@@ -65,4 +69,12 @@ export const userAPI = {
       body: JSON.stringify(updates),
     });
   },
+
+  // Update past courses
+  updatePastCourses: async (pastCourses: { past_courses: Record<string, string> }): Promise<User> => {
+    return apiRequest<User>('/user/update-past-courses', {
+      method: 'PATCH',
+      body: JSON.stringify(pastCourses)
+    })
+  }
 };
