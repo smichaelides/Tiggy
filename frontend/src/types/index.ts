@@ -45,3 +45,17 @@ export interface CreateUserRequest {
   concentration?: string;
   certificates?: string[];
 } 
+
+export interface Course {
+  code: string;
+  title: string;
+  instructor: string;
+  format: string;
+  schedule: string;
+  description: string;
+}
+
+export interface RecommendationsResponse {
+  courses: Course[];
+  message?: string;
+}

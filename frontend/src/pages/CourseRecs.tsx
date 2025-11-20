@@ -1,63 +1,17 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { userAPI } from "../api/userAPI";
-import type { User } from "../types";
-
-interface Course {
-  code: string;
-  title: string;
-  instructor: string;
-  format: string;
-  schedule: string;
-  description: string;
-}
+import { recommendationsAPI } from "../api/recommendationsAPI";
+import type { User, Course } from "../types";
 
 function CourseRecs() {
   const [user, setUser] = useState<User | null>(null);
-
-  // Example courses - replace with API call later
-  const [courseRecs] = useState<Course[]>([
-    {
-      code: "AAS 225",
-      title: "Martin, Malcolm, and Ella",
-      instructor: "Eddie S. Glaude",
-      format: "Seminar",
-      schedule: "Tues 1:30-4:20 PM | Morrison Hall 104",
-      description: "Examines Black Freedom Movement leadership."
-    },
-    {
-      code: "COS 126",
-      title: "Computer Science: An Interdisciplinary Approach",
-      instructor: "Robert Sedgewick",
-      format: "Lecture",
-      schedule: "Mon, Wed 10:00-10:50 AM | Friend Center 101",
-      description: "An introduction to computer science in the context of scientific, engineering, and commercial applications. Topics include algorithms, data structures, and computer systems."
-    },
-    {
-      code: "ECO 100",
-      title: "Introduction to Microeconomics",
-      instructor: "Harold H. Kuhn",
-      format: "Lecture",
-      schedule: "Mon, Wed, Fri 11:00-11:50 AM | McCosh Hall 50",
-      description: "Introduction to economic analysis and its applications. Topics include supply and demand, market structures, consumer choice, and firm behavior."
-    },
-    {
-      code: "HIS 300",
-      title: "The American Revolution",
-      instructor: "Sean Wilentz",
-      format: "Seminar",
-      schedule: "Thurs 1:30-4:20 PM | Dickinson Hall 211",
-      description: "An in-depth examination of the causes, course, and consequences of the American Revolution, with emphasis on political, social, and intellectual developments."
-    },
-    {
-      code: "PHI 201",
-      title: "Introduction to Philosophy",
-      instructor: "Gideon Rosen",
-      format: "Lecture",
-      schedule: "Tue, Thu 10:00-10:50 AM | McCosh Hall 28",
-      description: "An introduction to fundamental philosophical questions concerning knowledge, reality, ethics, and the nature of mind. Readings from classical and contemporary sources."
-    }
-  ]);
+  const [courses, setCourses] = useState<Course[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -71,6 +25,30 @@ function CourseRecs() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      setIsLoading(true);
+      setError(null);
+      setMessage(null);
+      
+      try {
+        const response = await recommendationsAPI.getCourseRecommendations();
+        setCourses(response.courses);
+        if (response.message) {
+          setMessage(response.message);
+        }
+      } catch (err) {
+        console.error("Failed to fetch recommendations:", err);
+        setError(err instanceof Error ? err.message : "Failed to load course recommendations. Please try again later.");
+        setCourses(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRecommendations();
+  }, []);
+
   return (
     <div className="app">
       <Header messages={[]} />
@@ -81,29 +59,116 @@ function CourseRecs() {
               Tiggy recommends these courses{user?.name ? ` for you, ${user.name.split(' ')[0]}` : ''}
             </h1>
           </div>
-          
-          <div className="courses-container">
-            {courseRecs.map((course, index) => (
-              <div key={index} className="course-card">
-                <div className="course-header">
-                  <div className="course-code">{course.code}</div>
-                  <div className="course-format">{course.format}</div>
-                </div>
-                <h2 className="course-title">{course.title}</h2>
-                <div className="course-details">
-                  <div className="course-detail-item">
-                    <span className="course-detail-label">Instructor:</span>
-                    <span className="course-detail-value">{course.instructor}</span>
+
+          {/* Message banner for adding past courses */}
+          {message && (
+            <div className="course-message-banner" style={{
+              backgroundColor: '#fff3cd',
+              border: '1px solid #ffc107',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '24px',
+              color: '#856404'
+            }}>
+              <p style={{ margin: 0, marginBottom: '8px' }}>{message}</p>
+              <button
+                onClick={() => navigate('/settings')}
+                style={{
+                  backgroundColor: '#ffc107',
+                  color: '#000',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '8px 16px',
+                  cursor: 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                Go to Settings
+              </button>
+            </div>
+          )}
+
+          {/* Loading state */}
+          {isLoading && (
+            <div style={{ textAlign: 'center', padding: '40px' }}>
+              <p>Loading recommendations...</p>
+            </div>
+          )}
+
+          {/* Error state */}
+          {error && !isLoading && (
+            <div style={{
+              backgroundColor: '#f8d7da',
+              border: '1px solid #f5c6cb',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '24px',
+              color: '#721c24'
+            }}>
+              <p style={{ margin: 0, marginBottom: '8px' }}>{error}</p>
+              <button
+                onClick={() => {
+                  setError(null);
+                  setIsLoading(true);
+                  recommendationsAPI.getCourseRecommendations()
+                    .then(response => {
+                      setCourses(response.courses);
+                      if (response.message) {
+                        setMessage(response.message);
+                      }
+                      setIsLoading(false);
+                    })
+                    .catch(err => {
+                      setError(err instanceof Error ? err.message : "Failed to load recommendations");
+                      setIsLoading(false);
+                    });
+                }}
+                style={{
+                  backgroundColor: '#dc3545',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '8px 16px',
+                  cursor: 'pointer'
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {/* Courses list */}
+          {!isLoading && !error && courses && courses.length > 0 && (
+            <div className="courses-container">
+              {courses.map((course, index) => (
+                <div key={index} className="course-card">
+                  <div className="course-header">
+                    <div className="course-code">{course.code}</div>
+                    <div className="course-format">{course.format}</div>
                   </div>
-                  <div className="course-detail-item">
-                    <span className="course-detail-label">Schedule:</span>
-                    <span className="course-detail-value">{course.schedule}</span>
+                  <h2 className="course-title">{course.title}</h2>
+                  <div className="course-details">
+                    <div className="course-detail-item">
+                      <span className="course-detail-label">Instructor:</span>
+                      <span className="course-detail-value">{course.instructor}</span>
+                    </div>
+                    <div className="course-detail-item">
+                      <span className="course-detail-label">Schedule:</span>
+                      <span className="course-detail-value">{course.schedule}</span>
+                    </div>
                   </div>
+                  <p className="course-description">{course.description}</p>
                 </div>
-                <p className="course-description">{course.description}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!isLoading && !error && (!courses || courses.length === 0) && (
+            <div style={{ textAlign: 'center', padding: '40px' }}>
+              <p>No course recommendations available at this time.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
