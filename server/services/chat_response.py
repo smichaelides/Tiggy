@@ -13,8 +13,9 @@ You have access to course information from the current term's course catalog. Us
 When recommending courses:
 - Use the course information provided in the context
 - Match courses to the student's query (e.g., if they ask about computer science, recommend COS courses)
+- If the student asks about a specific requirement (distribution, prerequisite, etc.), ONLY recommend courses that fulfill that requirement
 - Consider the student's class year for appropriate course levels
-- Consider their major for relevant courses
+- Consider their major for relevant courses ONLY when it doesn't conflict with a specific requirement query
 - If you see relevant courses in the provided data, recommend them with confidence
 - If the student asks about a subject area, look for courses in that department (e.g., "computer science" → COS, "economics" → ECO, "history" → HIS)
 - Always explain your reasoning
@@ -92,9 +93,71 @@ def build_chat_prompt(
     context_parts.append('}')
     context_parts.append("")
     
+    # Detect if query is about a specific requirement (distribution, prerequisite, etc.)
+    query_lower = user_query.lower()
+    is_requirement_query = False
+    requirement_type = None
+    
+    # Check for distribution requirement mentions
+    distribution_keywords = {
+        # Culture and Difference
+        'cd': 'CD (Culture and Difference)',
+        'culture and difference': 'CD (Culture and Difference)',
+        # Epistemology and Cognition
+        'ec': 'EC (Epistemology and Cognition)',
+        'epistemology and cognition': 'EC (Epistemology and Cognition)',
+        'epistemology': 'EC (Epistemology and Cognition)',
+        'cognition': 'EC (Epistemology and Cognition)',
+        # Ethical Thought and Moral Values
+        'em': 'EM (Ethical Thought and Moral Values)',
+        'ethical thought and moral values': 'EM (Ethical Thought and Moral Values)',
+        'ethical thought': 'EM (Ethical Thought and Moral Values)',
+        'moral values': 'EM (Ethical Thought and Moral Values)',
+        'ethics': 'EM (Ethical Thought and Moral Values)',
+        # Historical Analysis
+        'ha': 'HA (Historical Analysis)',
+        'historical analysis': 'HA (Historical Analysis)',
+        # Literature and the Arts
+        'la': 'LA (Literature and the Arts)',
+        'literature and the arts': 'LA (Literature and the Arts)',
+        'literature and arts': 'LA (Literature and the Arts)',
+        # Quantitative and Computational Reasoning
+        'qcr': 'QCR (Quantitative and Computational Reasoning)',
+        'quantitative and computational reasoning': 'QCR (Quantitative and Computational Reasoning)',
+        'quantitative reasoning': 'QCR (Quantitative and Computational Reasoning)',
+        'computational reasoning': 'QCR (Quantitative and Computational Reasoning)',
+        # Science and Engineering with Laboratory
+        'sel': 'SEL (Science and Engineering with Laboratory)',
+        'science and engineering with lab': 'SEL (Science and Engineering with Laboratory)',
+        'science and engineering with laboratory': 'SEL (Science and Engineering with Laboratory)',
+        'science with lab': 'SEL (Science and Engineering with Laboratory)',
+        'science with laboratory': 'SEL (Science and Engineering with Laboratory)',
+        # Science and Engineering No Lab
+        'sen': 'SEN (Science and Engineering No Lab)',
+        'science and engineering no lab': 'SEN (Science and Engineering No Lab)',
+        'science no lab': 'SEN (Science and Engineering No Lab)',
+        'science without lab': 'SEN (Science and Engineering No Lab)',
+        'science without laboratory': 'SEN (Science and Engineering No Lab)',
+        # Social Analysis
+        'sa': 'SA (Social Analysis)',
+        'social analysis': 'SA (Social Analysis)',
+        # General requirement keywords
+        'distribution': 'distribution requirement',
+        'distribution requirement': 'distribution requirement',
+        'fulfill': 'requirement',
+        'requirement': 'requirement',
+        'prerequisite': 'prerequisite',
+        'prereq': 'prerequisite',
+    }
+    
+    for keyword, req_type in distribution_keywords.items():
+        if keyword in query_lower:
+            is_requirement_query = True
+            requirement_type = req_type
+            break
+    
     # Determine relevant departments based on query and major
     relevant_departments = []
-    query_lower = user_query.lower()
     
     # Map common subject mentions to department codes
     dept_keywords = {
@@ -120,13 +183,15 @@ def build_chat_prompt(
         'theater': ['THR'],
     }
     
-    # Find relevant departments from query
-    for keyword, depts in dept_keywords.items():
-        if keyword in query_lower:
-            relevant_departments.extend(depts)
+    # Find relevant departments from query (only if not a requirement query)
+    if not is_requirement_query:
+        for keyword, depts in dept_keywords.items():
+            if keyword in query_lower:
+                relevant_departments.extend(depts)
     
-    # Add student's major department if available
-    if major:
+    # Add student's major department if available (but only if not a requirement query)
+    # For requirement queries, we want courses from ALL departments that fulfill the requirement
+    if major and not is_requirement_query:
         relevant_departments.append(major.upper())
     
     # Remove duplicates and ensure we have some departments
@@ -138,64 +203,18 @@ def build_chat_prompt(
         term = course_details['term'][0]
         course_count = 0
         
-        # First, include all courses from relevant departments
-        if relevant_departments:
-            context_parts.append(f"Relevant departments based on query: {', '.join(relevant_departments)}")
+        # For requirement queries, include courses from ALL departments (not just major)
+        # For regular queries, focus on relevant departments
+        if is_requirement_query:
+            context_parts.append(f"⚠️ REQUIREMENT QUERY DETECTED: {requirement_type}")
+            context_parts.append("Including courses from ALL departments that may fulfill this requirement.")
             context_parts.append("")
+            # Include courses from all departments, but prioritize those that might fulfill the requirement
             for subject_obj in term.get('subjects', []):
                 subject_code = subject_obj.get('code', '').upper()
-                if subject_code in relevant_departments:
-                    subject_name = subject_obj.get('name', '')
-                    context_parts.append(f"=== {subject_code} - {subject_name} ===")
-                    for course in subject_obj.get('courses', []):
-                        catalog_num = course.get('catalog_number', '')
-                        title = course.get('title', '')
-                        instructors = course.get('instructors', [])
-                        instructor_name = instructors[0].get('full_name', 'TBA') if instructors else 'TBA'
-                        classes = course.get('classes', [])
-                        format_type = classes[0].get('type_name', 'Unknown') if classes else 'Unknown'
-                        detail = course.get('detail', {})
-                        description = detail.get('description', '')[:300] if detail else ''
-                        
-                        # Format schedule
-                        schedule = "TBA"
-                        if classes and len(classes) > 0:
-                            class_schedule = classes[0].get('schedule', {})
-                            meetings = class_schedule.get('meetings', [])
-                            if meetings:
-                                schedule_parts = []
-                                for meeting in meetings:
-                                    days = meeting.get('days', [])
-                                    start_time = meeting.get('start_time', '')
-                                    end_time = meeting.get('end_time', '')
-                                    if days and start_time and end_time:
-                                        day_map = {'M': 'Mon', 'T': 'Tue', 'W': 'Wed', 'R': 'Thu', 'F': 'Fri', 'S': 'Sat', 'U': 'Sun'}
-                                        days_str = ', '.join([day_map.get(day, day) for day in days])
-                                        schedule_parts.append(f"{days_str} {start_time}-{end_time}")
-                                if schedule_parts:
-                                    schedule = ' | '.join(schedule_parts)
-                        
-                        context_parts.append(f"{subject_code} {catalog_num} - {title}")
-                        context_parts.append(f"  Instructor: {instructor_name}")
-                        context_parts.append(f"  Format: {format_type}")
-                        context_parts.append(f"  Schedule: {schedule}")
-                        if description:
-                            context_parts.append(f"  Description: {description}")
-                        context_parts.append("")
-                        course_count += 1
-                    context_parts.append("")
-        
-        # If no relevant departments found or we need more courses, include a broader sample
-        if course_count < 20 or not relevant_departments:
-            context_parts.append("=== Additional Courses from Other Departments ===")
-            added_count = 0
-            for subject_obj in term.get('subjects', []):
-                subject_code = subject_obj.get('code', '').upper()
-                if relevant_departments and subject_code in relevant_departments:
-                    continue  # Skip, already added
-                
                 subject_name = subject_obj.get('name', '')
-                for course in subject_obj.get('courses', [])[:3]:  # Limit to 3 per department
+                context_parts.append(f"=== {subject_code} - {subject_name} ===")
+                for course in subject_obj.get('courses', []):
                     catalog_num = course.get('catalog_number', '')
                     title = course.get('title', '')
                     instructors = course.get('instructors', [])
@@ -203,32 +222,160 @@ def build_chat_prompt(
                     classes = course.get('classes', [])
                     format_type = classes[0].get('type_name', 'Unknown') if classes else 'Unknown'
                     detail = course.get('detail', {})
-                    description = detail.get('description', '')[:200] if detail else ''
+                    description = detail.get('description', '')[:300] if detail else ''
+                    
+                    # Format schedule
+                    schedule = "TBA"
+                    if classes and len(classes) > 0:
+                        class_schedule = classes[0].get('schedule', {})
+                        meetings = class_schedule.get('meetings', [])
+                        if meetings:
+                            schedule_parts = []
+                            for meeting in meetings:
+                                days = meeting.get('days', [])
+                                start_time = meeting.get('start_time', '')
+                                end_time = meeting.get('end_time', '')
+                                if days and start_time and end_time:
+                                    day_map = {'M': 'Mon', 'T': 'Tue', 'W': 'Wed', 'R': 'Thu', 'F': 'Fri', 'S': 'Sat', 'U': 'Sun'}
+                                    days_str = ', '.join([day_map.get(day, day) for day in days])
+                                    schedule_parts.append(f"{days_str} {start_time}-{end_time}")
+                            if schedule_parts:
+                                schedule = ' | '.join(schedule_parts)
                     
                     context_parts.append(f"{subject_code} {catalog_num} - {title}")
                     context_parts.append(f"  Instructor: {instructor_name}")
                     context_parts.append(f"  Format: {format_type}")
+                    context_parts.append(f"  Schedule: {schedule}")
                     if description:
-                        context_parts.append(f"  Description: {description}...")
+                        context_parts.append(f"  Description: {description}")
                     context_parts.append("")
-                    added_count += 1
-                    if added_count >= 30:  # Limit additional courses
+                    course_count += 1
+                    if course_count >= 200:  # Limit for requirement queries to avoid token limits
                         break
-                if added_count >= 30:
+                if course_count >= 200:
                     break
+        else:
+            # First, include all courses from relevant departments
+            if relevant_departments:
+                context_parts.append(f"Relevant departments based on query: {', '.join(relevant_departments)}")
+                context_parts.append("")
+                for subject_obj in term.get('subjects', []):
+                    subject_code = subject_obj.get('code', '').upper()
+                    if subject_code in relevant_departments:
+                        subject_name = subject_obj.get('name', '')
+                        context_parts.append(f"=== {subject_code} - {subject_name} ===")
+                        for course in subject_obj.get('courses', []):
+                            catalog_num = course.get('catalog_number', '')
+                            title = course.get('title', '')
+                            instructors = course.get('instructors', [])
+                            instructor_name = instructors[0].get('full_name', 'TBA') if instructors else 'TBA'
+                            classes = course.get('classes', [])
+                            format_type = classes[0].get('type_name', 'Unknown') if classes else 'Unknown'
+                            detail = course.get('detail', {})
+                            description = detail.get('description', '')[:300] if detail else ''
+                            
+                            # Format schedule
+                            schedule = "TBA"
+                            if classes and len(classes) > 0:
+                                class_schedule = classes[0].get('schedule', {})
+                                meetings = class_schedule.get('meetings', [])
+                                if meetings:
+                                    schedule_parts = []
+                                    for meeting in meetings:
+                                        days = meeting.get('days', [])
+                                        start_time = meeting.get('start_time', '')
+                                        end_time = meeting.get('end_time', '')
+                                        if days and start_time and end_time:
+                                            day_map = {'M': 'Mon', 'T': 'Tue', 'W': 'Wed', 'R': 'Thu', 'F': 'Fri', 'S': 'Sat', 'U': 'Sun'}
+                                            days_str = ', '.join([day_map.get(day, day) for day in days])
+                                            schedule_parts.append(f"{days_str} {start_time}-{end_time}")
+                                    if schedule_parts:
+                                        schedule = ' | '.join(schedule_parts)
+                            
+                            context_parts.append(f"{subject_code} {catalog_num} - {title}")
+                            context_parts.append(f"  Instructor: {instructor_name}")
+                            context_parts.append(f"  Format: {format_type}")
+                            context_parts.append(f"  Schedule: {schedule}")
+                            if description:
+                                context_parts.append(f"  Description: {description}")
+                            context_parts.append("")
+                            course_count += 1
+                        context_parts.append("")
+            
+            # If no relevant departments found or we need more courses, include a broader sample
+            if course_count < 20 or not relevant_departments:
+                context_parts.append("=== Additional Courses from Other Departments ===")
+                added_count = 0
+                for subject_obj in term.get('subjects', []):
+                    subject_code = subject_obj.get('code', '').upper()
+                    if relevant_departments and subject_code in relevant_departments:
+                        continue  # Skip, already added
+                    
+                    subject_name = subject_obj.get('name', '')
+                    for course in subject_obj.get('courses', [])[:3]:  # Limit to 3 per department
+                        catalog_num = course.get('catalog_number', '')
+                        title = course.get('title', '')
+                        instructors = course.get('instructors', [])
+                        instructor_name = instructors[0].get('full_name', 'TBA') if instructors else 'TBA'
+                        classes = course.get('classes', [])
+                        format_type = classes[0].get('type_name', 'Unknown') if classes else 'Unknown'
+                        detail = course.get('detail', {})
+                        description = detail.get('description', '')[:200] if detail else ''
+                        
+                        context_parts.append(f"{subject_code} {catalog_num} - {title}")
+                        context_parts.append(f"  Instructor: {instructor_name}")
+                        context_parts.append(f"  Format: {format_type}")
+                        if description:
+                            context_parts.append(f"  Description: {description}...")
+                        context_parts.append("")
+                        added_count += 1
+                        if added_count >= 30:  # Limit additional courses
+                            break
+                    if added_count >= 30:
+                        break
     context_parts.append("")
     
     context_parts.append("INSTRUCTIONS:")
-    context_parts.append("Based on the student's query below, recommend relevant courses from the available courses listed above.")
-    context_parts.append("")
-    context_parts.append("When recommending:")
-    context_parts.append("- Match courses to what the student is asking for (e.g., 'computer science' → COS courses)")
-    context_parts.append("- Consider the student's class year for appropriate course levels")
-    context_parts.append("- Consider their major for additional relevant courses")
-    context_parts.append("- Recommend 3-5 courses that best match their query")
-    context_parts.append("- For each course, provide: course code, title, instructor, format, schedule, and a brief rationale")
-    context_parts.append("- If the student asks a general question, provide helpful recommendations from the available courses")
-    context_parts.append("")
+    
+    # Add requirement-specific instructions if detected
+    if is_requirement_query:
+        context_parts.append(f"⚠️ CRITICAL: The student is asking about fulfilling a {requirement_type}.")
+        context_parts.append("")
+        context_parts.append("REQUIREMENT-SPECIFIC RULES (MUST FOLLOW):")
+        context_parts.append("1. ONLY recommend courses that actually fulfill the requested requirement.")
+        context_parts.append("2. DO NOT recommend courses that do NOT fulfill the requirement, even if they are:")
+        context_parts.append("   - In the student's major")
+        context_parts.append("   - Related to the subject area")
+        context_parts.append("   - Otherwise interesting or relevant")
+        context_parts.append("3. If you cannot determine which courses fulfill the requirement from the provided data,")
+        context_parts.append("   you must state that you need more information about which courses fulfill this requirement.")
+        context_parts.append("4. The student's major is SECONDARY - the requirement fulfillment is MANDATORY.")
+        context_parts.append("5. If the student has a major, you can prefer courses that both fulfill the requirement AND are relevant to their major,")
+        context_parts.append("   but requirement fulfillment is the primary criterion.")
+        context_parts.append("")
+        context_parts.append("For distribution requirements:")
+        context_parts.append("- CD (Culture and Difference): One course examining culture and difference")
+        context_parts.append("- EC (Epistemology and Cognition): One course on epistemology and cognition")
+        context_parts.append("- EM (Ethical Thought and Moral Values): One course on ethical thought and moral values")
+        context_parts.append("- HA (Historical Analysis): One course in historical analysis")
+        context_parts.append("- LA (Literature and the Arts): Two courses in literature and the arts")
+        context_parts.append("- QCR (Quantitative and Computational Reasoning): One course in quantitative and computational reasoning")
+        context_parts.append("- SEL (Science and Engineering with Laboratory): At least one course with laboratory component (part of two-course requirement)")
+        context_parts.append("- SEN (Science and Engineering No Lab): Can be the second course in the science requirement (if not taking a second SEL)")
+        context_parts.append("- SA (Social Analysis): Two courses in social analysis")
+        context_parts.append("")
+    else:
+        context_parts.append("Based on the student's query below, recommend relevant courses from the available courses listed above.")
+        context_parts.append("")
+        context_parts.append("When recommending:")
+        context_parts.append("- Match courses to what the student is asking for (e.g., 'computer science' → COS courses)")
+        context_parts.append("- Consider the student's class year for appropriate course levels")
+        context_parts.append("- Consider their major for relevant courses")
+        context_parts.append("- Recommend 3-5 courses that best match their query")
+        context_parts.append("- For each course, provide: course code, title, instructor, format, schedule, and a brief rationale")
+        context_parts.append("- If the student asks a general question, provide helpful recommendations from the available courses")
+        context_parts.append("")
+    
     context_parts.append("STUDENT QUERY:")
     context_parts.append(user_query)
     context_parts.append("")
