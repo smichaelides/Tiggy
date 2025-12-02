@@ -28,7 +28,6 @@ def get_course_recommendations():
         student_data = get_student_data(user_id)
         past_courses = student_data.get("past_courses", {})
         concentration = student_data.get("concentration")
-        grade = student_data.get("grade")
         
         # Get available courses for prompt
         available_courses = get_available_courses_for_prompt(

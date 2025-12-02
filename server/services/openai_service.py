@@ -12,13 +12,10 @@ load_dotenv()
 _openai_client: Optional[OpenAI] = None
 
 
+# Get or create OpenAI client instance.
+# Returns:
+#     OpenAI client instance
 def get_openai_client() -> OpenAI:
-    """
-    Get or create OpenAI client instance.
-    
-    Returns:
-        OpenAI client instance
-    """
     global _openai_client
     
     if _openai_client is not None:
@@ -30,29 +27,75 @@ def get_openai_client() -> OpenAI:
     logging.info("OpenAI client initialized")
     return _openai_client
 
+# Generate chat response from OpenAI API.
+# Args:
+#     system_prompt: System prompt defining the role and behavior
+#     context_message: Context message with student data and course information
+#     model: OpenAI model to use (default: "gpt-4o-mini")
+#     max_retries: Maximum number of retry attempts (default: 3)
+# Returns:
+#     String response from the model
+# Raises:
+#     Exception: If OpenAI API call fails after retries
+def generate_chat_response(
+    system_prompt: str, 
+    context_message: str, 
+    model: str = "gpt-4o-mini", 
+    max_retries: int = 3
+) -> str:
+    client = get_openai_client()
 
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": context_message}
+    ]
+
+    for attempt in range(max_retries):
+        try:
+            logging.info(f"Calling OpenAI API for chat response (attempt {attempt + 1}/{max_retries})")
+            
+            response = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.7,
+                max_tokens=2000,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+            )
+            
+            response_text = response.choices[0].message.content.strip()
+            logging.info(f"OpenAI chat response received: {response_text[:200]}...")
+            
+            return response_text
+        
+        except Exception as e:
+            logging.error(f"OpenAI API call failed (attempt {attempt + 1}/{max_retries}): {e}")
+            if attempt < max_retries - 1:
+                continue
+            else:
+                raise
+    
+    raise Exception("Failed to generate chat response after all retries")
+
+# Call OpenAI API to generate course recommendations.
+#    Args:
+#        system_prompt: System prompt defining the role and output format
+#        context_message: Context message with student data and available courses
+#        model: OpenAI model to use (default: "gpt-4o-mini")
+#        max_retries: Maximum number of retry attempts (default: 3)   
+#    Returns:
+#        List of 5 course codes (e.g., ["COS 126", "ECO 100", ...])    
+#    Raises:
+#        ValueError: If unable to extract 5 course codes after retries
+#        Exception: If OpenAI API call fails after retries
 def generate_course_recommendations(
     system_prompt: str,
     context_message: str,
     model: str = "gpt-4o-mini",
     max_retries: int = 3
 ) -> List[str]:
-    """
-    Call OpenAI API to generate course recommendations.
     
-    Args:
-        system_prompt: System prompt defining the role and output format
-        context_message: Context message with student data and available courses
-        model: OpenAI model to use (default: "gpt-4o-mini")
-        max_retries: Maximum number of retry attempts (default: 3)
-    
-    Returns:
-        List of 5 course codes (e.g., ["COS 126", "ECO 100", ...])
-    
-    Raises:
-        ValueError: If unable to extract 5 course codes after retries
-        Exception: If OpenAI API call fails after retries
-    """
     client = get_openai_client()
     
     messages = [
@@ -103,17 +146,13 @@ def generate_course_recommendations(
     raise ValueError("Failed to generate recommendations after all retries")
 
 
+# Parse course codes from OpenAI response.
+# Handles various formats: JSON array, newline-separated, comma-separated, etc.
+# Args:
+#     response_text: Raw response text from OpenAI
+# Returns:
+#     List of course codes in format "SUBJECT NUMBER"
 def parse_course_codes(response_text: str) -> List[str]:
-    """
-    Parse course codes from OpenAI response.
-    Handles various formats: JSON array, newline-separated, comma-separated, etc.
-    
-    Args:
-        response_text: Raw response text from OpenAI
-    
-    Returns:
-        List of course codes in format "SUBJECT NUMBER"
-    """
     course_codes = []
     
     # Try to parse as JSON first
@@ -179,16 +218,12 @@ def parse_course_codes(response_text: str) -> List[str]:
     return normalized[:5]
 
 
+# Normalize a course code to standard format "SUBJECT NUMBER".
+# Args:
+#     course_code: Course code in various formats
+# Returns:
+#     Normalized course code or None if invalid
 def normalize_course_code(course_code: str) -> Optional[str]:
-    """
-    Normalize a course code to standard format "SUBJECT NUMBER".
-    
-    Args:
-        course_code: Course code in various formats
-    
-    Returns:
-        Normalized course code or None if invalid
-    """
     if not course_code:
         return None
     

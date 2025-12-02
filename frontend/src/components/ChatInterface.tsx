@@ -2,6 +2,9 @@ import React from 'react';
 import { FiArrowUp } from 'react-icons/fi';
 import type { Chat } from '../types';
 import tigerAvatar from "../assets/tiggy.png";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 
 interface ChatInterfaceProps {
@@ -40,7 +43,32 @@ function ChatInterface({
                 </div>
               )}
               <div className={`message-bubble ${message.isUser ? 'user-bubble' : 'ai-bubble'}`}>
-                <p className="message-text">{message.message}</p>
+              <ReactMarkdown 
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+                components={{
+                  h1: ({node, ...props}) => <h1 className="markdown-h1" {...props} />,
+                  h2: ({node, ...props}) => <h2 className="markdown-h2" {...props} />,
+                  h3: ({node, ...props}) => <h3 className="markdown-h3" {...props} />,
+                  p: ({node, ...props}) => <p className="markdown-p" {...props} />,
+                  strong: ({node, ...props}) => <strong className="markdown-strong" {...props} />,
+                  em: ({node, ...props}) => <em className="markdown-em" {...props} />,
+                  ul: ({node, ...props}) => <ul className="markdown-ul" {...props} />,
+                  ol: ({node, ...props}) => <ol className="markdown-ol" {...props} />,
+                  li: ({node, ...props}) => <li className="markdown-li" {...props} />,
+                  code: ({node, inline, ...props}: any) => 
+                    inline ? (
+                      <code className="markdown-code-inline" {...props} />
+                    ) : (
+                      <code className="markdown-code-block" {...props} />
+                    ),
+                  pre: ({node, ...props}) => <pre className="markdown-pre" {...props} />,
+                  blockquote: ({node, ...props}) => <blockquote className="markdown-blockquote" {...props} />,
+                  a: ({node, ...props}) => <a className="markdown-a" {...props} />,
+                }}
+              >
+                {message.message}
+              </ReactMarkdown>
               </div>
             </div>
             <div className={`message-time ${message.isUser ? 'time-right' : 'time-left'}`}>

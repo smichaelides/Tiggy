@@ -8,6 +8,8 @@ from flask import Blueprint, request, session
 from server.database import get_database
 from server.api.models.chat import Chat
 from server.api.models.message import UserMessage, ModelMessage
+from server.services.chat_response import build_chat_prompt
+from server.services.openai_service import generate_chat_response
 
 load_dotenv()
 
@@ -198,10 +200,34 @@ def send_message():
         logging.error("Failed to upload user message to the database: %s", ex)
         return {"error": f"Failed to upload user message to the database: {ex}"}, 500
 
-    model_msg = ModelMessage.model_validate(payload)
-    model_msg.message = (
-        "This is a simulated response. The backend integration will be added later!"
-    )
+    # Generate AI response
+    try:
+        user_id = str(session.get("userId"))
+        if not user_id:
+            return {"error": "User not authenticated"}, 401
+        
+        # Build prompts
+        system_prompt, context_message = build_chat_prompt(
+            user_id=user_id,
+            user_query=user_msg.message
+        )
+        
+        # Generate response from OpenAI
+        ai_response = generate_chat_response(
+            system_prompt=system_prompt,
+            context_message=context_message
+        )
+        
+        model_msg = ModelMessage.model_validate(payload)
+        model_msg.message = ai_response
+        
+    except Exception as ex:
+        logging.error("Failed to generate AI response: %s", ex)
+        # Fallback to error message
+        model_msg = ModelMessage.model_validate(payload)
+        model_msg.message = "I apologize, but I'm having trouble processing your request right now. Please try again later."
+    
+    # Save model message to database
     try:
         db.chats.update_one(
             {"_id": model_msg.chatId, "userId": user_msg.userId},
