@@ -10,14 +10,17 @@ SYSTEM_PROMPT = """You are Tiggy, an academic advising assistant powered by GPT-
 
 You have access to course information from the current term's course catalog. Use the course data provided to recommend courses that match the student's interests, major, class year, and query. 
 
+CRITICAL: Distinguish between SUBJECT AREA queries and REQUIREMENT queries:
+- SUBJECT AREA query: When a student asks for a course in a subject (e.g., "history class", "computer science course", "economics class"), they want courses in that SUBJECT/DEPARTMENT, NOT a distribution requirement. Recommend courses from that department (e.g., "history" → HIS courses, "computer science" → COS courses).
+- REQUIREMENT query: When a student explicitly mentions a requirement (e.g., "SEN distribution", "fulfill HA requirement", "need a QCR course"), they want courses that fulfill that SPECIFIC requirement.
+
 When recommending courses:
 - Use the course information provided in the context
-- Match courses to the student's query (e.g., if they ask about computer science, recommend COS courses)
-- If the student asks about a specific requirement (distribution, prerequisite, etc.), ONLY recommend courses that fulfill that requirement
+- For SUBJECT AREA queries: Match courses to the subject/department mentioned (e.g., "history class" → recommend HIS courses, "computer science" → recommend COS courses)
+- For REQUIREMENT queries: ONLY recommend courses that actually fulfill the specified requirement
 - Consider the student's class year for appropriate course levels
 - Consider their major for relevant courses ONLY when it doesn't conflict with a specific requirement query
 - If you see relevant courses in the provided data, recommend them with confidence
-- If the student asks about a subject area, look for courses in that department (e.g., "computer science" → COS, "economics" → ECO, "history" → HIS)
 - Always explain your reasoning
 - If you cannot find relevant courses in the provided data, you can acknowledge that and suggest they check the full course catalog or contact their advisor"""
 
@@ -98,7 +101,39 @@ def build_chat_prompt(
     is_requirement_query = False
     requirement_type = None
     
-    # Check for distribution requirement mentions
+    # First, check if this is a subject area query (these take priority over requirement queries)
+    # Map common subject mentions to department codes
+    dept_keywords = {
+        'computer science': ['COS'],
+        'cs': ['COS'],
+        'programming': ['COS'],
+        'economics': ['ECO'],
+        'history': ['HIS'],
+        'philosophy': ['PHI'],
+        'math': ['MAT'],
+        'mathematics': ['MAT'],
+        'physics': ['PHY'],
+        'chemistry': ['CHM'],
+        'biology': ['MOL', 'EEB'],
+        'english': ['ENG'],
+        'literature': ['ENG'],
+        'politics': ['POL'],
+        'political science': ['POL'],
+        'psychology': ['PSY'],
+        'sociology': ['SOC'],
+        'art': ['ART', 'VIS'],
+        'music': ['MUS'],
+        'theater': ['THR'],
+    }
+    
+    # Check if query mentions a subject area (e.g., "history class", "computer science course")
+    is_subject_query = False
+    for keyword in dept_keywords.keys():
+        if keyword in query_lower:
+            is_subject_query = True
+            break
+    
+    # Check for distribution requirement mentions (only if not a subject query)
     distribution_keywords = {
         # Culture and Difference
         'cd': 'CD (Culture and Difference)',
@@ -150,38 +185,17 @@ def build_chat_prompt(
         'prereq': 'prerequisite',
     }
     
-    for keyword, req_type in distribution_keywords.items():
-        if keyword in query_lower:
-            is_requirement_query = True
-            requirement_type = req_type
-            break
+    # Only check for requirement keywords if this is NOT a subject area query
+    # Subject area queries (e.g., "history class") take priority over requirement queries
+    if not is_subject_query:
+        for keyword, req_type in distribution_keywords.items():
+            if keyword in query_lower:
+                is_requirement_query = True
+                requirement_type = req_type
+                break
     
     # Determine relevant departments based on query and major
     relevant_departments = []
-    
-    # Map common subject mentions to department codes
-    dept_keywords = {
-        'computer science': ['COS'],
-        'cs': ['COS'],
-        'programming': ['COS'],
-        'economics': ['ECO'],
-        'history': ['HIS'],
-        'philosophy': ['PHI'],
-        'math': ['MAT'],
-        'mathematics': ['MAT'],
-        'physics': ['PHY'],
-        'chemistry': ['CHM'],
-        'biology': ['MOL', 'EEB'],
-        'english': ['ENG'],
-        'literature': ['ENG'],
-        'politics': ['POL'],
-        'political science': ['POL'],
-        'psychology': ['PSY'],
-        'sociology': ['SOC'],
-        'art': ['ART', 'VIS'],
-        'music': ['MUS'],
-        'theater': ['THR'],
-    }
     
     # Find relevant departments from query (only if not a requirement query)
     if not is_requirement_query:
@@ -339,7 +353,7 @@ def build_chat_prompt(
     
     # Add requirement-specific instructions if detected
     if is_requirement_query:
-        context_parts.append(f"⚠️ CRITICAL: The student is asking about fulfilling a {requirement_type}.")
+        context_parts.append(f"CRITICAL: The student is asking about fulfilling a {requirement_type}.")
         context_parts.append("")
         context_parts.append("REQUIREMENT-SPECIFIC RULES (MUST FOLLOW):")
         context_parts.append("1. ONLY recommend courses that actually fulfill the requested requirement.")
@@ -367,8 +381,13 @@ def build_chat_prompt(
     else:
         context_parts.append("Based on the student's query below, recommend relevant courses from the available courses listed above.")
         context_parts.append("")
+        context_parts.append("IMPORTANT: This is a SUBJECT AREA query, NOT a requirement query.")
+        context_parts.append("The student is asking for courses in a specific subject/department (e.g., 'history class', 'computer science course').")
+        context_parts.append("DO NOT interpret this as a distribution requirement query.")
+        context_parts.append("")
         context_parts.append("When recommending:")
-        context_parts.append("- Match courses to what the student is asking for (e.g., 'computer science' → COS courses)")
+        context_parts.append("- Match courses to the SUBJECT/DEPARTMENT the student mentioned (e.g., 'history class' → recommend HIS courses, 'computer science' → recommend COS courses)")
+        context_parts.append("- Do NOT assume they want a distribution requirement unless they explicitly mention one")
         context_parts.append("- Consider the student's class year for appropriate course levels")
         context_parts.append("- Consider their major for relevant courses")
         context_parts.append("- Recommend 3-5 courses that best match their query")

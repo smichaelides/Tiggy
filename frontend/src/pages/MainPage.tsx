@@ -236,20 +236,20 @@ function MainPage() {
       timestamp: new Date(),
     };
 
-    const chatResponse = await chatAPI.sendMessage(
-      currentChat!._id,
-      textToSend
-    );
-
-    updateChatMessages(currentChat!._id, [
-      ...currentChat!.messages,
-      userMessage,
-    ]);
+    // Add user message immediately
+    const messagesWithUser = [...currentChat!.messages, userMessage];
+    updateChatMessages(currentChat!._id, messagesWithUser);
     setInputValue("");
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Make API call
+      const chatResponse = await chatAPI.sendMessage(
+        currentChat!._id,
+        textToSend
+      );
+
+      // Replace thinking message with actual response
       const aiMessage: Message = {
         message: chatResponse.model_message,
         isUser: false,
@@ -257,12 +257,24 @@ function MainPage() {
       };
 
       updateChatMessages(currentChat!._id, [
-        ...currentChat!.messages,
-        userMessage,
+        ...messagesWithUser,
         aiMessage,
       ]);
       setIsLoading(false);
-    }, 2000);
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      // Replace thinking message with error message
+      const errorMessage: Message = {
+        message: "Sorry, I encountered an error. Please try again.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      updateChatMessages(currentChat!._id, [
+        ...messagesWithUser,
+        errorMessage,
+      ]);
+      setIsLoading(false);
+    }
   }, [inputValue, currentChat, createNewChat, updateChatMessages]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
