@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { userAPI } from "../api/userAPI";
 import { recommendationsAPI } from "../api/recommendationsAPI";
 import type { User, Course } from "../types";
+import { FiArrowLeft } from "react-icons/fi";
 
 function CourseRecs() {
   const [user, setUser] = useState<User | null>(null);
@@ -48,6 +49,10 @@ function CourseRecs() {
 
     fetchRecommendations();
   }, []);
+
+  const handleBackToChat = () => {
+    navigate('/')
+  }
 
   return (
     <div className="app">
@@ -169,6 +174,16 @@ function CourseRecs() {
               <p>No course recommendations available at this time.</p>
             </div>
           )}
+          <div className='back-to-chat-container'>
+            <button
+              className="back-to-chat-button"
+              onClick={handleBackToChat}
+            >
+              <FiArrowLeft />
+              Back to Chat
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>

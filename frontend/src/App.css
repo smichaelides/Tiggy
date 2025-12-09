@@ -1191,6 +1191,12 @@ body {
   height: 1.25rem;
 }
 
+.back-to-chat-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
 .back-to-chat-button {
   display: flex;
   align-items: center;

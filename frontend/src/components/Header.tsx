@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiUser, FiSettings, FiLogOut, FiDownload, FiBookOpen } from 'react-icons/fi';
+import { FiUser, FiLogOut, FiDownload, FiBookOpen } from 'react-icons/fi';
 import princetonLogo from '../assets/princeton.png';
 import type { Message } from '../types';
 import { generateChatPDF } from '../utils/pdfGenerator';
@@ -80,8 +80,8 @@ function Header({ messages }: HeaderProps) {
             {isDropdownOpen && (
               <div className="header-dropdown">
                 <button className="dropdown-item" onClick={handleSettingsClick}>
-                  <FiSettings />
-                  <span>Settings</span>
+                  <FiUser />
+                  <span>Profile</span>
                 </button>
                 <button className="dropdown-item" onClick={handleLogoutClick}>
                   <FiLogOut />
