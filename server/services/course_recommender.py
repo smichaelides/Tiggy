@@ -3,8 +3,8 @@ import json
 import logging
 import random
 from typing import Dict, List, Optional, Any, Tuple
-from bson import ObjectId
-from server.database import get_database, get_database_standalone
+from bson import ObjectId  # pyright: ignore[reportMissingImports]
+from server.core.database import get_database, get_database_standalone
 from server.services.embeddings_utils import (
     embedding_from_string,
     cosine_similarity,
