@@ -5,11 +5,11 @@ from typing import Any
 from datetime import datetime, timezone
 from bson import ObjectId
 from flask import Blueprint, request, session
-from server.database import get_database
+from server.core.database import get_database
 from server.api.models.chat import Chat
 from server.api.models.message import UserMessage, ModelMessage
-from server.services.chat_response import build_chat_prompt
-from server.services.openai_service import generate_chat_response
+from server.llm.chat_prompts import build_chat_prompt
+from server.llm.openai_service import generate_chat_response
 
 load_dotenv()
 

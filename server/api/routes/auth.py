@@ -1,7 +1,7 @@
 import logging
 from dotenv import load_dotenv
 from flask import Blueprint, session, request
-from server.database import get_database
+from server.core.database import get_database
 from server.api.models.user import User
 
 load_dotenv()
