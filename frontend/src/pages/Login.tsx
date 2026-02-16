@@ -33,7 +33,7 @@ function Login({
         setIsAuthenticated(true);
       } catch (ex) {
         console.error(ex);
-        if (ex?.message) {
+        if (ex instanceof Error && ex.message) {
           setIsAuthenticated(true);
           setHasCompletedWelcome(false);
         }

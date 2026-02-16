@@ -52,17 +52,20 @@ export interface UserSettings {
 }
 
 // Settings storage functions
-export const saveUserSettings = (settings: UserSettings): void => {
+export const saveUserSettings = (_settings: UserSettings): void => {
+    // TODO: Implement settings persistence
 };
 
 export const loadUserSettings = (): UserSettings => {
-    if (savedSettings) {
-        try {
-            return JSON.parse(savedSettings);
-        } catch (error) {
-            console.error('Error parsing saved settings:', error);
-        }
-    }
+    // TODO: Implement settings loading from storage
+    // const savedSettings = localStorage.getItem('userSettings');
+    // if (savedSettings) {
+    //     try {
+    //         return JSON.parse(savedSettings);
+    //     } catch (error) {
+    //         console.error('Error parsing saved settings:', error);
+    //     }
+    // }
     return { grade: '', major: '', concentration: '' };
 };
 
