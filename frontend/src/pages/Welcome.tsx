@@ -7,11 +7,17 @@ import { princetonMajors, grades } from "../utils/settings";
 import { authAPI } from "../api/authAPI";
 import type { OnboardingInfo } from "../types";
 
+interface WelcomeProps {
+  googleAuthInfo: OnboardingInfo;
+  setIsAuthenticated: (isAuth: boolean) => void;
+  setHasCompletedWelcome: (completed: boolean) => void;
+}
+
 function Welcome({
   googleAuthInfo,
-}: {
-    googleAuthInfo: OnboardingInfo;
-}) {
+  setIsAuthenticated,
+  setHasCompletedWelcome,
+}: WelcomeProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [onboardingInfo, setOnboardingInfo] = useState<OnboardingInfo>({
     ...googleAuthInfo,
@@ -28,9 +34,18 @@ function Welcome({
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Sign up user with information
-      await authAPI.completeUserLogin(onboardingInfo);
-      navigate("/");
+      try {
+        // Sign up user with information
+        await authAPI.completeUserLogin(onboardingInfo);
+        // Update authentication state
+        setIsAuthenticated(true);
+        setHasCompletedWelcome(true);
+        // Navigate to main page
+        navigate("/");
+      } catch (error) {
+        console.error("Failed to complete user login:", error);
+        // You might want to show an error message to the user here
+      }
     }
   };
 

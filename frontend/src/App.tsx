@@ -46,7 +46,11 @@ function AppContent() {
               setOnboardingInfo={setOnboardingInfo}
             />
           ) : !hasCompletedWelcome ? (
-            <WelcomePage googleAuthInfo={onboardingInfo} />
+            <WelcomePage 
+              googleAuthInfo={onboardingInfo}
+              setIsAuthenticated={setIsAuthenticated}
+              setHasCompletedWelcome={setHasCompletedWelcome}
+            />
           ) : (
             <Navigate to="/" replace />
           )
