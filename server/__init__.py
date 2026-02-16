@@ -15,19 +15,9 @@ def create_app():
         SECRET_KEY=os.getenv("SECRET_KEY", "dev"),
     )
 
-    # Configure session cookies for cross-origin requests (Vercel frontend → Render backend)
-    # Required for cookies to work across different domains
-    app.config.update(
-        SESSION_COOKIE_SAMESITE='None',  # Allow cross-site cookies
-        SESSION_COOKIE_SECURE=True,       # Require HTTPS (required with SameSite=None)
-        SESSION_COOKIE_HTTPONLY=True,     # Prevent JavaScript access (security)
-    )
-
     # Configure CORS to allow requests from Vercel frontend
     # Get allowed origins from environment variable or use default
     allowed_origins = os.getenv("CORS_ORIGINS", "*").split(",")
-    # Clean up origins (remove empty strings from split)
-    allowed_origins = [origin.strip() for origin in allowed_origins if origin.strip()]
     CORS(app, origins=allowed_origins, supports_credentials=True)
 
     # Add root route for health checks (Render, etc.)
