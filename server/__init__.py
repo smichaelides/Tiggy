@@ -14,6 +14,11 @@ def create_app():
         SECRET_KEY=os.getenv("SECRET_KEY", "dev"),
     )
 
+    # Add root route for health checks (Render, etc.)
+    @app.route("/", methods=["GET"])
+    def root():
+        return {"message": "Tiggy API Server", "status": "healthy"}, 200
+
     register_routes(app)
 
     return app
