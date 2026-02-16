@@ -2,7 +2,7 @@ import os
 import json
 import logging
 import re
-from typing import List, Optional
+from typing import List, Optional, Dict
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -31,6 +31,7 @@ def get_openai_client() -> OpenAI:
 # Args:
 #     system_prompt: System prompt defining the role and behavior
 #     context_message: Context message with student data and course information
+#     conversation_history: Optional list of previous messages in OpenAI format
 #     model: OpenAI model to use (default: "gpt-4o-mini")
 #     max_retries: Maximum number of retry attempts (default: 3)
 # Returns:
@@ -39,16 +40,23 @@ def get_openai_client() -> OpenAI:
 #     Exception: If OpenAI API call fails after retries
 def generate_chat_response(
     system_prompt: str, 
-    context_message: str, 
+    context_message: str,
+    conversation_history: Optional[List[dict]] = None,
     model: str = "gpt-4o-mini", 
     max_retries: int = 3
 ) -> str:
     client = get_openai_client()
 
     messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": context_message}
+        {"role": "system", "content": system_prompt}
     ]
+    
+    # Add conversation history if provided
+    if conversation_history:
+        messages.extend(conversation_history)
+    
+    # Add current context message
+    messages.append({"role": "user", "content": context_message})
 
     for attempt in range(max_retries):
         try:

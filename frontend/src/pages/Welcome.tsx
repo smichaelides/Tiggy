@@ -104,7 +104,7 @@ function Welcome({
         return (
           <div className="welcome-page-step">
             <h2 className="welcome-page-step-title">
-              What's your concentration?
+              What's your major?
             </h2>
             <p className="welcome-page-step-subtitle">
               Choose your primary field of study

@@ -23,6 +23,12 @@ export const authAPI = {
         })
     },
 
+    logout: async (): Promise<void> => {
+        return apiRequest<void>('/auth/logout', {
+            method: 'POST',
+        });
+    },
+
     // external APIs
     googleLogin: async (accessToken: string): Promise<GoogleUserInfo> => {
         const userInfoResponse = await fetch(

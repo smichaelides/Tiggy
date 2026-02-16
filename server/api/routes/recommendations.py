@@ -50,11 +50,12 @@ def get_course_recommendations():
                 "message": "Unable to find courses. Please ensure your major is set in settings."
             }, 400
         
-        # Build prompt with vector search enabled
+        # Build prompt without vector search - use student profile-based recommendations
+        # Vector search can interfere with profile-based recommendations on this page
         system_prompt, context_message = build_recommendation_prompt(
             student_data=student_data,
             available_courses=available_courses,
-            use_vector_search=True,  # Enable vector search
+            use_vector_search=False,  # Disable vector search for profile-based recommendations
             user_query=user_query
         )
         

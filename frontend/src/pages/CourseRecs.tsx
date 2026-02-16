@@ -6,7 +6,11 @@ import { recommendationsAPI } from "../api/recommendationsAPI";
 import type { User, Course } from "../types";
 import { FiArrowLeft } from "react-icons/fi";
 
-function CourseRecs() {
+interface CourseRecsProps {
+  onLogout?: () => void;
+}
+
+function CourseRecs({ onLogout }: CourseRecsProps) {
   const [user, setUser] = useState<User | null>(null);
   const [courses, setCourses] = useState<Course[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -56,7 +60,7 @@ function CourseRecs() {
 
   return (
     <div className="app">
-      <Header messages={[]} />
+      <Header messages={[]} onLogout={onLogout} />
       <div className="course-recs-container">
         <div className="course-recs-card">
           <div className="course-recs-header">

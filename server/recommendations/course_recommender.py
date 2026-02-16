@@ -883,52 +883,30 @@ def generate_and_store_course_embeddings(
             # Generate embedding
             embedding = embedding_from_string(course_text, model=model)
             
-            # Store in MongoDB
-            # Try to find existing course document
+            # Store in MongoDB course_embeddings collection
             subject_code = course_code.split()[0]
             catalog_number = course_code.split()[1]
             
-            # Update course document with embedding
-            filter_query = {
-                "department": subject_code,
-                "catalog_number": catalog_number
-            }
-            if semester_code:
-                filter_query["semester"] = semester_code
-            
-            result = db.courses.update_one(
-                filter_query,
+            # Store directly in course_embeddings collection
+            db.course_embeddings.update_one(
+                {
+                    "course_code": course_code,
+                    "subject_code": subject_code,
+                    "catalog_number": catalog_number
+                },
                 {
                     "$set": {
-                        "embedding": embedding,
-                        "embedding_model": model,
-                        "course_text_corpus": course_text
-                    }
-                },
-                upsert=False  # Don't create if doesn't exist
-            )
-            
-            # If course not in DB, store in a separate embeddings collection
-            if result.matched_count == 0:
-                db.course_embeddings.update_one(
-                    {
                         "course_code": course_code,
                         "subject_code": subject_code,
-                        "catalog_number": catalog_number
-                    },
-                    {
-                        "$set": {
-                            "course_code": course_code,
-                            "subject_code": subject_code,
-                            "catalog_number": catalog_number,
-                            "embedding": embedding,
-                            "embedding_model": model,
-                            "course_text_corpus": course_text,
-                            "course_obj": course_obj
-                        }
-                    },
-                    upsert=True
-                )
+                        "catalog_number": catalog_number,
+                        "embedding": embedding,
+                        "embedding_model": model,
+                        "course_text_corpus": course_text,
+                        "course_obj": course_obj
+                    }
+                },
+                upsert=True
+            )
         
         except Exception as e:
             logging.error(f"Failed to generate embedding for {course_code}: {e}")
@@ -960,7 +938,7 @@ def get_course_embeddings_from_db(use_standalone: bool = False) -> Tuple[List[st
     course_texts = []
     embeddings = []
     
-    # Try to get from course_embeddings collection first
+    # Get embeddings from course_embeddings collection
     embedding_docs = db.course_embeddings.find({"embedding": {"$exists": True}})
     
     for doc in embedding_docs:
@@ -973,23 +951,7 @@ def get_course_embeddings_from_db(use_standalone: bool = False) -> Tuple[List[st
             course_texts.append(course_text)
             embeddings.append(embedding)
     
-    # Also check courses collection for embeddings
-    course_docs = db.courses.find({"embedding": {"$exists": True}})
-    
-    for doc in course_docs:
-        subject_code = doc.get('department', '')
-        catalog_number = doc.get('catalog_number', '')
-        embedding = doc.get('embedding')
-        course_text = doc.get('course_text_corpus', '')
-        
-        if subject_code and catalog_number and embedding:
-            course_code = f"{subject_code} {catalog_number}"
-            if course_code not in course_codes:  # Avoid duplicates
-                course_codes.append(course_code)
-                course_texts.append(course_text)
-                embeddings.append(embedding)
-    
-    logging.info(f"Loaded {len(course_codes)} course embeddings from database")
+    logging.info(f"Loaded {len(course_codes)} course embeddings from course_embeddings collection")
     return course_codes, course_texts, embeddings
 
 
@@ -1000,7 +962,7 @@ def vector_search_courses(
     model: str = "text-embedding-3-small"
 ) -> List[Tuple[str, float]]:
     """
-    Perform vector search to find semantically similar courses.
+    Perform vector search to find semantically similar courses using MongoDB Atlas Vector Search.
     
     Args:
         query_text: The query text (user's request or course description)
@@ -1011,52 +973,108 @@ def vector_search_courses(
     Returns:
         List of tuples (course_code, similarity_score) sorted by similarity
     """
-    # Load embeddings from database
-    all_course_codes, all_course_texts, all_embeddings = get_course_embeddings_from_db()
-    
-    if len(all_course_codes) == 0:
-        logging.warning("No embeddings found in database. Generating on-the-fly...")
-        # Fallback: generate embeddings on-the-fly (slower)
-        courses = get_all_courses_with_text()
-        if available_course_codes:
-            courses = [(code, text, obj) for code, text, obj in courses if code in available_course_codes]
+    try:
+        # Get database connection
+        try:
+            db = get_database()
+        except RuntimeError:
+            db = get_database_standalone()
         
-        course_codes = [code for code, _, _ in courses]
-        course_texts = [text for _, text, _ in courses]
+        # Generate embedding for query
+        query_embedding = embedding_from_string(query_text, model=model)
         
-        return find_similar_courses(query_text, course_texts, course_codes, top_k=top_k, model=model)
-    
-    # Filter to available courses if specified
-    if available_course_codes:
-        filtered_indices = [
-            i for i, code in enumerate(all_course_codes)
-            if code in available_course_codes
+        # Build aggregation pipeline for MongoDB Atlas Vector Search
+        pipeline = [
+            {
+                "$vectorSearch": {
+                "queryVector": query_embedding,
+                "path": "embedding",
+                "numCandidates": min(100, top_k * 5),  # numCandidates should be >= limit
+                "limit": top_k,
+                "index": "vector_index"
+                }
+            },
+            {
+                "$project": {
+                    "course_code": 1,
+                    "score": {"$meta": "vectorSearchScore"}
+                }
+            }
         ]
-        course_codes = [all_course_codes[i] for i in filtered_indices]
-        course_texts = [all_course_texts[i] for i in filtered_indices]
-        embeddings = [all_embeddings[i] for i in filtered_indices]
-    else:
-        course_codes = all_course_codes
-        course_texts = all_course_texts
-        embeddings = all_embeddings
-    
-    if len(course_codes) == 0:
-        return []
-    
-    # Generate embedding for query
-    query_embedding = embedding_from_string(query_text, model=model)
-    
-    # Calculate similarities
-    similarities = [cosine_similarity(query_embedding, emb) for emb in embeddings]
-    
-    # Create list of (course_code, similarity) tuples
-    course_similarities = list(zip(course_codes, similarities))
-    
-    # Sort by similarity (descending)
-    course_similarities.sort(key=lambda x: x[1], reverse=True)
-    
-    # Return top-k
-    return course_similarities[:top_k]
+        
+        # If filtering by available course codes, add a match stage after vector search
+        if available_course_codes:
+            pipeline.append({
+                "$match": {
+                    "course_code": {"$in": available_course_codes}
+                }
+            })
+        
+        # Execute vector search
+        results = list(db.course_embeddings.aggregate(pipeline))
+        
+        # Convert results to list of tuples (course_code, similarity_score)
+        # Note: MongoDB returns scores where higher = more similar
+        course_similarities = [
+            (doc["course_code"], doc.get("score", 0.0))
+            for doc in results
+            if "course_code" in doc
+        ]
+        
+        # Sort by similarity (descending) - MongoDB should already return sorted, but ensure it
+        course_similarities.sort(key=lambda x: x[1], reverse=True)
+        
+        logging.info(f"Vector search returned {len(course_similarities)} results")
+        return course_similarities[:top_k]
+        
+    except Exception as e:
+        logging.warning(f"MongoDB Atlas Vector Search failed: {e}, falling back to in-memory search")
+        # Fallback: use the old method if vector search fails
+        all_course_codes, all_course_texts, all_embeddings = get_course_embeddings_from_db()
+        
+        if len(all_course_codes) == 0:
+            logging.warning("No embeddings found in database. Generating on-the-fly...")
+            # Fallback: generate embeddings on-the-fly (slower)
+            courses = get_all_courses_with_text()
+            if available_course_codes:
+                courses = [(code, text, obj) for code, text, obj in courses if code in available_course_codes]
+            
+            course_codes = [code for code, _, _ in courses]
+            course_texts = [text for _, text, _ in courses]
+            
+            return find_similar_courses(query_text, course_texts, course_codes, top_k=top_k, model=model)
+        
+        # Filter to available courses if specified
+        if available_course_codes:
+            filtered_indices = [
+                i for i, code in enumerate(all_course_codes)
+                if code in available_course_codes
+            ]
+            course_codes = [all_course_codes[i] for i in filtered_indices]
+            course_texts = [all_course_texts[i] for i in filtered_indices]
+            embeddings = [all_embeddings[i] for i in filtered_indices]
+        else:
+            course_codes = all_course_codes
+            course_texts = all_course_texts
+            embeddings = all_embeddings
+        
+        if len(course_codes) == 0:
+            return []
+        
+        # Generate embedding for query
+        query_embedding = embedding_from_string(query_text, model=model)
+        
+        # Calculate similarities
+        similarities = [cosine_similarity(query_embedding, emb) for emb in embeddings]
+        
+        # Create list of (course_code, similarity) tuples
+        course_similarities = list(zip(course_codes, similarities))
+        
+        # Sort by similarity (descending)
+        course_similarities.sort(key=lambda x: x[1], reverse=True)
+        
+        # Return top-k
+        return course_similarities[:top_k]
 
 
 def filter_and_rerank_courses(

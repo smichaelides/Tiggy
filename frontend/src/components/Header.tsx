@@ -7,9 +7,10 @@ import { generateChatPDF } from '../utils/pdfGenerator';
 
 interface HeaderProps {
   messages: Message[];
+  onLogout?: () => void;
 }
 
-function Header({ messages }: HeaderProps) {
+function Header({ messages, onLogout }: HeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -31,8 +32,12 @@ function Header({ messages }: HeaderProps) {
   };
 
   const handleLogoutClick = () => {
-    navigate('/login');
     setIsDropdownOpen(false);
+    if (onLogout) {
+      onLogout();
+    } else {
+      navigate('/login');
+    }
   };
 
   const handleDownloadChat = () => {

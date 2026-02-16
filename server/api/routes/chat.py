@@ -10,6 +10,7 @@ from server.api.models.chat import Chat
 from server.api.models.message import UserMessage, ModelMessage
 from server.llm.chat_prompts import build_chat_prompt
 from server.llm.openai_service import generate_chat_response
+from server.llm.context_manager import build_conversation_history
 
 load_dotenv()
 
@@ -206,23 +207,54 @@ def send_message():
         if not user_id:
             return {"error": "User not authenticated"}, 401
         
-        # Build prompts
-        system_prompt, context_message = build_chat_prompt(
-            user_id=user_id,
-            user_query=user_msg.message
+        # Retrieve previous messages from the chat for context
+        chat_doc = db.chats.find_one(
+            {"_id": user_msg.chatId, "userId": user_msg.userId}
         )
         
-        # Generate response from OpenAI
+        previous_user_messages = []
+        previous_model_messages = []
+        conversation_history = []
+        
+        if chat_doc:
+            # Get previous messages (excluding the one we just added)
+            previous_user_messages = chat_doc.get("userMessages", [])
+            previous_model_messages = chat_doc.get("modelMessages", [])
+            
+            # Remove the last user message if it's the one we just added
+            # (it will have the same timestamp or be the most recent)
+            if previous_user_messages and len(previous_user_messages) > 0:
+                # The last message should be the one we just added, so take all but the last
+                previous_user_messages = previous_user_messages[:-1]
+            
+            # Build conversation history for OpenAI
+            if previous_user_messages or previous_model_messages:
+                conversation_history = build_conversation_history(
+                    user_messages=previous_user_messages,
+                    model_messages=previous_model_messages,
+                    max_messages=10
+                )
+        
+        # Build prompts with conversation context
+        system_prompt, context_message = build_chat_prompt(
+            user_id=user_id,
+            user_query=user_msg.message,
+            previous_user_messages=previous_user_messages,
+            previous_model_messages=previous_model_messages
+        )
+        
+        # Generate response from OpenAI with conversation history
         ai_response = generate_chat_response(
             system_prompt=system_prompt,
-            context_message=context_message
+            context_message=context_message,
+            conversation_history=conversation_history if conversation_history else None
         )
         
         model_msg = ModelMessage.model_validate(payload)
         model_msg.message = ai_response
         
     except Exception as ex:
-        logging.error("Failed to generate AI response: %s", ex)
+        logging.exception("Failed to generate AI response: %s", ex)  # Use exception() to get full traceback
         # Fallback to error message
         model_msg = ModelMessage.model_validate(payload)
         model_msg.message = "I apologize, but I'm having trouble processing your request right now. Please try again later."

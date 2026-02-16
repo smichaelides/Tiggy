@@ -6,6 +6,10 @@ import ChatSidebar from "../components/ChatSidebar";
 import type { Message, Chat } from "../types";
 import { chatAPI } from "../api/chatAPI";
 
+interface MainPageProps {
+  onLogout?: () => void;
+}
+
 const getChatTitle = (messages: Message[]) => {
   return messages.length > 0
     ? messages[0].message.substring(0, 30) +
@@ -13,7 +17,7 @@ const getChatTitle = (messages: Message[]) => {
     : "New Chat";
 };
 
-function MainPage() {
+function MainPage({ onLogout }: MainPageProps) {
   const [chats, setChats] = useState<Chat[]>([]);
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
   const [inputValue, setInputValue] = useState("");
@@ -286,7 +290,7 @@ function MainPage() {
 
   return (
     <div className="app">
-      <Header messages={currentChat?.messages ?? []} />
+      <Header messages={currentChat?.messages ?? []} onLogout={onLogout} />
 
       <div className="main-content">
         <ChatSidebar

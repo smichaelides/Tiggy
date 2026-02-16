@@ -54,3 +54,9 @@ def complete_user_login():
         return {"error": "Failed to create new user"}, 500
 
     return new_user.model_dump_json(), 201
+
+@auth.route("/logout", methods=["POST"])
+def logout():
+    """Clear the user session on logout."""
+    session.clear()
+    return {"message": "Logout successful"}, 200

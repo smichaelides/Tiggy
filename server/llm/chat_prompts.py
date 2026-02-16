@@ -1,5 +1,6 @@
 import logging
-from typing import Dict, Any, Optional
+import json
+from typing import Dict, Any, Optional, List
 from server.recommendations.course_recommender import (
     get_student_data,
     load_course_details,
@@ -8,6 +9,93 @@ from server.recommendations.course_recommender import (
     match_course_code,
     get_courses_by_distribution
 )
+from server.llm.context_manager import (
+    are_queries_related,
+    enhance_query_with_context
+)
+from server.llm.openai_service import get_openai_client
+
+# Cache for valid department codes (built once, reused)
+_valid_dept_codes_cache: Optional[set] = None
+
+
+def classify_query_with_llm(user_query: str) -> Dict[str, Any]:
+    """
+    Classify a user query using LLM to determine intent and extract relevant information.
+    
+    Args:
+        user_query: The user's query string
+    
+    Returns:
+        Dictionary with:
+        - intent: "similarity", "requirement", or "subject"
+        - similarity_course_code: Course code if similarity query (e.g., "COS 226")
+        - requirement_type: Requirement type if requirement query (e.g., "SEL", "HA")
+        - detected_dept_code: Department code if subject query (e.g., "COS", "HIS")
+    """
+    client = get_openai_client()
+    
+    classification_prompt = """Classify the following student query about courses. Return a JSON object with:
+- "intent": one of "similarity", "requirement", or "subject"
+- "similarity_course_code": course code if intent is "similarity" (e.g., "COS 226"), null otherwise
+- "requirement_type": requirement code if intent is "requirement" (e.g., "SEL", "HA", "LA", "CD", "EC", "EM", "QCR", "SEN", "SA"), null otherwise
+- "detected_dept_code": department code if intent is "subject" (e.g., "COS", "HIS", "MAT"), null otherwise
+
+Priority order:
+1. SIMILARITY: If query asks for courses "similar to X", "like X", "related to X" - use "similarity" intent
+2. REQUIREMENT: If query mentions distribution requirements (e.g., "SEL", "HA", "fulfill requirement") - use "requirement" intent
+3. SUBJECT: If query asks for courses in a subject/department (e.g., "history class", "computer science course") - use "subject" intent
+
+Query: {query}
+
+Return only valid JSON, no other text.""".format(query=user_query)
+    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a query classifier. Return only valid JSON."},
+                {"role": "user", "content": classification_prompt}
+            ],
+            temperature=0.1,
+            max_tokens=200,
+            response_format={"type": "json_object"}
+        )
+        
+        result = json.loads(response.choices[0].message.content)
+        
+        # Normalize the result
+        classification = {
+            "intent": result.get("intent", "subject").lower(),
+            "similarity_course_code": result.get("similarity_course_code"),
+            "requirement_type": result.get("requirement_type"),
+            "detected_dept_code": result.get("detected_dept_code")
+        }
+        
+        # Normalize requirement codes
+        if classification["requirement_type"]:
+            req_code = classification["requirement_type"].upper()
+            # Handle common variations
+            req_mapping = {
+                "STL": "SEL",
+                "STN": "SEN",
+                "QR": "QCR"
+            }
+            classification["requirement_type"] = req_mapping.get(req_code, req_code)
+        
+        logging.info(f"Query classified: {classification}")
+        return classification
+        
+    except Exception as e:
+        logging.error(f"LLM classification failed: {e}, falling back to default")
+        # Fallback: return default classification
+        return {
+            "intent": "subject",
+            "similarity_course_code": None,
+            "requirement_type": None,
+            "detected_dept_code": None
+        }
+
 
 # System prompt for Tiggy
 SYSTEM_PROMPT = """You are Tiggy, an academic advising assistant powered by GPT-4. You are advising Princeton undergraduate students on what courses to consider taking, based on what is offered in the Spring 2026 course catalog. 
@@ -29,10 +117,12 @@ When recommending courses:
 - Always explain your reasoning
 - If you cannot find relevant courses in the provided data, you can acknowledge that and suggest they check the full course catalog or contact their advisor"""
 
-# returns tuple of system prompt and contex message
+    # returns tuple of system prompt and contex message
 def build_chat_prompt(
     user_id: str,
-    user_query: str
+    user_query: str,
+    previous_user_messages: list[dict] = None,
+    previous_model_messages: list[dict] = None
 ) -> tuple[str, str]:
     # Get student data
     student_data = get_student_data(user_id)
@@ -42,6 +132,23 @@ def build_chat_prompt(
     
     # Load course details
     course_details = load_course_details()
+    
+    # Enhance query with conversation context if available
+    # Only check context if there are previous messages (skip for first message in chat)
+    # This optimization avoids unnecessary processing for new conversations
+    enhanced_query = user_query
+    if previous_user_messages and previous_model_messages and len(previous_user_messages) > 0:
+        # Only process context if we have at least one previous query
+        previous_queries = [msg.get('message', '') for msg in previous_user_messages if msg.get('message', '').strip()]
+        previous_responses = [msg.get('message', '') for msg in previous_model_messages if msg.get('message', '').strip()]
+        
+        # Only enhance if we have actual previous queries (not just empty messages)
+        if previous_queries:
+            enhanced_query = enhance_query_with_context(
+                current_query=user_query,
+                previous_queries=previous_queries,
+                previous_responses=previous_responses
+            )
     
     # Build context message
     context_parts = []
@@ -79,7 +186,7 @@ def build_chat_prompt(
     context_parts.append('    {')
     context_parts.append('      "code": "1264",')
     context_parts.append('      "suffix": "S2026",')
-    context_parts.append('      "cal_name": "Spring 2026",')
+    context_parts.append('      "caFl_name": "Spring 2026",')
     context_parts.append('      "subjects": [')
     context_parts.append('        {')
     context_parts.append('          "code": "AAS",')
@@ -110,31 +217,38 @@ def build_chat_prompt(
     context_parts.append("A course may have multiple distribution requirements (e.g., ['CD', 'LA']).")
     context_parts.append("")
     
-    # Detect if query is about a specific requirement (distribution, prerequisite, etc.)
-    query_lower = user_query.lower()
-    is_requirement_query = False
-    requirement_type = None
-    is_similarity_query = False
-    similarity_course_code = None
+    # Use LLM-based classification instead of regex
+    classification = classify_query_with_llm(user_query)
     
-    # FIRST PRIORITY: Check if this is a similarity query (e.g., "similar to COS 226", "like COS 226")
-    # These take absolute priority over everything else
-    similarity_keywords = ['similar to', 'like', 'same as', 'equivalent to', 'comparable to', 'related to']
-    for keyword in similarity_keywords:
-        if keyword in query_lower:
-            # Try to extract course code (e.g., "COS 226", "COS226")
-            import re
-            # Pattern: 3 letters, optional space, 3 digits
-            course_pattern = r'\b([A-Z]{2,4})\s*(\d{3})\b'
-            matches = re.findall(course_pattern, user_query.upper())
-            if matches:
-                is_similarity_query = True
-                subject, number = matches[0]
-                similarity_course_code = f"{subject} {number}"
-                break
+    # Extract classification results
+    is_similarity_query = classification["intent"] == "similarity"
+    similarity_course_code = classification.get("similarity_course_code")
+    is_requirement_query = classification["intent"] == "requirement"
+    requirement_type = classification.get("requirement_type")
+    detected_dept_code = classification.get("detected_dept_code")
+    is_subject_query = classification["intent"] == "subject"
     
-    # Second, check if this is a subject area query (these take priority over requirement queries)
-    # Map common subject mentions to department codes
+    # Map requirement codes to full requirement type strings for display
+    requirement_type_mapping = {
+        'CD': 'CD (Culture and Difference)',
+        'EC': 'EC (Epistemology and Cognition)',
+        'EM': 'EM (Ethical Thought and Moral Values)',
+        'HA': 'HA (Historical Analysis)',
+        'LA': 'LA (Literature and the Arts)',
+        'QCR': 'QCR (Quantitative and Computational Reasoning)',
+        'SEL': 'SEL (Science and Engineering with Laboratory)',
+        'SEN': 'SEN (Science and Engineering No Lab)',
+        'SA': 'SA (Social Analysis)',
+    }
+    
+    if requirement_type and requirement_type in requirement_type_mapping:
+        requirement_type = requirement_type_mapping[requirement_type]
+    
+    # Determine relevant departments based on query and major
+    relevant_departments = []
+    query_lower = user_query.lower()  # Still needed for some checks
+    
+    # Map common subject mentions to department codes (for fallback)
     dept_keywords = {
         'computer science': ['COS'],
         'cs': ['COS'],
@@ -156,88 +270,32 @@ def build_chat_prompt(
         'art': ['ART', 'VIS'],
         'music': ['MUS'],
         'theater': ['THR'],
+        'ece': ['ECE'],
+        'electrical': ['ECE'],
+        'electrical engineering': ['ECE'],
+        'electrical and computer engineering': ['ECE'],
     }
-    
-    # Check if query mentions a subject area (e.g., "history class", "computer science course")
-    is_subject_query = False
-    for keyword in dept_keywords.keys():
-        if keyword in query_lower:
-            is_subject_query = True
-            break
-    
-    # Check for distribution requirement mentions (only if not a subject query)
-    distribution_keywords = {
-        # Culture and Difference
-        'cd': 'CD (Culture and Difference)',
-        'culture and difference': 'CD (Culture and Difference)',
-        # Epistemology and Cognition
-        'ec': 'EC (Epistemology and Cognition)',
-        'epistemology and cognition': 'EC (Epistemology and Cognition)',
-        'epistemology': 'EC (Epistemology and Cognition)',
-        'cognition': 'EC (Epistemology and Cognition)',
-        # Ethical Thought and Moral Values
-        'em': 'EM (Ethical Thought and Moral Values)',
-        'ethical thought and moral values': 'EM (Ethical Thought and Moral Values)',
-        'ethical thought': 'EM (Ethical Thought and Moral Values)',
-        'moral values': 'EM (Ethical Thought and Moral Values)',
-        'ethics': 'EM (Ethical Thought and Moral Values)',
-        # Historical Analysis
-        'ha': 'HA (Historical Analysis)',
-        'historical analysis': 'HA (Historical Analysis)',
-        # Literature and the Arts
-        'la': 'LA (Literature and the Arts)',
-        'literature and the arts': 'LA (Literature and the Arts)',
-        'literature and arts': 'LA (Literature and the Arts)',
-        # Quantitative and Computational Reasoning
-        'qcr': 'QCR (Quantitative and Computational Reasoning)',
-        'quantitative and computational reasoning': 'QCR (Quantitative and Computational Reasoning)',
-        'quantitative reasoning': 'QCR (Quantitative and Computational Reasoning)',
-        'computational reasoning': 'QCR (Quantitative and Computational Reasoning)',
-        # Science and Engineering with Laboratory
-        'sel': 'SEL (Science and Engineering with Laboratory)',
-        'science and engineering with lab': 'SEL (Science and Engineering with Laboratory)',
-        'science and engineering with laboratory': 'SEL (Science and Engineering with Laboratory)',
-        'science with lab': 'SEL (Science and Engineering with Laboratory)',
-        'science with laboratory': 'SEL (Science and Engineering with Laboratory)',
-        # Science and Engineering No Lab
-        'sen': 'SEN (Science and Engineering No Lab)',
-        'science and engineering no lab': 'SEN (Science and Engineering No Lab)',
-        'science no lab': 'SEN (Science and Engineering No Lab)',
-        'science without lab': 'SEN (Science and Engineering No Lab)',
-        'science without laboratory': 'SEN (Science and Engineering No Lab)',
-        # Social Analysis
-        'sa': 'SA (Social Analysis)',
-        'social analysis': 'SA (Social Analysis)',
-        # General requirement keywords
-        'distribution': 'distribution requirement',
-        'distribution requirement': 'distribution requirement',
-        'fulfill': 'requirement',
-        'requirement': 'requirement',
-        'prerequisite': 'prerequisite',
-        'prereq': 'prerequisite',
-    }
-    
-    # Only check for requirement keywords if this is NOT a similarity query and NOT a subject area query
-    # Similarity queries take absolute priority, then subject area queries, then requirement queries
-    if not is_similarity_query and not is_subject_query:
-        for keyword, req_type in distribution_keywords.items():
-            if keyword in query_lower:
-                is_requirement_query = True
-                requirement_type = req_type
-                break
-    
-    # Determine relevant departments based on query and major
-    relevant_departments = []
     
     # Find relevant departments from query (only if not a requirement query)
     if not is_requirement_query:
+        # First, add detected department code if found (highest priority)
+        if detected_dept_code:
+            relevant_departments.append(detected_dept_code)
+        
+        # Then check keyword mappings as fallback
         for keyword, depts in dept_keywords.items():
             if keyword in query_lower:
                 relevant_departments.extend(depts)
     
-    # Add student's major department if available (but only if not a requirement query)
+    # Add student's major department if available (but only if not a requirement query and query is substantive)
     # For requirement queries, we want courses from ALL departments that fulfill the requirement
-    if major and not is_requirement_query:
+    # For generic queries (greetings, etc.), don't default to major - let LLM handle it
+    is_generic_query = len(user_query.split()) <= 3 and not any([
+        is_similarity_query, is_requirement_query, is_subject_query,
+        detected_dept_code, any(keyword in query_lower for keyword in ['course', 'class', 'recommend', 'take', 'need'])
+    ])
+    
+    if major and not is_requirement_query and not is_generic_query:
         relevant_departments.append(major.upper())
     
     # Remove duplicates and ensure we have some departments
@@ -282,33 +340,6 @@ def build_chat_prompt(
                 past_courses=past_courses,
                 exclude_taken=True
             )
-            
-            # For SEN/SEL, use vector search to prioritize science-focused courses
-            if normalized_code in ['SEN', 'SEL'] and matching_courses:
-                try:
-                    # Build a query for science courses
-                    if normalized_code == 'SEL':
-                        science_query = "Science and engineering course with laboratory component, lab work, experiments, scientific methods"
-                    else:  # SEN
-                        science_query = "Science and engineering course without laboratory, theoretical science, mathematical science, computational science"
-                    
-                    # Do vector search within matching courses to prioritize science-focused ones
-                    vector_results = vector_search_courses(
-                        query_text=science_query,
-                        available_course_codes=matching_courses,
-                        top_k=min(50, len(matching_courses))
-                    )
-                    
-                    if vector_results:
-                        # Reorder: science-focused courses first, then the rest
-                        vector_course_codes = [code for code, _ in vector_results]
-                        prioritized = [code for code in vector_course_codes if code in matching_courses]
-                        remaining = [code for code in matching_courses if code not in vector_course_codes]
-                        matching_courses = prioritized + remaining
-                        logging.info(f"Prioritized {len(prioritized)} science-focused courses out of {len(matching_courses)} total")
-                except Exception as e:
-                    logging.warning(f"Vector search for science courses failed: {e}")
-                    # Continue with original order
             
             # Display matching courses
             if matching_courses:
@@ -410,7 +441,8 @@ def build_chat_prompt(
     
     # Include a comprehensive list of available courses
     # For requirement queries, skip showing all courses - only show the filtered matches above
-    if not is_requirement_query:
+    # For generic queries (greetings), also skip showing courses
+    if not is_requirement_query and not is_generic_query:
         context_parts.append("AVAILABLE COURSES (Spring 2026):")
         if 'term' in course_details and course_details['term']:
             term = course_details['term'][0]
@@ -573,9 +605,16 @@ def build_chat_prompt(
         context_parts.append("")
     
     context_parts.append("STUDENT QUERY:")
-    context_parts.append(user_query)
+    # Use enhanced query which includes conversation context if applicable
+    context_parts.append(enhanced_query)
     context_parts.append("")
-    context_parts.append("Please provide course recommendations based on the student's query and the available courses listed above.")
+    
+    # Adjust final instruction based on query type
+    if is_generic_query:
+        context_parts.append("Please respond to the student's greeting or message in a friendly, helpful manner.")
+        context_parts.append("Do NOT recommend courses unless they explicitly ask for course recommendations.")
+    else:
+        context_parts.append("Please provide course recommendations based on the student's query and the available courses listed above.")
     
     context_message = "\n".join(context_parts)
     

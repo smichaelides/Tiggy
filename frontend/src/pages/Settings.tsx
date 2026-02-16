@@ -13,6 +13,10 @@ interface PastClass {
   grade?: string;
 }
 
+interface SettingsProps {
+  onLogout: () => void;
+}
+
 const letterGrades = [
   { value: "A", label: "A" },
   { value: "B", label: "B" },
@@ -22,7 +26,7 @@ const letterGrades = [
   { value: "P", label: "P"}
 ];
 
-function Settings() {
+function Settings({ onLogout }: SettingsProps) {
   const [activeTab, setActiveTab] = useState<TabType>("profile");
   const [grade, setGrade] = useState("");
   const [concentration, setConcentration] = useState("");
@@ -262,7 +266,7 @@ function Settings() {
 
                       <div className="form-group">
                         <label htmlFor="concentration" className="form-label">
-                          Concentration (Optional)
+                          Major (Optional)
                         </label>
                         <input
                           type="text"
@@ -388,7 +392,7 @@ function Settings() {
                 <FiArrowLeft />
                 Back to Chat
               </button>
-              <button className="logout-button">
+              <button className="logout-button" onClick={onLogout}>
                 <FiLogOut />
                 Logout
               </button>
