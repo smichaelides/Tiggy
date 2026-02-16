@@ -1,0 +1,3 @@
+# Vercel serverless function dependencies
+# Reference the server requirements
+-r ../server/requirements.txt
