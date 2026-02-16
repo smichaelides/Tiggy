@@ -96,11 +96,25 @@ def list_chats():
 @chat.route("/create-chat", methods=["POST"])
 def create_chat():
     db = get_database()
-    user_id = session["userId"]
+    user_id = session.get("userId")
+    
+    if not user_id:
+        return {"error": "User not authenticated"}, 401
 
     # Verify that userId exists in the users collection
+    # Note: user _id is stored as email (string), not ObjectId
     try:
-        user_exists = db.users.find_one({"_id": ObjectId(user_id)})
+        # Try to find user by _id (which is the email)
+        user_exists = db.users.find_one({"_id": user_id})
+        
+        # If not found, try with ObjectId (for backwards compatibility)
+        if not user_exists:
+            try:
+                user_exists = db.users.find_one({"_id": ObjectId(user_id)})
+            except (ValueError, TypeError):
+                # user_id is not a valid ObjectId, probably an email - that's fine
+                pass
+        
         if not user_exists:
             logging.error("User with userId %s does not exist.", user_id)
             return {"error": "Invalid userId. User does not exist."}, 400

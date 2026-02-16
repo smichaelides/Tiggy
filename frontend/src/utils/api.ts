@@ -9,7 +9,10 @@ export async function apiRequest<T>(
   // If API_BASE_URL is set, use it (for production with separate backend)
   // Otherwise, use relative path (for local dev with Vite proxy)
   const baseUrl = API_BASE_URL || '';
-  const url = `${baseUrl}/api${endpoint}`;
+  // Remove trailing slash from baseUrl and leading slash from endpoint to avoid double slashes
+  const cleanBaseUrl = baseUrl.replace(/\/$/, '');
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${cleanBaseUrl}/api${cleanEndpoint}`;
 
   const response = await fetch(url, {
     headers: {
