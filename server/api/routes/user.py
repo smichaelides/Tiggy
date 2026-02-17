@@ -14,7 +14,8 @@ def get_user():
     user_id = session["userId"]
 
     try:
-        db_user = db.users.find_one({"_id": ObjectId(user_id)})
+        # Note: user _id is stored as email (string), not ObjectId
+        db_user = db.users.find_one({"_id": user_id})
         if not db_user:
             return {"error": f"User with id {user_id} not found"}, 404
         # expose string id to the model via public 'id' field and avoid touching protected attributes
@@ -68,6 +69,7 @@ def create_user():
         grade=payload.get("grade", ""),
         concentration=payload.get("concentration"),
         certificates=payload.get("certificates", []),
+        past_courses=payload.get("past-courses", {})
     )
 
     try:
@@ -85,7 +87,8 @@ def get_past_courses():
     user_id = session["userId"]
 
     try:
-        db_user = db.users.find_one({"_id": ObjectId(user_id)})
+        # Note: user _id is stored as email (string), not ObjectId
+        db_user = db.users.find_one({"_id": user_id})
         if not db_user:
             return {"error": f"User with id {user_id} not found"}, 404
         # expose string id to the model via public 'id' field and avoid touching protected attributes
@@ -110,8 +113,9 @@ def update_concentration():
     concentration: str = payload.get("concentration")
 
     try:
+        # Note: user _id is stored as email (string), not ObjectId
         db.users.update_one(
-            {"_id": ObjectId(user_id)}, {"$set": {"concentration": concentration}}
+            {"_id": user_id}, {"$set": {"concentration": concentration}}
         )
     except Exception as ex:
         logging.error(
@@ -139,8 +143,9 @@ def update_certificates():
     certificates: list[str] = payload.get("certificates")
 
     try:
+        # Note: user _id is stored as email (string), not ObjectId
         db.users.update_one(
-            {"_id": ObjectId(user_id)}, {"$set": {"certificates": certificates}}
+            {"_id": user_id}, {"$set": {"certificates": certificates}}
         )
     except Exception as ex:
         logging.error(
@@ -173,9 +178,10 @@ def update_user():
         return {"error": "No fields to update"}, 400
 
     try:
-        db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
+        # Note: user _id is stored as email (string), not ObjectId
+        db.users.update_one({"_id": user_id}, {"$set": update_fields})
         # Fetch updated user
-        updated_user = db.users.find_one({"_id": ObjectId(user_id)})
+        updated_user = db.users.find_one({"_id": user_id})
         if not updated_user:
             return {"error": "User not found after update"}, 404
 
@@ -227,9 +233,10 @@ def update_past_courses():
         print("ex", ex)
 
     try:
-        db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
+        # Note: user _id is stored as email (string), not ObjectId
+        db.users.update_one({"_id": user_id}, {"$set": update_fields})
         # Fetch updated user
-        updated_user = db.users.find_one({"_id": ObjectId(user_id)})
+        updated_user = db.users.find_one({"_id": user_id})
         if not updated_user:
             return {"error": "User not found after update"}, 404
 
