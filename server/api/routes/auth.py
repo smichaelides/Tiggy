@@ -43,12 +43,14 @@ def complete_user_login():
         grade=user_data.get("grade"),
         concentration=user_data.get("concentration"),
         certificates=user_data.get("certificates", []),
+        past_courses=user_data.get("past_courses", {}),  # Initialize as empty dict
     )
 
     try:
         result = db.users.insert_one(new_user.model_dump())
         # Set session after successful user creation
-        session["userId"] = str(result.inserted_id)
+        # Note: _id is set to email, so inserted_id should be the email string
+        session["userId"] = user_data.get("email")
     except Exception as ex:
         logging.error("Failed to create new user: %s", ex)
         return {"error": "Failed to create new user"}, 500

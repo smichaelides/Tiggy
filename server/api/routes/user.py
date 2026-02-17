@@ -96,7 +96,9 @@ def get_past_courses():
         logging.error("Failed to get user %s: %s", user_id, ex)
         return {"error": f"Failed to get user {user_id}"}, 500
 
-    return {"past_courses": db_user["past_courses"]}, 200
+    # Get past_courses with default empty dict if not present (for users created before this field existed)
+    past_courses = db_user.get("past_courses", {})
+    return {"past_courses": past_courses}, 200
 
 
 @user.route("/update-concentration", methods=["PATCH"])
@@ -234,10 +236,20 @@ def update_past_courses():
 
     try:
         # Note: user _id is stored as email (string), not ObjectId
-        db.users.update_one({"_id": user_id}, {"$set": update_fields})
+        update_result = db.users.update_one({"_id": user_id}, {"$set": update_fields})
+        
+        # Log update result for debugging
+        if update_result.matched_count == 0:
+            logging.error("User not found for update: %s", user_id)
+            return {"error": f"User with id {user_id} not found"}, 404
+        
+        if update_result.modified_count == 0:
+            logging.warning("User found but update did not modify: %s", user_id)
+        
         # Fetch updated user
         updated_user = db.users.find_one({"_id": user_id})
         if not updated_user:
+            logging.error("User not found after successful update: %s", user_id)
             return {"error": "User not found after update"}, 404
 
         updated_user["id"] = str(updated_user["_id"])

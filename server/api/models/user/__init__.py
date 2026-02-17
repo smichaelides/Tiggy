@@ -8,3 +8,4 @@ class User(Model):
     grade: str
     concentration: str | None
     certificates: list[str]
+    past_courses: dict[str, str] = {}
