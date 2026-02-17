@@ -8,14 +8,37 @@ from server.core.database import get_database
 user = Blueprint("user", __name__, url_prefix="/user")
 
 
+def find_user_by_id(db, user_id: str):
+    """
+    Find user by _id, handling both ObjectId and email string formats.
+    Tries ObjectId first, then falls back to email string.
+    """
+    # Try as ObjectId first (for older users)
+    try:
+        if len(user_id) == 24:  # ObjectId is always 24 hex characters
+            db_user = db.users.find_one({"_id": ObjectId(user_id)})
+            if db_user:
+                return db_user
+    except Exception:
+        pass  # Not a valid ObjectId, continue to try as string
+    
+    # Try as email string (for newer users)
+    db_user = db.users.find_one({"_id": user_id})
+    if db_user:
+        return db_user
+    
+    # Also try by email field as fallback
+    db_user = db.users.find_one({"email": user_id})
+    return db_user
+
+
 @user.route("/get-user", methods=["GET"])
 def get_user():
     db = get_database()
     user_id = session["userId"]
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
-        db_user = db.users.find_one({"_id": user_id})
+        db_user = find_user_by_id(db, user_id)
         if not db_user:
             return {"error": f"User with id {user_id} not found"}, 404
         # expose string id to the model via public 'id' field and avoid touching protected attributes
@@ -87,8 +110,7 @@ def get_past_courses():
     user_id = session["userId"]
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
-        db_user = db.users.find_one({"_id": user_id})
+        db_user = find_user_by_id(db, user_id)
         if not db_user:
             return {"error": f"User with id {user_id} not found"}, 404
         # expose string id to the model via public 'id' field and avoid touching protected attributes
@@ -115,9 +137,14 @@ def update_concentration():
     concentration: str = payload.get("concentration")
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
+        # Find user first to get the actual _id format
+        db_user = find_user_by_id(db, user_id)
+        if not db_user:
+            return {"error": f"User with id {user_id} not found"}, 404
+        
+        actual_user_id = db_user["_id"]
         db.users.update_one(
-            {"_id": user_id}, {"$set": {"concentration": concentration}}
+            {"_id": actual_user_id}, {"$set": {"concentration": concentration}}
         )
     except Exception as ex:
         logging.error(
@@ -145,9 +172,14 @@ def update_certificates():
     certificates: list[str] = payload.get("certificates")
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
+        # Find user first to get the actual _id format
+        db_user = find_user_by_id(db, user_id)
+        if not db_user:
+            return {"error": f"User with id {user_id} not found"}, 404
+        
+        actual_user_id = db_user["_id"]
         db.users.update_one(
-            {"_id": user_id}, {"$set": {"certificates": certificates}}
+            {"_id": actual_user_id}, {"$set": {"certificates": certificates}}
         )
     except Exception as ex:
         logging.error(
@@ -180,10 +212,15 @@ def update_user():
         return {"error": "No fields to update"}, 400
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
-        db.users.update_one({"_id": user_id}, {"$set": update_fields})
+        # Find user first to get the actual _id format
+        db_user = find_user_by_id(db, user_id)
+        if not db_user:
+            return {"error": f"User with id {user_id} not found"}, 404
+        
+        actual_user_id = db_user["_id"]
+        db.users.update_one({"_id": actual_user_id}, {"$set": update_fields})
         # Fetch updated user
-        updated_user = db.users.find_one({"_id": user_id})
+        updated_user = db.users.find_one({"_id": actual_user_id})
         if not updated_user:
             return {"error": "User not found after update"}, 404
 
@@ -235,19 +272,25 @@ def update_past_courses():
         print("ex", ex)
 
     try:
-        # Note: user _id is stored as email (string), not ObjectId
-        update_result = db.users.update_one({"_id": user_id}, {"$set": update_fields})
+        # Find user first to get the actual _id format
+        db_user = find_user_by_id(db, user_id)
+        if not db_user:
+            logging.error("User not found for update: %s", user_id)
+            return {"error": f"User with id {user_id} not found"}, 404
+        
+        actual_user_id = db_user["_id"]
+        update_result = db.users.update_one({"_id": actual_user_id}, {"$set": update_fields})
         
         # Log update result for debugging
         if update_result.matched_count == 0:
-            logging.error("User not found for update: %s", user_id)
+            logging.error("User not found for update (after find): %s", user_id)
             return {"error": f"User with id {user_id} not found"}, 404
         
         if update_result.modified_count == 0:
             logging.warning("User found but update did not modify: %s", user_id)
         
         # Fetch updated user
-        updated_user = db.users.find_one({"_id": user_id})
+        updated_user = db.users.find_one({"_id": actual_user_id})
         if not updated_user:
             logging.error("User not found after successful update: %s", user_id)
             return {"error": "User not found after update"}, 404

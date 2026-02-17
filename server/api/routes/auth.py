@@ -23,7 +23,9 @@ def login():
         # Redirects them to the setup
         return {"error": f"User with email {email} not found"}, 404
 
-    session["userId"] = str(db_user["_id"])
+    # Normalize session to always use email (for consistency)
+    # If user has ObjectId _id, we'll still use email in session
+    session["userId"] = email
     return {"message": "Login successful"}, 200
 
 @auth.route("/complete-user-login", methods=["POST"])
