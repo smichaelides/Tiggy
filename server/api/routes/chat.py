@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from typing import Any
 from datetime import datetime, timezone
 from bson import ObjectId
+from bson.errors import InvalidId
 from flask import Blueprint, request, session
 from server.core.database import get_database
 from server.api.models.chat import Chat
@@ -15,6 +16,30 @@ from server.llm.context_manager import build_conversation_history
 load_dotenv()
 
 chat = Blueprint("chat", __name__, url_prefix="/chat")
+
+
+def find_user_by_id(db, user_id: str):
+    """
+    Find user by _id, handling both ObjectId and email string formats.
+    Tries ObjectId first, then falls back to email string.
+    """
+    # Try as ObjectId first (for older users)
+    try:
+        if len(user_id) == 24:  # ObjectId is always 24 hex characters
+            db_user = db.users.find_one({"_id": ObjectId(user_id)})
+            if db_user:
+                return db_user
+    except (InvalidId, ValueError, TypeError):
+        pass  # Not a valid ObjectId, continue to try as string
+    
+    # Try as email string (for newer users)
+    db_user = db.users.find_one({"_id": user_id})
+    if db_user:
+        return db_user
+    
+    # Also try by email field as fallback
+    db_user = db.users.find_one({"email": user_id})
+    return db_user
 
 
 @chat.route("/get-chat", methods=["GET"])
@@ -102,19 +127,8 @@ def create_chat():
         return {"error": "User not authenticated"}, 401
 
     # Verify that userId exists in the users collection
-    # Note: user _id is stored as email (string), not ObjectId
     try:
-        # Try to find user by _id (which is the email)
-        user_exists = db.users.find_one({"_id": user_id})
-        
-        # If not found, try with ObjectId (for backwards compatibility)
-        if not user_exists:
-            try:
-                user_exists = db.users.find_one({"_id": ObjectId(user_id)})
-            except (ValueError, TypeError):
-                # user_id is not a valid ObjectId, probably an email - that's fine
-                pass
-        
+        user_exists = find_user_by_id(db, user_id)
         if not user_exists:
             logging.error("User with userId %s does not exist.", user_id)
             return {"error": "Invalid userId. User does not exist."}, 400
